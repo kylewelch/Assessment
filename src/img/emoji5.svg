@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 56.3 (81716) - https://sketch.com -->
+    <title>Group 12</title>
+    <desc>Created with Sketch.</desc>
+    <g id="HiFi-Designs" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-12" transform="translate(1.000000, 1.000000)">
+            <path d="M8.33333333,16.6666667 L21.6666667,16.6666667 C21.6666667,20.348565 18.6818983,23.3333333 15,23.3333333 C11.3181017,23.3333333 8.33333333,20.348565 8.33333333,16.6666667 L8.33333333,16.6666667 Z" id="Rectangle" fill="#8C8C8C"></path>
+            <circle id="Oval" stroke="#949494" stroke-width="1.5" cx="15" cy="15" r="15"></circle>
+            <g id="Group-9" transform="translate(8.333333, 10.000000)" fill="#8C8C8C">
+                <circle id="Oval" cx="11.6666667" cy="1.66666667" r="1.66666667"></circle>
+                <circle id="Oval-Copy-7" cx="1.66666667" cy="1.66666667" r="1.66666667"></circle>
+            </g>
+        </g>
+    </g>
+</svg>

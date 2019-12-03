@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="63px" viewBox="0 0 64 63" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 56.3 (81716) - https://sketch.com -->
+    <title>Group 2</title>
+    <desc>Created with Sketch.</desc>
+    <g id="HiFi-Designs" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.72">
+        <g id="q1---UI" transform="translate(-128.000000, -266.000000)">
+            <g id="Group-3" transform="translate(27.000000, 246.000000)">
+                <g id="Group-2" transform="translate(101.000000, 20.000000)">
+                    <rect id="Rectangle" fill="#808080" x="0.5" y="0" width="63" height="63" rx="3"></rect>
+                    <g id="Group" transform="translate(8.500000, 14.000000)" fill="#D8D8D8">
+                        <polygon id="Path-2" points="0 35.9228091 46.3199382 35.9228091 34.692334 17.9220448 25.7145996 21.7456692 17.3580241 7.56852921"></polygon>
+                        <ellipse id="Oval" cx="30.0229329" cy="3.91304348" rx="3.91666667" ry="3.91304348"></ellipse>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,471 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,800,800i&display=swap');
+
+body {
+  font: 14px "Poppins", Futura, sans-serif;
+  margin: 35px;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.container {
+  max-width: 920px;
+  margin: auto;
+}
+
+ol, ul {
+  padding-left: 30px;
+}
+
+.board-row:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.status {
+  margin-bottom: 10px;
+}
+
+.square {
+  background: #fff;
+  border: 1px solid #999;
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 34px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 34px;
+}
+
+.square:focus {
+  outline: none;
+}
+
+.kbd-navigation .square:focus {
+  background: #ddd;
+}
+
+.game {
+  display: flex;
+  flex-direction: row;
+}
+
+.game-info {
+  margin-left: 20px;
+}
+
+
+
+/* Grid styles */
+
+.skill-grid {
+  display: flex;
+  width: 320px;
+  margin: 70px auto 0 -7px;
+
+}
+
+.skill-grid-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.skill-grid-col-block {
+  height: 24px;
+  width: 24px; 
+  margin: 4px;
+  border-radius: 4px;
+}
+
+.skill-grid-col-label {
+  position: relative;
+  margin-bottom: 28px;
+}
+
+.skill-grid-col-label-text {
+  transform: rotate(-60deg);
+  position: absolute;
+  transform-origin: center left;
+  margin-left: 14px;
+}
+
+.skill-blank {
+  background: #e1e5ec; 
+}
+
+.skill-added {
+  background: #00e7c0;
+}
+
+.skill-potential {
+  
+}
+
+
+/* Assessment styles */
+
+
+.assessment {
+  display: none;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.sub-heading {
+  color: #6a6e72;
+  margin-bottom: 0;
+  font-size: 1.1em;
+}
+
+.main-heading {
+  margin-top: .4em;
+}
+
+.main-heading-skill {
+  font-style: italic;
+  color: #94999e;
+}
+
+.nav-btn {
+  background-color: #6a6e72;
+  width: 100%;
+  height: 2.8em;
+  border: none;
+  border-radius: 6px;
+  margin: 1.4em auto 0;
+  font-size: 1.4em;
+  font-weight: 500;
+  color: #fff;
+}
+
+.nav-btn-secondary {
+  margin: .6em auto 0;
+  border: 2px solid #6a6e72;
+  background-color: #fff;
+  color: #6a6e72;
+}
+
+.main-img {
+  width: 100%;
+  max-width: 500px;
+  margin: 2em 0 1em;
+}
+
+.validation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.validation-msg {
+  color: #e01010;
+  height: 23px;
+  line-height: 23px;
+  margin: 0 6px 0 0 ;
+}
+
+
+/* Styles for Assessment Question Types */
+
+
+/* 1. Image cards */
+
+
+.answer-card {
+  width: 100%;
+  background-color: #d8d8d8;
+  border-radius: 4px;
+  margin: 10px auto;
+  height: 140px;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.answer-card:hover {
+  cursor: pointer;
+}
+
+.answer-card-text {
+  font-size: .7em;
+  margin-bottom: 0;
+  opacity: .5;
+}
+
+
+/* 2. Radio buttons */
+
+
+.radio-option {
+  margin: 1.5em 0;
+}
+
+.radio-input:hover {
+  cursor: pointer;
+}
+
+.radio-input {
+  /*float: left;
+  margin-top: 7px;
+  margin-right: 7px;*/
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.radio-input:checked ~ .radio-fill {
+  opacity: 1;
+}
+
+.radio-circle {
+  float: left;
+  height: 20px;
+  width: 20px;
+  margin-top: 1px;
+  border: 2px solid #a1a4a9;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radio-fill {
+  background-color: #a1a4a9;
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.radio-fill:hover {
+  opacity: 1;
+}
+
+.radio-label {
+  font-size: 1.3em;
+  display: block;
+  margin-left: 34px;
+  color: #a1a4a9;
+}
+
+.radio-main-answer {
+  font-weight: 600;
+  color: #2a3036;
+}
+
+.radio-multi-answer {
+  color: #2a3036;
+}
+
+
+/* 3. Input Cards */
+
+
+.input-card {
+  background-color: #f9f9f9;
+  border: 2px solid #d8d8d8;
+  border-radius: 4px;
+  margin: 30px 0;
+}
+
+.input-card-image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #d8d8d8;
+  height: 130px;
+}
+
+.input-card-content {
+  padding: 16px;
+}
+
+.input-card-question {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 16px;
+}
+
+.input-card-button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.input-card-option {
+  border-radius: 3px;
+  height: 70px;
+  width: 28%;
+  border: 2px solid #a1a4a9;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.checked {
+  background-color: #a1a4a9;
+}
+
+.unchecked {
+  background-color: none;
+}
+
+
+/* 4. Slider Radio Cards */
+
+
+.emoji-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.emoji-text {
+  font-size: 10px;
+  margin: 30px 0 0;
+  position: absolute;
+}
+
+.slidecontainer {
+  width: 100%;
+  background-color: #efefef;
+  border-radius: 4px;
+  margin-bottom: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* The slider itself */
+.slider {
+  -webkit-appearance: none;  
+  appearance: none;
+  width: 90%; 
+  height: 8px; 
+  margin-bottom: 23px;
+  background: #d3d3d3; 
+  outline: none; 
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+  border-radius: 4px;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #aaa; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+  border-radius: 50%;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #d4d4d4; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+  border-radius: 50%;
+}
+
+
+/* Assessment Creation Page */
+
+
+.assessment-name-input {
+  margin: .5em 0 2em;
+  font-size: 1.2em;
+  border: none;
+  border-bottom: 1px solid #bdbdbd;
+  line-height: 2em;
+  width: 45%;
+  font-family: "Poppins", Futura, sans-serif;
+}
+
+.assessment-name-input::placeholder {
+  opacity: .5;
+}
+
+.assessment-name-input:focus {
+  outline-width: 0;
+  border-bottom: 2px solid #009789;
+}
+
+.skill-list {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.skill-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #bdbdbd;
+  width: 45%;
+  padding: 6px 16px;
+  border-radius: 4px;
+  margin: 13px 0;
+}
+
+.selected-item {
+  background-color: #eee;
+}
+
+.skill-list-item:hover {
+  cursor: pointer;
+}
+
+.skill-list-item-name {
+  display: flex;
+  align-items: center;
+  font-size: 1.2em;
+}
+
+.circle-icon {
+  height: 40px;
+  width: 40px;
+  background-color: #bdbdbd;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.skill-list-item-check {
+  border: 2px solid #ababab;
+  box-shadow: none;
+  height: 17px;
+  width: 17px;
+  border-radius: 2px;
+  margin: 0 4px;
+}
+
+.checked-item {
+  background-color: #009789;
+  border: 2px solid #009789;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

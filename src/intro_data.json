@@ -1,0 +1,20 @@
+{
+  "intro_pages": [
+    {
+      "id": 1,
+      "page_name": "Homepage",
+      "main_text": "Which design superpowers do you want to have?",
+      "sub_text": "Get a personalized roadmap to help you level up your design skills",
+      "image": true,
+      "cta_text": "Next"
+    },
+    {
+      "id": 2,
+      "page_name": "Quiz Intro",
+      "main_text": "First, let's see where you're currently at",
+      "sub_text": "Answer 10 questions about your current skills",
+      "image": false,
+      "cta_text": "Let's do it"
+    }
+  ]
+}

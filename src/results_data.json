@@ -1,0 +1,49 @@
+{
+  "quiz_results": [
+    {
+      "id": 1,
+      "skill_shape": "beginner",
+      "results_text": "You have a bright future ahead of you. You have many different paths to choose from."
+    },
+    {
+      "id": 2,
+      "skill_shape": "generalist",
+      "results_text": "You haven’t specialized in any specific area of design,  instead you have skills in a wide variety of areas."
+    },
+    {
+      "id": 3,
+      "skill_shape": "I-shaped",
+      "results_text": "You’re an ",
+      "results_text2": " designer with expertise in ",
+      "results_text3": " and ",
+      "results_text4": "."
+    },
+    {
+      "id": 4,
+      "skill_shape": "T-shaped",
+      "results_text": "You’re a ",
+      "results_text2": " designer with expertise in ",
+      "results_text3": " and ",
+      "results_text4": ", as well as ",
+      "results_text5": "solid breadth in a variety of other skills."
+    },
+    {
+      "id": 5,
+      "skill_shape": "tree-shaped",
+      "results_text": "You’re a ",
+      "results_text2": " designer because you have deep skills in ",
+      "results_text3": " different areas."
+    },
+    {
+      "id": 6,
+      "skill_shape": "X-shaped",
+      "results_text": "You’re an ",
+      "results_text2": " designer, which means you have what it takes to be a design leader. You have the right combination of hard skills and soft skills needed to lead a design team."
+    },
+    {
+      "id": 7,
+      "skill_shape": "unicorn",
+      "results_text": "You belong to a mythical species of designers with deep skills in many areas."
+    }
+  ]
+}
