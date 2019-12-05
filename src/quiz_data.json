@@ -81,7 +81,7 @@
       "question_type": "multi-radio",
       "instruction_text": "What's your experience with ",
       "instruction_text2": "?",
-      "question1": "On my projects, I've written the final that gets shipped to customers:",
+      "question1": "On my projects, I've written the final copy that gets shipped to customers:",
       "answer_options": ["Never", "A few times", "Lots of times"],
       "question2": "How would you rate your writing ability?",
       "answer_options2": ["I not so good at making the English", "Decent, but not my specialty", "Above average", "My prose is crisp AF"],

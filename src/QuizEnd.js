@@ -57,7 +57,7 @@ class Grid extends Component {
 
   render() {
     let cols = [];
-    for (let i = 0; i < 10; ++i) {
+    for (let i = 0; i < this.props.selectedQuestions.length; ++i) {
       cols.push(this.renderColumn(i));
     }
 
@@ -191,9 +191,13 @@ class QuizEnd extends Component {
   render() {
     return(
       <div>
-        <h1 className="main-heading">It looks like you're a {(this.props.shape === "T-shaped designer" || this.props.shape === "specialist") ? ((this.props.deep_skills.length === 2) ? (this.props.deep_skills[0] + '/' + this.props.deep_skills[1] + ' ' + this.props.level) : (this.props.deep_skills[0] + ' ' + this.props.level)) : this.props.shape}!</h1>
-        <Grid skill_level={this.props.skills} skill_name={this.props.names}/>
-        <p>{this.renderDescription(this.props.shape)}</p>
+        <h1 className="main-heading">Design Skills{/*(this.props.shape === "T-shaped designer" || this.props.shape === "specialist") ? ((this.props.deep_skills.length === 2) ? (this.props.deep_skills[0] + '/' + this.props.deep_skills[1] + ' ' + this.props.level) : (this.props.deep_skills[0] + ' ' + this.props.level)) : this.props.shape*/}</h1>
+        <Grid 
+          skill_level={this.props.skills} 
+          skill_name={this.props.names}
+          selectedQuestions={this.props.selectedQuestions}
+          />
+        <p>Add more info here{/*this.renderDescription(this.props.shape)*/}</p>
         {/*<a href='#' onClick={this.handleResetClick.bind(this)}>Retake the Assessment</a>*/}
       </div>
     )

@@ -31,14 +31,14 @@ class QuizQuestion extends Component {
   render() {
     return (
       <main>
-        <p className="sub-heading">{'Question ' + this.props.quiz_question.id + ' of 10'}</p>
+        <p className="sub-heading">{'Question ' + this.props.quiz_position + ' of ' + this.props.selectedQuestions.length}</p>
         <h1 className="main-heading">
           {this.props.quiz_question.instruction_text}
           <span className="main-heading-skill">{this.props.quiz_question.skill_name}</span>{this.props.quiz_question.instruction_text2}
         </h1>
         {(this.props.quiz_question.question_type === "radio") ? 
           <QuizQuestionRadio 
-            quiz_question={quizData.quiz_questions[this.props.quiz_position - 1]}
+            quiz_question={this.props.quiz_question}
             value={0} 
             updateValue={this.updateAnswerValue.bind(this)}
             nav_text={quizData.nav_text[0]}
@@ -48,7 +48,7 @@ class QuizQuestion extends Component {
           : (this.props.quiz_question.question_type === "input-card") ? 
           <QuizQuestionInputCards 
             quiz_position={this.props.quiz_position}
-            quiz_question={quizData.quiz_questions[this.props.quiz_position - 1]}
+            quiz_question={this.props.quiz_question}
             value={0} 
             updateSectionValue={this.updateAnswerSectionValue.bind(this)}
             updateTotalValue={this.updateAnswerValue.bind(this)}
@@ -60,7 +60,7 @@ class QuizQuestion extends Component {
           : (this.props.quiz_question.question_type === "slider-radio-card") ? 
           <QuizQuestionSliderCards 
             quiz_position={this.props.quiz_position}
-            quiz_question={quizData.quiz_questions[this.props.quiz_position - 1]}
+            quiz_question={this.props.quiz_question}
             value={0} 
             updateSectionValue={this.updateAnswerSectionValue.bind(this)}
             updateSliderValue={this.updateAnswerSliderValue.bind(this)}
@@ -74,7 +74,7 @@ class QuizQuestion extends Component {
           : (this.props.quiz_question.question_type === "radio-cards") ? 
           <QuizQuestionRadioCards 
             quiz_position={this.props.quiz_position}
-            quiz_question={quizData.quiz_questions[this.props.quiz_position - 1]}
+            quiz_question={this.props.quiz_question}
             value={0} 
             updateSectionValue={this.updateAnswerSectionValue.bind(this)}
             updateTotalValue={this.updateAnswerValue.bind(this)}
@@ -86,7 +86,7 @@ class QuizQuestion extends Component {
           : (this.props.quiz_question.question_type === "multi-radio") ? 
           <QuizQuestionMultiRadio 
             quiz_position={this.props.quiz_position}
-            quiz_question={quizData.quiz_questions[this.props.quiz_position - 1]}
+            quiz_question={this.props.quiz_question}
             value={0} 
             updateSectionValue={this.updateAnswerSectionValue.bind(this)}
             updateTotalValue={this.updateAnswerValue.bind(this)}
@@ -96,7 +96,7 @@ class QuizQuestion extends Component {
             currentSkillValue={this.props.currentSkillValue}
             section_values={this.props.section_values} /> :
           <QuizQuestionCards 
-            quiz_question={quizData.quiz_questions[this.props.quiz_position - 1]}
+            quiz_question={this.props.quiz_question}
             value={0} 
             updateValue={this.updateAnswerValue.bind(this)}
             nav_text={quizData.nav_text[0]}

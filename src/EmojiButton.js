@@ -15,7 +15,7 @@ let filled_images = [emoji1a, emoji2a, emoji3a, emoji4a, emoji5a]
 
 class EmojiButton extends Component {
   handleClick() {
-    this.props.clickHandler(this.props.question_data.answer_options[this.props.answer_option], this.props.section, this.props.quiz_position)
+    this.props.clickHandler(this.props.question_data.answer_options[this.props.answer_option], this.props.section, this.props.question_data.id)
   }
   render() {
     return (

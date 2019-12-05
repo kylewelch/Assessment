@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 class QuizQuestionInputCardButton extends Component {
   handleClick() {
-    this.props.clickHandler(this.props.question_data.answer_options[this.props.answer_option], this.props.section, this.props.quiz_position)
+    this.props.clickHandler(this.props.question_data.answer_options[this.props.answer_option], this.props.section, this.props.question_data.id)
   }
   render() {
     return (

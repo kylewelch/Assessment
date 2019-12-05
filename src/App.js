@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Quiz from './Quiz.js'
 import Intro from './Intro.js'
 import Create from './Create.js'
+import Upload from './Upload.js'
 import './App.css'
 
 let introData = require('./intro_data.json')
@@ -11,9 +12,11 @@ class App extends Component {
     super(props)
     this.state = {
       current_screen: 1,
-      skillValues: [null, null, null, null, null, null, null, null, null, null],
+      skillValues: Array(10).fill(null),
       skillNames: ['UI', 'UX', 'Research', 'Motion', 'Leadership', 'Illustration', 'Writing', 'Code', 'Future', 'Ops'], 
-      skillFullNames: ['UI Design', 'UX Design', 'User Research', 'Motion Design', 'Design Leadership', 'Illustration', 'Writing', 'Front-end Engineering', 'Emerging Technology', 'Design Ops'], 
+      skillFullNames: ['UI Design', 'UX Design', 'User Research', 'Motion Design', 'Design Leadership', 'Illustration', 'Writing', 'Front-end Engineering', 'Emerging Technology', 'Design Ops'],
+      selectedQuestions: [],
+      selectedNames: [],
       arrangedValues: [],
       arrangedNames: [],
       researchValues: [null, null, null, null, null],
@@ -23,11 +26,18 @@ class App extends Component {
       illustrationValues: [null, null],
       writingValues: [null, null],
       techValues: [null, null, null],
-      opsValues: [null, null, null],
-      skillShape: null,
-      deepSkills: [],
-      level: 'Specialist'
+      opsValues: [null, null, null]
     }
+  }
+  
+  // Store the skills selected during the creation of this assessment
+  
+  updateSelectedSkills(skills) {
+    let selectedNames = []
+    for (let i = 0; i < skills.length; i++) {
+      selectedNames.push(this.state.skillNames[skills[i]])
+    }
+    this.setState({selectedQuestions: skills, selectedNames: selectedNames})
   }
   
   // For questions that collect multiple data points, store those data in the App state
@@ -89,58 +99,16 @@ class App extends Component {
              
     // At the end of the quiz, analyze the results
       
-      if (this.state.skillValues[9] != null)   {          
-      let values = this.state.skillValues.slice();
-      let value_names = this.state.skillFullNames.slice();
-      let deep_skill_names = this.state.deepSkills.slice();
-      let deepest_skill = values.reduce(function(a, b) {return Math.max(a, b)})
-      let deep_skills = 0
-      for (let i = 0; i < values.length; i++) { 
-        if (values[i] >= 3) {
-          deep_skills++
-          deep_skill_names.push(value_names[i])
-          this.setState({deepSkills: deep_skill_names})
-        }
+      if (this.state.skillValues[this.state.selectedQuestions.length - 1] != null)   {          
+      let values = []
+      let names = []
+      for (let i = 0; i < this.state.selectedQuestions.length; i++) {
+        if (this.state.skillValues[i] != null) {
+          values.push(this.state.skillValues[i])
+          names.push(this.state.skillNames[this.state.selectedQuestions[i]])
+        }}
+      this.setState({skillNames: names, skillValues: values})  
       }
-      let total = values.reduce((a, b) => a + b, 0);
-      let breadth = 0;
-      for (let i = 0; i < values.length; i++) {
-        if (values[i] >= 1) {
-          breadth++
-        }
-      }
-      if (deepest_skill == 4) {
-        this.setState({level: 'Expert'})        
-      }
-      else if (deepest_skill == 5) {
-        this.setState({level: 'Grandmaster'})        
-      }
-      if (total >= 30) {
-        this.setState({skillShape: 'unicorn'})
-      }
-      else if (deepest_skill < 3) {
-        if (total < 6) {
-          this.setState({skillShape: 'beginner'})
-        }
-        else {
-          this.setState({skillShape: 'generalist'})
-        }
-      } 
-      else if (breadth < 3) {
-        this.setState({skillShape: 'specialist'})
-      }
-      else if (this.state.skillValues[4] >= 4 && total >= 17 && total < 30) {
-        this.setState({skillShape: 'X-shaped designer'})      
-      }
-      else if (deep_skills < 3) {
-        this.setState({skillShape: 'T-shaped designer'})
-      }
-      else {
-        this.setState({skillShape: 'Tree-shaped designer'})        
-      }
-    
-  }}
-                  )
     
     // Sort all answers into a bell curve
     
@@ -149,8 +117,8 @@ class App extends Component {
       this.name = name;
       this.level = level;
     }
-    for (let i = 0; i < this.state.skillValues.length; i++) {
-      let NewSkill = new Skill(skillNames[i], skillValues[i])
+    for (let i = 0; i < this.state.selectedQuestions.length; i++) {
+      let NewSkill = new Skill(this.state.selectedNames[i], this.state.skillValues[i])
       skillArray.push(NewSkill)
     }
     let Sorted = skillArray.sort((a, b) => (a.level > b.level) ? 1 : -1);
@@ -168,22 +136,23 @@ class App extends Component {
     let Arranged = firstHalf.concat(secondHalf.sort((a, b) => (a.level < b.level) ? 1 : -1));
     let newLevels = Arranged.map(a => a.level);
     let newNames = Arranged.map(a => a.name);
-    this.setState({arrangedValues: newLevels, arrangedNames: newNames})
-    
+    this.setState({arrangedValues: newLevels, arrangedNames: newNames})  
 
-  }
+  })}
 
   showNextScreen() {
     this.setState((state) => {
       return {current_screen: state.current_screen + 1}
     })
   }
+  
   render() {
-    const isQuizStart = ((this.state.current_screen) === 3)
+    const didQuizStart = ((this.state.current_screen) === 2)
     
     return (
       <div class="container">
-        {isQuizStart ? <Quiz 
+        {didQuizStart ? <Quiz 
+                         selectedQuestions={this.state.selectedQuestions}
                          updateQuizSectionValue={this.updateSectionValue.bind(this)}
                          updateQuizSliderValue={this.updateSliderValue.bind(this)}
                          updateQuizValue={this.updateValue.bind(this)} 
@@ -205,7 +174,8 @@ class App extends Component {
                         /> 
                       : <Create 
                           intro_content={introData.intro_pages[this.state.current_screen - 1]} 
-                          showNextScreenHandler={this.showNextScreen.bind(this)} />}
+                          showNextScreenHandler={this.showNextScreen.bind(this)}
+                          updateSelectedSkills={this.updateSelectedSkills.bind(this)} />}
       </div>
     )
   }

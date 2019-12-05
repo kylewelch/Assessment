@@ -7,7 +7,7 @@ body {
 }
 
 .container {
-  max-width: 920px;
+  max-width: 800px;
   margin: auto;
 }
 
@@ -428,7 +428,7 @@ ol, ul {
   width: 45%;
   padding: 6px 16px;
   border-radius: 4px;
-  margin: 13px 0;
+  margin: 7px 0;
 }
 
 .selected-item {
@@ -468,4 +468,27 @@ ol, ul {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+
+
+
+/* Media Queries */
+
+
+@media only screen and (max-width: 800px) {
+  .skill-list-item {
+    width: 70%;
+    margin: 6px 0;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .skill-list-item {
+    width: 100%;
+    margin: 6px 0;
+  }
+  .assessment-name-input {
+    width: 90%;
+  }
 }

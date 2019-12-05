@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 class QuizQuestionRadioButton extends Component {
   handleClick() {
-    this.props.clickHandler(this.props.index, this.props.section, this.props.quiz_position)
+    this.props.clickHandler(this.props.index, this.props.section, this.props.question_data.id)
   }
   render() {
     return (

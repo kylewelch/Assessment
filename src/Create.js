@@ -8,7 +8,7 @@ class Create extends Component {
     super(props)
     this.state = {
       assessmentName: "",
-      skills: ["UI Design", "UX Design", "UX Research", "Motion Design", "Management", "Illustration", "Writing", "Engineering", "Design Ops", "Future Tech"],
+      skills: ["UI Design", "UX Design", "UX Research", "Motion Design", "Management", "Illustration", "Writing", "Engineering", "Future Tech", "Design Ops"],
       selectedSkills: [false, false, false, false, false, false, false, false, false, false]
     }
   }
@@ -19,6 +19,9 @@ class Create extends Component {
   }
 
   selectItem(index) {
+    
+    // when user clicks a skill, toggle between selecting and deselecting that skill
+    
     let selectedSkills = this.state.selectedSkills.slice();
     if (selectedSkills[index] === true) {
       selectedSkills[index] = false;
@@ -27,6 +30,15 @@ class Create extends Component {
       selectedSkills[index] = true;
     }
     this.setState({selectedSkills: selectedSkills});
+    
+    // send the indexes of each selected skill up to the App state
+    let skillIndexes = [];
+    for (let i = 0; i < selectedSkills.length; i++) {
+      if (selectedSkills[i] === true) {
+        skillIndexes.push(i)
+      }
+    }
+    this.props.updateSelectedSkills(skillIndexes);
   }
   
   createAssessment(e) {
@@ -40,6 +52,10 @@ class Create extends Component {
       Questions: this.state.selectedSkills
     });*/ 
   };
+  
+  showNextScreen() {
+    this.props.showNextScreenHandler()
+  }
 
   render() { 
     return (
@@ -65,7 +81,7 @@ class Create extends Component {
                     />
             })}
           </div>
-          <button className="nav-btn" type="submit">Next</button>
+          <button className="nav-btn" type="submit" onClick={this.showNextScreen.bind(this)}>Next</button>
         </form>
       </main>
     )
