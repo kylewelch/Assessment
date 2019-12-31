@@ -19,6 +19,7 @@ class QuizQuestionInputCards extends Component {
   }
   updateSectionValue(newValue, section, position) {
     this.props.updateSectionValue(newValue, section, position)
+    this.props.updateSubskills(newValue, section, position)
   }
   calculateTotal() {
     let scores = this.props.section_values
@@ -33,7 +34,7 @@ class QuizQuestionInputCards extends Component {
       }
     }
 
-    let values = (this.props.quiz_position === 3 || this.props.quiz_position === 10) ? scores.slice() : scores.map(x => x * 2.5)
+    let values = (this.props.quiz_question.id === 3 || this.props.quiz_question.id === 6) ? scores.slice() : scores.map(x => x * 2.5)
 
     for (let i = 0; i < values.length; i++) {
       if (values[i] === 2) {

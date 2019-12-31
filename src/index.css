@@ -63,9 +63,9 @@ ol, ul {
 
 .skill-grid {
   display: flex;
+  justify-content: center;
   width: 320px;
-  margin: 70px auto 0 -7px;
-
+  margin: 60px auto 0;
 }
 
 .skill-grid-col {
@@ -97,7 +97,7 @@ ol, ul {
 }
 
 .skill-added {
-  background: #00e7c0;
+  background: #4194FC;
 }
 
 .skill-potential {
@@ -208,6 +208,12 @@ ol, ul {
   margin: 1.5em 0;
 }
 
+.radio-option-horiz {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .radio-input:hover {
   cursor: pointer;
 }
@@ -258,6 +264,14 @@ ol, ul {
   color: #a1a4a9;
 }
 
+.radio-label-horiz {
+  font-size: .8em;
+  color: #a1a4a9;
+  width: 52px;
+  margin-top: 8px;
+  text-align: center;
+}
+
 .radio-main-answer {
   font-weight: 600;
   color: #2a3036;
@@ -267,6 +281,31 @@ ol, ul {
   color: #2a3036;
 }
 
+.horizontal-radio {
+  margin: 2em 0;
+}
+
+.radio-row {
+  display: flex;
+  align-items:flex-start;
+  justify-content: space-between;
+  max-width: 360px;
+  background-color: #f2f2f2;
+  padding: 20px 10px;
+  border-radius: 6px;
+}
+
+.follow-up-section {
+  margin-top: 4em;
+}
+
+.upload-section {
+  margin-top: 3em;
+}
+
+.uploads {
+  max-width: 100%;
+}
 
 /* 3. Input Cards */
 
@@ -451,6 +490,19 @@ ol, ul {
   background-color: #bdbdbd;
   border-radius: 50%;
   margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.skill-list-core-skill {
+  margin-bottom: 0;
+  font-weight: 600;
+}
+
+.skill-list-subskill {
+  font-size: 14px;
+  margin-top: 0;
+  opacity: .7;
+
 }
 
 .skill-list-item-check {
@@ -460,6 +512,7 @@ ol, ul {
   width: 17px;
   border-radius: 2px;
   margin: 0 4px;
+  flex-shrink: 0;
 }
 
 .checked-item {
@@ -471,7 +524,131 @@ ol, ul {
 }
 
 
+/* Assessment Preview Page */
 
+
+.quiz-preview {
+  max-width: 800px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f2f2f2;
+  padding: 2em 2em 5em;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.grid-preview {
+  background-color: #fff;
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  border-radius: 6px;
+  padding: 2em;
+  margin: 1.5em 0 2em;
+}
+
+.skill-grid-preview {
+  display: flex;
+  margin-top: 3em;
+}
+
+.skill-grid-col-block-preview {
+  height: 24px;
+  width: 24px; 
+  margin: 4px;
+  border-radius: 4px;
+}
+
+.preview-btn {
+  background-color: #9A9C9F;
+  width: 50%;
+  height: 3em;
+  border: none;
+  border-radius: 6px;
+  margin: 1.4em auto 0;
+  font-size: 1.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  color: #fff;
+}
+
+.preview-btn:hover {
+  cursor: pointer;
+}
+
+.preview-secondary {
+  background-color: #6a6e72;
+}
+
+
+/* Subskill section */
+
+
+.subskill-section {
+  display: block;
+  margin: 50px 0;
+}
+.subskill-container {
+  width: 100%;
+  border: 1px solid #bdbdbd;
+  border-radius: 4px;
+  display: flex;
+}
+
+.subskill-container-section {
+  width: 50%;
+  margin: 15px 30px;
+}
+
+.progress-bar-section {
+  margin: 1em 0;
+}
+
+.progress-bar-name {
+  margin: 0;
+}
+
+.progress-bar-container {
+  display: flex;
+  align-items: center;
+  margin: 4px 0;
+}
+
+.prog-bar-bg {
+  height: 12px;
+  width: 64%;
+  border-radius: 6px;
+  background-color: #eeeff2;
+}
+
+.prog-bar {
+  height: 12px;
+  width: 0px;
+  border-radius: 6px;
+  background-color: #4194FC;
+  transition: .2s;
+  transition-timing-function: ease-out;
+}
+
+.prog-bar-skill-level {
+  margin: 0 10px;
+  opacity: .6;
+  font-size: .9em;
+}
+
+.subskill-empty-image {
+  background-color: #eeeff2;
+  width: 100%;
+  height: 125px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 /* Media Queries */
 
@@ -490,5 +667,12 @@ ol, ul {
   }
   .assessment-name-input {
     width: 90%;
+  }
+  .subskill-container-section {
+    width: 100%;
+    margin: 15px 30px;
+  }
+  .subskill-container {
+    flex-wrap: wrap;
   }
 }

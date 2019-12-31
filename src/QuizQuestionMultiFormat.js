@@ -1,28 +1,30 @@
 import React, { Component } from 'react'
 import QuizQuestionRadioButton from './QuizQuestionRadioButton.js'
-import NavButton from './NavButton.js'
-import Validation from './QuizQuestionValidation.js'
 import QuizQuestionHorizontalRadio from './QuizQuestionHorizontalRadio.js'
 import Upload from './Upload.js'
+import NavButton from './NavButton.js'
+import Validation from './QuizQuestionValidation.js'
+
 let quizData = require('./quiz_data.json')
 
-class QuizQuestionMultiRadio extends Component {
+class QuizQuestionMultiFormat extends Component {
   constructor(props) {
     super(props)
     this.state={
       isIncomplete: null
     }
   }
-  handleClick(buttonText, section, position) {
-    this.props.updateSectionValue(buttonText, section, position)
+  handleClick(buttonText) {
+    this.props.updateValue(buttonText)
   }
   updateSubskills(value, section, id) {
     this.props.updateSubskills(value, section, id)
+    this.props.updateSectionValue(value, section, id)
   }
   calculateTotal() {
     let scores = this.props.section_values
     
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < this.props.quiz_question.subskills.length; i++) {
       if (scores[i] === null) {
           this.setState({isIncomplete: true})
           return
@@ -31,7 +33,11 @@ class QuizQuestionMultiRadio extends Component {
           this.setState({isIncomplete: false})
       }
     }
-    this.props.updateTotalValue((scores.reduce((a,b) => a + b, 0)));
+
+    let values = scores.map(x => x * 1.25)
+
+
+    this.props.updateTotalValue(Math.round((values.reduce((a,b) => a + b, 0))/5));
     this.props.showNextQuestionHandler();
   }
   showPreviousQuestion() {
@@ -40,35 +46,7 @@ class QuizQuestionMultiRadio extends Component {
   render() {
     return (        
       <section>   
-        <p className="input-card-question">{this.props.quiz_question.question1}</p>
-        {this.props.quiz_question.answer_options.map((answer_option, index) => {
-          return <QuizQuestionRadioButton 
-                    key={index}
-                    section={0}
-                    index={index}
-                    answer_text={answer_option} 
-                    isChecked={(this.props.section_values[0] === index)}
-                    clickHandler={this.handleClick.bind(this)} 
-                    question_data={this.props.quiz_question} 
-                    quiz_position={this.props.quiz_position}
-                  />
-          })}
-        <p className="input-card-question">{this.props.quiz_question.question2}</p>
-        {this.props.quiz_question.answer_options2.map((answer_option, index) => {
-          return <QuizQuestionRadioButton 
-                    key={index}
-                    section={1}
-                    index={index}
-                    answer_text={answer_option} 
-                    isChecked={(this.props.section_values[1] === index)}
-                    clickHandler={this.handleClick.bind(this)} 
-                    question_data={this.props.quiz_question} 
-                    quiz_position={this.props.quiz_position}
-                  />
-          })}
-          
           <div className="follow-up-section">
-            <h2>How skilled are you at: </h2>
             {this.props.quiz_question.subskills.map((level, index) => {
               return <QuizQuestionHorizontalRadio 
                         key={index} 
@@ -83,7 +61,8 @@ class QuizQuestionMultiRadio extends Component {
             <Upload 
               skills={this.props.quiz_question.subskills}
             />
-          </div> 
+          </div>
+        
       {this.state.isIncomplete ? <Validation /> : null}
       <NavButton 
         button_text={this.props.quiz_question} 
@@ -98,4 +77,4 @@ class QuizQuestionMultiRadio extends Component {
   }
 }
 
-export default QuizQuestionMultiRadio
+export default QuizQuestionMultiFormat

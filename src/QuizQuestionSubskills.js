@@ -7,15 +7,15 @@ import Validation from './QuizQuestionValidation.js'
 
 let quizData = require('./quiz_data.json')
 
-class QuizQuestionRadio extends Component {
+class QuizQuestionSubskills extends Component {
   constructor(props) {
     super(props)
     this.state={
       isIncomplete: null
     }
   }
-  handleClick(value) {
-    this.props.updateValue(value)
+  handleClick(buttonText) {
+    this.props.updateValue(buttonText)
   }
   updateSubskills(value, section, id) {
     this.props.updateSubskills(value, section, id)
@@ -36,35 +36,23 @@ class QuizQuestionRadio extends Component {
   render() {
     return (        
       <section>   
-        {this.props.quiz_question.answer_options.map((answer_option, index) => {
-          return <QuizQuestionRadioButton 
-                    key={index} 
-                    index={index}
-                    answer_text={answer_option} 
-                    isChecked={(this.props.currentSkillValue === index)}
-                    clickHandler={this.handleClick.bind(this)} 
-                    question_data={this.props.quiz_question} 
-                  />
-          })}
-        {this.props.currentSkillValue ? 
-          <div className="follow-up-section">
-            <h2>How skilled are you at: </h2>
-            {this.props.quiz_question.subskills.map((level, index) => {
-              return <QuizQuestionHorizontalRadio 
-                        key={index} 
-                        index={index}
-                        answer_text={level} 
-                        isChecked={(this.props.currentSkillValue === index)}
-                        updateSubskills={this.updateSubskills.bind(this)} 
-                        question_data={this.props.quiz_question}
-                        subskillValue={this.props.subskills[index]}
-                      />
+        <div className="follow-up-section">
+          <h2>How skilled are you at: </h2>
+          {this.props.quiz_question.subskills.map((level, index) => {
+            return <QuizQuestionHorizontalRadio 
+                      key={index} 
+                      index={index}
+                      answer_text={level} 
+                      isChecked={(this.props.currentSkillValue === index)}
+                      updateSubskills={this.updateSubskills.bind(this)} 
+                      question_data={this.props.quiz_question}
+                      subskillValue={this.props.subskills[index]}
+                    />
             })}
             <Upload 
               skills={this.props.quiz_question.subskills}
             />
-          </div> : null
-        }
+        </div>
       {this.state.isIncomplete ? <Validation /> : null}
       <NavButton 
         button_text={this.props.quiz_question} 
@@ -79,4 +67,4 @@ class QuizQuestionRadio extends Component {
   }
 }
 
-export default QuizQuestionRadio
+export default QuizQuestionSubskills

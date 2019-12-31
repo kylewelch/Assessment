@@ -12,7 +12,7 @@ class Upload extends Component {
     return{file: []}
   }
 
-  onChange() {
+  onChange() {  
     // Assuming only image
     var file = this.refs.file.files[0];
     var reader = new FileReader();
@@ -28,18 +28,20 @@ class Upload extends Component {
   }
 
   render() {
-   return (
-    <div>
+    return (
+    <div className="upload-section">
+      <h3>Share a sample of your {this.props.skills[0]}{this.props.skills[2] ? ', ' : ' or '} {this.props.skills[1]} {this.props.skills[2] ? ', or ' : null} {this.props.skills[2] ? this.props.skills[2] : null}</h3>
+      <p>Optional, but it’s strongly recommended to share at least one sample</p>
       <form>
-        <input 
+        <input
           ref="file" 
           type="file" 
           name="user[image]" 
-          multiple="true"
+          multiple="false"
           onChange={this.onChange.bind(this)}/>
        </form>
       {/* Only show first image, for now. */}
-      <img src={this.state.imgSrc} />
+      <img className="uploads" src={this.state.imgSrc} />
     </div>
    )
   }

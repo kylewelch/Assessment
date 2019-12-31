@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import QuizQuestion from './QuizQuestion.js'
 import QuizEnd from './QuizEnd.js'
-import QuizPreview from './QuizPreview.js'
+
 let quizData = require('./quiz_data.json')
 
 class Quiz extends Component {
@@ -22,9 +22,6 @@ class Quiz extends Component {
     let thisIteration = this.state.quiz_position - 1
     this.props.updateQuizValue(newValue, thisIteration)
   }
-  updateSubskills(value, section, id) {
-    this.props.updateSubskills(value, section, id)
-  }
   showNextQuestion() {
     this.setState((state) => {
       return {quiz_position: state.quiz_position + 1}
@@ -41,41 +38,23 @@ class Quiz extends Component {
     this.setState({quiz_position: 1, quiz_finished: false})
     this.props.resetQuiz()
   }
-  showQuiz() {
-    this.props.showQuiz();
-    this.ref.current.scrollIntoView(/*{behavior: 'smooth'}*/)
-  }
+  
   render() {
-    const showPreview = this.props.showPreview
     const isQuizEnd = ((this.state.quiz_position -1) === this.props.selectedQuestions.length)
     let currentQuestionID = this.props.selectedQuestions[this.state.quiz_position - 1] + 1
     return (
       <div ref={this.ref}>
-      {showPreview ? 
-          <QuizPreview 
-            selectedQuestions={this.props.selectedQuestions}         
-            resetClickHandler={this.handleResetClick.bind(this)} 
-            unsorted_values={this.props.unsorted_values}
-            skills={this.props.skill_values} 
-            names={this.props.skill_names}
-            selectedNames={this.props.selectedNames}
-            full_names={this.props.full_names}
-            shape={this.props.shape}
-            deep_skills={this.props.deep_skills}
-            level={this.props.level}
-            showQuiz={this.showQuiz.bind(this)}
-          />
-          : isQuizEnd ? 
+      {isQuizEnd ? 
         <QuizEnd 
-          selectedQuestions={this.props.selectedQuestions} 
-          selectedNames={this.props.selectedNames}
+          selectedQuestions={this.props.selectedQuestions}         
           resetClickHandler={this.handleResetClick.bind(this)} 
           unsorted_values={this.props.unsorted_values}
           skills={this.props.skill_values} 
           names={this.props.skill_names}
           full_names={this.props.full_names}
-          subskillNames={this.props.subskillNames}
-          subskills={this.props.subskills}
+          shape={this.props.shape}
+          deep_skills={this.props.deep_skills}
+          level={this.props.level}
         /> : 
         <QuizQuestion
           quiz_position={this.state.quiz_position}
@@ -85,13 +64,12 @@ class Quiz extends Component {
           currentSkillValue={this.props.unsorted_values[this.state.quiz_position - 1]}
           updateSectionValue={this.updateAnswerSectionValue.bind(this)}
           updateSliderValue={this.updateAnswerSliderValue.bind(this)}
-          updateSubskills={this.updateSubskills.bind(this)}
           updateValue={this.updateAnswerValue.bind(this)}
           showNextQuestionHandler={this.showNextQuestion.bind(this)}
           showPreviousQuestionHandler={this.showPreviousQuestion.bind(this)}
-          section_values={(currentQuestionID === 3) ? this.props.research_values : (currentQuestionID === 4) ?  this.props.writing_values : (currentQuestionID === 1) ?  this.props.visual_values : this.props.ops_values} 
-          leader_values2={this.props.leader_values2} 
-          subskills={this.props.subskills[this.props.selectedQuestions[this.state.quiz_position - 1]]} /> }
+          section_values={(currentQuestionID === 3) ? this.props.research_values : (currentQuestionID === 4) ? this.props.motion_values : (currentQuestionID === 5) ? 
+          this.props.leader_values : (currentQuestionID === 6) ? this.props.illustration_values :(currentQuestionID === 7) ? this.props.writing_values : (currentQuestionID === 9) ? this.props.tech_values : this.props.ops_values} 
+          leader_values2={this.props.leader_values2} /> }
 
       </div>
     )

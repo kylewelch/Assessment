@@ -10,11 +10,12 @@ let introData = require('./intro_data.json')
 class App extends Component {
   constructor(props) {
     super(props)
+    this.ref = React.createRef()
     this.state = {
       current_screen: 1,
-      skillValues: Array(10).fill(null),
-      skillNames: ['UI', 'UX', 'Research', 'Motion', 'Leadership', 'Illustration', 'Writing', 'Code', 'Future', 'Ops'], 
-      skillFullNames: ['UI Design', 'UX Design', 'User Research', 'Motion Design', 'Design Leadership', 'Illustration', 'Writing', 'Front-end Engineering', 'Emerging Technology', 'Design Ops'],
+      skillValues: Array(6).fill(null),
+      skillNames: ['UI', 'UX', 'Research', 'Writing', 'Code', 'Ops'], 
+      skillFullNames: ['Visual Design', 'UX Design', 'UX Research', 'Writing', 'Code', 'DesignOps'],
       selectedQuestions: [],
       selectedNames: [],
       arrangedValues: [],
@@ -24,9 +25,12 @@ class App extends Component {
       leaderValues: [null, null, null, null, null],
       leaderValues2: [0, 0, 0, 0, 0],
       illustrationValues: [null, null],
+      visualValues: [null, null, null, null, null],
       writingValues: [null, null],
       techValues: [null, null, null],
-      opsValues: [null, null, null]
+      opsValues: [null, null, null],
+      subskills: [[null, null, null, null, null], [null, null, null], [null, null, null, null, null], [null, null, null], [null, null], [null, null, null]],
+      showPreview: false
     }
   }
   
@@ -44,35 +48,20 @@ class App extends Component {
   
   updateSectionValue(updatedValue, section, position) {
     switch (position) {
+      case 1:
+        let visualValues = this.state.visualValues.slice()
+        visualValues[section] = updatedValue
+        this.setState({visualValues: visualValues})
+        break;  
       case 3:
         let researchValues = this.state.researchValues.slice()
         researchValues[section] = updatedValue
         this.setState({researchValues: researchValues})
-        break;
+        break;      
       case 4:
-        let motionValues = this.state.motionValues.slice()
-        motionValues[section] = updatedValue
-        this.setState({motionValues: motionValues})
-        break;
-      case 5:
-        let leaderValues = this.state.leaderValues.slice()
-        leaderValues[section] = updatedValue
-        this.setState({leaderValues: leaderValues})
-        break;
-      case 6:
-        let illustrationValues = this.state.illustrationValues.slice()
-        illustrationValues[section] = updatedValue
-        this.setState({illustrationValues: illustrationValues})
-        break;       
-      case 7:
         let writingValues = this.state.writingValues.slice()
         writingValues[section] = updatedValue
         this.setState({writingValues: writingValues})
-        break;
-      case 9:
-        let techValues = this.state.techValues.slice()
-        techValues[section] = updatedValue
-        this.setState({techValues: techValues})
         break;
       default:
         let opsValues = this.state.opsValues.slice()
@@ -87,6 +76,36 @@ class App extends Component {
   }
   resetQuiz() {
     this.setState({quizFinished: false, deepSkills: []})      
+  }
+  
+  updateSubskills(value, section, id) {
+    let subskills = this.state.subskills.slice();
+    switch(id) {
+      case 2:
+        subskills[1][section] = value;
+        this.setState({subskills: subskills})
+        break;
+      case 3:
+        subskills[2][section] = value;
+        this.setState({subskills: subskills})
+        break;
+      case 4:
+        subskills[3][section] = value;
+        this.setState({subskills: subskills})
+        break;
+      case 5:
+        subskills[4][section] = value;
+        this.setState({subskills: subskills})
+        break;
+      case 6:
+        subskills[5][section] = value;
+        this.setState({subskills: subskills})
+        break;
+      default:
+        subskills[0][section] = value;
+        this.setState({subskills: subskills})
+        break;
+    }
   }
   
   // Once a question is completed (ie user hits the 'Next' button), store the answer value in the App state
@@ -139,23 +158,31 @@ class App extends Component {
     this.setState({arrangedValues: newLevels, arrangedNames: newNames})  
 
   })}
-
+  showPreview() {
+    this.setState({showPreview: true})
+  }
+  showQuiz() {
+    this.setState({showPreview: false})
+  }
   showNextScreen() {
     this.setState((state) => {
       return {current_screen: state.current_screen + 1}
     })
+    this.ref.current.scrollIntoView(/*{behavior: 'smooth'}*/)
   }
   
   render() {
     const didQuizStart = ((this.state.current_screen) === 2)
     
     return (
-      <div class="container">
+      <div class="container" ref={this.ref}>
         {didQuizStart ? <Quiz 
                          selectedQuestions={this.state.selectedQuestions}
+                         selectedNames={this.state.selectedNames}
                          updateQuizSectionValue={this.updateSectionValue.bind(this)}
                          updateQuizSliderValue={this.updateSliderValue.bind(this)}
-                         updateQuizValue={this.updateValue.bind(this)} 
+                         updateQuizValue={this.updateValue.bind(this)}
+                         updateSubskills={this.updateSubskills.bind(this)}
                          skill_values={this.state.arrangedValues} 
                          skill_names={this.state.arrangedNames}
                          unsorted_values={this.state.skillValues}
@@ -164,18 +191,29 @@ class App extends Component {
                          leader_values={this.state.leaderValues}
                          leader_values2={this.state.leaderValues2}
                          illustration_values={this.state.illustrationValues}
+                          visual_values={this.state.visualValues}
                          writing_values={this.state.writingValues}
                          tech_values={this.state.techValues}
                          ops_values={this.state.opsValues}
                          shape={this.state.skillShape}
                          resetQuiz={this.resetQuiz.bind(this)}
                          deep_skills={this.state.deepSkills}
-                         level={this.state.level}
+                         level={this.state.level} 
+                         subskills={this.state.subskills}
+                         showPreview={this.state.showPreview}
+                         showQuiz={this.showQuiz.bind(this)}
                         /> 
                       : <Create 
                           intro_content={introData.intro_pages[this.state.current_screen - 1]} 
+                          showPreview={this.showPreview.bind(this)}
                           showNextScreenHandler={this.showNextScreen.bind(this)}
-                          updateSelectedSkills={this.updateSelectedSkills.bind(this)} />}
+                          updateSelectedSkills={this.updateSelectedSkills.bind(this)}
+                          selectedQuestions={this.state.selectedQuestions}
+                          skills={this.state.arrangedValues}
+                          names={this.state.arrangedNames}
+                          subskills={this.state.subskills}
+                          fullNames={this.state.skillFullNames}
+                          />}
       </div>
     )
   }

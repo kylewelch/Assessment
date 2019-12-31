@@ -5,6 +5,7 @@ import QuizQuestionMultiRadio from './QuizQuestionMultiRadio.js'
 import QuizQuestionInputCards from './QuizQuestionInputCards.js'
 import QuizQuestionSliderCards from './QuizQuestionSliderCards.js'
 import QuizQuestionRadioCards from './QuizQuestionRadioCards.js'
+import QuizQuestionMultiFormat from './QuizQuestionMultiFormat.js'
 
 let quizData = require('./quiz_data.json')
 
@@ -21,6 +22,9 @@ class QuizQuestion extends Component {
   }
   updateAnswerSliderValue(newValue, section) {
     this.props.updateSliderValue(newValue, section)
+  }
+  updateSubskills(value, section, id) {
+    this.props.updateSubskills(value, section, id)
   }
   showNextQuestion(newValue) {
     this.props.showNextQuestionHandler()
@@ -44,7 +48,23 @@ class QuizQuestion extends Component {
             nav_text={quizData.nav_text[0]}
             showNextQuestionHandler={this.showNextQuestion.bind(this)}
             showPreviousQuestionHandler={this.showPreviousQuestion.bind(this)}
-            currentSkillValue={this.props.currentSkillValue} />
+            currentSkillValue={this.props.currentSkillValue}
+            updateSubskills={this.props.updateSubskills.bind(this)}
+            subskills={this.props.subskills} />
+          : (this.props.quiz_question.question_type === "multiformat") ? 
+          <QuizQuestionMultiFormat 
+            quiz_question={this.props.quiz_question}
+            value={0} 
+            updateValue={this.updateAnswerValue.bind(this)}
+            updateTotalValue={this.updateAnswerValue.bind(this)}
+            updateSectionValue={this.updateAnswerSectionValue.bind(this)}
+            nav_text={quizData.nav_text[0]}
+            showNextQuestionHandler={this.showNextQuestion.bind(this)}
+            showPreviousQuestionHandler={this.showPreviousQuestion.bind(this)}
+            currentSkillValue={this.props.currentSkillValue}
+            updateSubskills={this.props.updateSubskills.bind(this)}
+            subskills={this.props.subskills}
+            section_values={this.props.section_values} />
           : (this.props.quiz_question.question_type === "input-card") ? 
           <QuizQuestionInputCards 
             quiz_position={this.props.quiz_position}
@@ -56,7 +76,10 @@ class QuizQuestion extends Component {
             nav_text={quizData.nav_text[0]}
             showNextQuestionHandler={this.showNextQuestion.bind(this)}
             showPreviousQuestionHandler={this.showPreviousQuestion.bind(this)}
-            section_values={this.props.section_values} /> 
+            section_values={this.props.section_values}
+            updateSubskills={this.props.updateSubskills.bind(this)}
+            subskills={this.props.subskills}
+            /> 
           : (this.props.quiz_question.question_type === "slider-radio-card") ? 
           <QuizQuestionSliderCards 
             quiz_position={this.props.quiz_position}
@@ -94,7 +117,8 @@ class QuizQuestion extends Component {
             showNextQuestionHandler={this.showNextQuestion.bind(this)}
             showPreviousQuestionHandler={this.showPreviousQuestion.bind(this)}
             currentSkillValue={this.props.currentSkillValue}
-            section_values={this.props.section_values} /> :
+            section_values={this.props.section_values}updateSubskills={this.props.updateSubskills.bind(this)}
+            subskills={this.props.subskills} /> :
           <QuizQuestionCards 
             quiz_question={this.props.quiz_question}
             value={0} 

@@ -2,12 +2,14 @@
   "quiz_questions": [
     {
       "id": 1,
-      "skill_name": "UI Design",
-      "question_type": "card",
-      "instruction_text": "Select the mockup that comes closest to your current ",
-      "instruction_text2": " skills:",
+      "skill_name": "Visual Design",
+      "question_type": "multiformat",
+      "instruction_text": "How skilled are you at the following types of ",
+      "instruction_text2": "?",
       "answer_options": ["World-class UI mockup", "Solid, but not world-class mockup", "Middle-of-the-road mockup", "Very novice UI mockup", "Basically a pencil sketch", "I don't do mockups"],
       "values": [5, 4, 3, 2, 1, 0],
+      "subskills": ["UI Design", "Illustration", "Typography", "Animation", "Photos"],
+      "subskill_levels": ["Never done it", "Beginner", "Proficient", "Expert", "World Class"],
       "cta_text": "Next"
     },
     {
@@ -16,37 +18,77 @@
       "question_type": "radio",
       "instruction_text": "How much experience do you have with ",
       "instruction_text2": "?",
-      "answer_options": ["I ain't got none!", "Beginner", "Junior level", "Mid-level", "Senior level", "World-class"],
+      "answer_options": ["None", "Beginner", "Junior level", "Mid-level", "Senior level", "World-class"],
       "answer_description": ["", " - I've mostly done student or practice projects", " - I've contributed to the design of at least one actual product", " - I've contributed to multiple projects over a few years", " - I've solved a wide variety of problems in different industries over many years", " - I produce top-quality, industry-leading work"],
       "values": 0,
+      "subskills": ["Information Architecture", "Interaction Design", "Prototyping"],
+      "subskill_levels": ["Never done it", "Beginner", "Proficient", "Expert", "World Class"],
       "cta_text": "Next"
     },
     {
       "id": 3,
-      "skill_name": "User Research",
+      "skill_name": "UX Research",
       "question_type": "input-card",
       "instruction_text": "How many times have you done the following types of ",
       "instruction_text2": "?",
       "answer_options": [0, 1, 2],
       "sections": [0, 1, 2, 3, 4],
       "section_text": ["Conducting user interviews", "Launching user surveys", "Rapid prototyping or concept testing", "Running A/B tests or analytics", "Any other types of user research (e.g. task analysis, card sorting, field studies, etc.)"],
-      "answer_text": ["Never", "A few times", "Lots o' times!"],      
+      "answer_text": ["Never", "A few times", "Lots of times"],      
       "values": 0,
+      "subskills": ["Interviews", "Surveys", "Concept Testing", "Analytics", "Other Methods"],
+      "subskill_levels": ["Never done it", "Beginner", "Proficient", "Expert", "World Class"],
       "cta_text": "Next"
     },
     {
       "id": 4,
-      "skill_name": "Animation",
+      "skill_name": "Writing",
+      "question_type": "radio",
+      "instruction_text": "What's your experience with ",
+      "instruction_text2": "?",
+      "question1": "On my projects, I've written the final copy that gets shipped to customers:",
+      "answer_options": ["None", "Pretty experienced", "Really experienced"],
+      "answer_description": [" - I never write the final copy that ships to customers", " - I have some experiemce writing the final copy", " - I have lots of experience with this"],
+      "values": 0,
+      "subskills": ["Content Strategy", "Copywriting", "Microcopy"],
+      "subskill_levels": ["Never done it", "Beginner", "Proficient", "Expert", "World Class"],
+      "cta_text": "Next"
+    },
+    {
+      "id": 5,
+      "skill_name": "Code",
+      "question_type": "radio",
+      "instruction_text": "How much experience do you have with writing ",
+      "instruction_text2": "?",
+      "answer_options": ["Nah, that ain't my thing", "I'm an informed non-engineer", "Junior level", "Mid-level", "Senior level", "World-class"],
+      "answer_description": ["", " - I'm familiar with the basics of HTML, CSS, and/or JavaScript, but I don't write much code", " - I can build a basic front end, but it's not my area of expertise", " - I'm a UI engineer", " - I'm a senior-level UI engineer", " - I'm a world-class engineer"],
+      "values": 0,
+      "subskills": ["HTML & CSS", "JavaScript", "Other Languages"],
+      "subskill_levels": ["Never done it", "Beginner", "Proficient", "Expert", "World Class"],
+      "cta_text": "Next"
+    },
+    {
+      "id": 6,
+      "skill_name": "DesignOps",
       "question_type": "input-card",
-      "instruction_text": "How many times have you created the following types of ",
+      "instruction_text": "How much experience do you have with the following aspects of ",
       "instruction_text2": "?",
       "answer_options": [0, 1, 2],
-      "sections": [0, 1, 2],
-      "section_text": ["Micro-interactions (animation of a single element or action)", "Full-page interactions", "Animated videos"],
-      "answer_text": ["Never", "A few times", "Lots o' times!"],
+      "sections": [0, 1, 2, 3, 4],
+      "section_text": ["Workflow - maximizing your design team’s output and efficiency", "Tooling - Managing the software and tools that your design team uses", "Design Systems - Contributing to a design system", "Education - helping members of your design team sharpen their skills", "Advocacy - promoting and advocating for design within your company"],
+      "answer_text": ["Never", "Done it a bit", "Done it a lot"], 
       "values": 0,
+      "subskills": ["Workflow", "Design Systems", "Tooling", "Mentoring", "Advocacy"],
+      "subskill_levels": ["Never done it", "Beginner", "Proficient", "Expert", "World Class"],
       "cta_text": "Next"
-    }, 
+    } 
+  ],
+  "nav_text": [
+    {
+      "cta_text": "Previous"
+    }
+  ],
+  "excluded_skills": [
     {
       "id": 5,
       "skill_name": "",
@@ -61,74 +103,6 @@
       "emoji_text": ["Hate it", "Dislike it", "No opinion", "Like it", "Love it"],
       "values": 0,
       "cta_text": "Next"
-    },
-    {
-      "id": 6,
-      "skill_name": "Illustration",
-      "question_type": "radio-cards",
-      "instruction_text": "What's your experience with ",
-      "instruction_text2": "?",
-      "question1": "How many years of professional illustration experience do you have?",
-      "answer_options": ["None", "less than 1", "1-2", "3-4", "5 or more"],
-      "question2": "Select the image that comes closest to your current Illustration abilities",
-      "answer_options2": ["(crappy illustration)", "(decent illustration)", "(great illustration)", "(world-class illustration)"],
-      "values": [0, 1, 2, 3],
-      "cta_text": "Next"
-    },
-    {
-      "id": 7,
-      "skill_name": "Copywriting",
-      "question_type": "multi-radio",
-      "instruction_text": "What's your experience with ",
-      "instruction_text2": "?",
-      "question1": "On my projects, I've written the final copy that gets shipped to customers:",
-      "answer_options": ["Never", "A few times", "Lots of times"],
-      "question2": "How would you rate your writing ability?",
-      "answer_options2": ["I not so good at making the English", "Decent, but not my specialty", "Above average", "My prose is crisp AF"],
-      "values": 0,
-      "cta_text": "Next"
-    },
-    {
-      "id": 8,
-      "skill_name": "Front-end Code",
-      "question_type": "radio",
-      "instruction_text": "How much experience do you have with writing ",
-      "instruction_text2": "?",
-      "answer_options": ["Nah, that ain't my thing", "I'm an informed non-engineer", "Junior level", "Mid-level", "Senior level", "World-class"],
-      "answer_description": ["", " - I'm familiar with the basics of HTML, CSS, and/or JavaScript, but I don't write much code", " - I can build a basic front end, but it's not my area of expertise", " - I'm a UI engineer", " - I'm a senior-level UI engineer", " - I'm a world-class engineer"],
-      "values": 0,
-      "cta_text": "Next"
-    },
-    {
-      "id": 9,
-      "skill_name": "",
-      "question_type": "input-card",
-      "instruction_text": "Have you ever designed for the following technologies?",
-      "instruction_text2": "",
-      "answer_options": [0, 1, 2],
-      "sections": [0, 1, 2],
-      "section_text": ["Virtual, Augmented, or Mixed Reality (VR/AR/MR/XR)", "Machine Learning / Artificial Intelligence (AI)", "No UI / Voice Technology (e.g., Siri)"],
-      "answer_text": ["Never", "A few times", "Lots o' times!"],  
-      "values": 0,
-      "cta_text": "Next"
-    },
-    {
-      "id": 10,
-      "skill_name": "Design Ops",
-      "question_type": "input-card",
-      "instruction_text": "How much experience do you have with the following aspects of ",
-      "instruction_text2": "?",
-      "answer_options": [0, 1, 2],
-      "sections": [0, 1, 2, 3, 4],
-      "section_text": ["Workflow - maximizing your design team’s output and efficiency", "Tooling - Managing the software and tools that your design team uses", "Design Systems - Contributing to a design system", "Education - helping members of your design team sharpen their skills", "Advocacy - promoting and advocating for design within your company"],
-      "answer_text": ["Never", "Done it a bit", "Done it a lot"], 
-      "values": 0,
-      "cta_text": "Next"
-    } 
-  ],
-  "nav_text": [
-    {
-      "cta_text": "Previous"
     }
   ]
 }

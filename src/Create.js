@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Checkbox from './Checkbox.js'
+import Subskill from './Subskill.js'
 
 let introData = require('./intro_data.json')
 
@@ -8,8 +9,7 @@ class Create extends Component {
     super(props)
     this.state = {
       assessmentName: "",
-      skills: ["UI Design", "UX Design", "UX Research", "Motion Design", "Management", "Illustration", "Writing", "Engineering", "Future Tech", "Design Ops"],
-      selectedSkills: [false, false, false, false, false, false, false, false, false, false]
+      selectedSkills: [false, false, false, false, false, false]
     }
   }
   updateName(e) {
@@ -54,6 +54,7 @@ class Create extends Component {
   };
   
   showNextScreen() {
+    this.props.showPreview()
     this.props.showNextScreenHandler()
   }
 
@@ -71,7 +72,7 @@ class Create extends Component {
             />
           <h1 className="main-heading">Which skills would you like to assess?</h1>
           <div className="skill-list">
-            {this.state.skills.map((skill, index) => {
+            {this.props.fullNames.map((skill, index) => {
             return <Checkbox
                       key={index} 
                       index={index}
