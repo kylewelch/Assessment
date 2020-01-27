@@ -124,7 +124,7 @@ ol, ul {
 }
 
 .main-heading {
-  margin-top: .4em;
+  margin-top: 2em;
 }
 
 .main-heading-skill {
@@ -434,7 +434,12 @@ ol, ul {
 /* Assessment Creation Page */
 
 
-.assessment-name-input {
+.input-fields {
+  display: flex;
+  justify-content: space-between;
+}
+
+.text-input {
   margin: .5em 0 2em;
   font-size: 1.2em;
   border: none;
@@ -444,11 +449,11 @@ ol, ul {
   font-family: "Poppins", Futura, sans-serif;
 }
 
-.assessment-name-input::placeholder {
+.text-input::placeholder {
   opacity: .5;
 }
 
-.assessment-name-input:focus {
+.text-input:focus {
   outline-width: 0;
   border-bottom: 2px solid #009789;
 }
@@ -650,6 +655,28 @@ ol, ul {
   justify-content: center;
 }
 
+.work-sample {
+  max-width: 300px;
+}
+
+
+/* Forms */
+
+
+.image-upload-container {
+  display: flex;
+}
+.text-label {
+  font-size: 1.2em;
+  margin-bottom: .3em;
+}
+
+.text-field {
+  font-size: 1.2em;
+  line-height: 2em;
+}
+
+
 /* Media Queries */
 
 
@@ -665,7 +692,7 @@ ol, ul {
     width: 100%;
     margin: 6px 0;
   }
-  .assessment-name-input {
+  .text-input {
     width: 90%;
   }
   .subskill-container-section {

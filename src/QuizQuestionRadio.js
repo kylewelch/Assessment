@@ -20,6 +20,9 @@ class QuizQuestionRadio extends Component {
   updateSubskills(value, section, id) {
     this.props.updateSubskills(value, section, id)
   }
+  storeImage(image) {
+    this.props.storeImage(image);
+  }
   showNextQuestion() {
     if (this.props.currentSkillValue === null) {
       this.setState({isIncomplete: true})
@@ -48,20 +51,27 @@ class QuizQuestionRadio extends Component {
           })}
         {this.props.currentSkillValue ? 
           <div className="follow-up-section">
-            <h2>How skilled are you at: </h2>
-            {this.props.quiz_question.subskills.map((level, index) => {
-              return <QuizQuestionHorizontalRadio 
-                        key={index} 
-                        index={index}
-                        answer_text={level} 
-                        isChecked={(this.props.currentSkillValue === index)}
-                        updateSubskills={this.updateSubskills.bind(this)} 
-                        question_data={this.props.quiz_question}
-                        subskillValue={this.props.subskills[index]}
-                      />
-            })}
+            {this.props.quiz_question.skip_subskills ? null :
+              <div>
+                <h2>How much experience do you have with the following:</h2>
+                {this.props.quiz_question.subskills.map((level, index) => {
+                  return <QuizQuestionHorizontalRadio 
+                            key={index} 
+                            index={index}
+                            answer_text={level} 
+                            isChecked={(this.props.currentSkillValue === index)}
+                            updateSubskills={this.updateSubskills.bind(this)} 
+                            question_data={this.props.quiz_question}
+                            subskillValue={this.props.subskills[index]}
+                          />
+                })}
+              </div>
+            }
             <Upload 
+              quiz_question={this.props.quiz_question}
               skills={this.props.quiz_question.subskills}
+              storeImage={this.storeImage.bind(this)}
+              image={this.props.image}             
             />
           </div> : null
         }

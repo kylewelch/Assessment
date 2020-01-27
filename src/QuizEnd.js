@@ -208,6 +208,7 @@ class QuizEnd extends Component {
                    names={[this.props.selectedNames]}
                    subskills={this.props.subskills[this.props.selectedQuestions[index]]}
                    selectedQuestion={this.props.selectedQuestions[index]}
+                   image={this.props.image}
                    />
         })}
         {/*<a href='#' onClick={this.handleResetClick.bind(this)}>Retake the Assessment</a>*/}

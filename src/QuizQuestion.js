@@ -32,6 +32,9 @@ class QuizQuestion extends Component {
   showPreviousQuestion(newValue) {
     this.props.showPreviousQuestionHandler()
   }
+  storeImage(image) {
+    this.props.storeImage(image);
+  }
   render() {
     return (
       <main>
@@ -50,7 +53,10 @@ class QuizQuestion extends Component {
             showPreviousQuestionHandler={this.showPreviousQuestion.bind(this)}
             currentSkillValue={this.props.currentSkillValue}
             updateSubskills={this.props.updateSubskills.bind(this)}
-            subskills={this.props.subskills} />
+            subskills={this.props.subskills}
+            storeImage={this.storeImage.bind(this)} 
+            image={this.props.image}
+          />
           : (this.props.quiz_question.question_type === "multiformat") ? 
           <QuizQuestionMultiFormat 
             quiz_question={this.props.quiz_question}

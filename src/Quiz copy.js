@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import QuizQuestion from './QuizQuestion.js'
 import QuizEnd from './QuizEnd.js'
-import Firebase from './Firebase.js'
 import QuizPreview from './QuizPreview.js'
 import {
   BrowserRouter as Router,
@@ -9,12 +8,12 @@ import {
   Route,
   Link
 } from "react-router-dom";
-const quizData = require('./quiz_data.json')
+
 const firebase = require("firebase");
 // Required for side-effects
 require("firebase/firestore");
 
-
+let quizData = require('./quiz_data.json')
 const assessmentID = window.location.pathname.substr(12);
 const db = firebase.firestore();
 
@@ -27,6 +26,10 @@ class Quiz extends Component {
       quiz_finished: false,
       test: window.location.pathname.substr(12),
       name: ''}
+  }
+  componentDidMount() {
+    const AssessName = db.collection("assessments").doc(assessmentID).get("name");
+    this.setState({name: AssessName})
   }
   updateAnswerSectionValue(newValue, section, position) {
     this.props.updateQuizSectionValue(newValue, section, position)

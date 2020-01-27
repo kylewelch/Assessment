@@ -22,6 +22,7 @@ class Upload extends Component {
         this.setState({
             imgSrc: [reader.result]
         })
+        this.props.storeImage(reader.result);
       }.bind(this);
 
     // TODO: concat files
@@ -30,7 +31,8 @@ class Upload extends Component {
   render() {
     return (
     <div className="upload-section">
-      <h3>Share a sample of your {this.props.skills[0]}{this.props.skills[2] ? ', ' : ' or '} {this.props.skills[1]} {this.props.skills[2] ? ', or ' : null} {this.props.skills[2] ? this.props.skills[2] : null}</h3>
+        <h2>{this.props.quiz_question.followup
+          /*<h3>Share a sample of your {this.props.skills[0]}{this.props.skills[2] ? ', ' : ' or '} {this.props.skills[1]} {this.props.skills[2] ? ', or ' : null} {this.props.skills[2] ? this.props.skills[2] : null}</h3>*/}</h2>
       <p>Optional, but it’s strongly recommended to share at least one sample</p>
       <form>
         <input
@@ -41,7 +43,7 @@ class Upload extends Component {
           onChange={this.onChange.bind(this)}/>
        </form>
       {/* Only show first image, for now. */}
-      <img className="uploads" src={this.state.imgSrc} />
+      <img className="uploads" src={this.props.image} />
     </div>
    )
   }

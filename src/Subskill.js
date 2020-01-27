@@ -32,6 +32,7 @@ class Subskill extends Component {
           </div>
           <div className="subskill-container-section">
             <h3>Work Samples</h3>
+            <img className="work-sample" src={this.props.image} />
             <div className="subskill-empty-image">No samples uploaded</div>
           </div>
         </div>       

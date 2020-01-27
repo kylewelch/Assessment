@@ -1,5 +1,12 @@
 import React, { Component } from 'react'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 let resultsData = require('./results_data.json')
+
 
 {/*
 // Single block component
@@ -86,6 +93,7 @@ class QuizPreview extends Component {
     this.props.showQuiz();
   }
   render() {
+    let AssessmentID = this.props.assessmentID
     return(
       <div className="quiz-preview">
         <h1 className="main-heading">Your assessment is ready!{/*(this.props.shape === "T-shaped designer" || this.props.shape === "specialist") ? ((this.props.deep_skills.length === 2) ? (this.props.deep_skills[0] + '/' + this.props.deep_skills[1] + ' ' + this.props.level) : (this.props.deep_skills[0] + ' ' + this.props.level)) : this.props.shape*/}</h1>
@@ -96,10 +104,10 @@ class QuizPreview extends Component {
             skill_name={this.props.selectedNames}
             selectedQuestions={this.props.selectedQuestions}
             />*/}
-          <p>{"sweetpotato.com/Assessment/" + this.props.assessmentID}</p>
+          <Link to={"/Assessment/" + AssessmentID}>{"sweetpotato.com/Assessment/" + this.props.assessmentID}</Link>
         </div>
-        <div class="preview-btn" onClick={this.showQuiz.bind(this)}>Preview</div>
-        <div class="preview-btn preview-secondary">Send</div>
+        {/*<div class="preview-btn">Copy link</div>*/}
+        <div class="preview-btn preview-secondary">Copy link</div>
       </div>
     )
   }

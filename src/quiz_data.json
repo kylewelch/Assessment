@@ -3,13 +3,16 @@
     {
       "id": 1,
       "skill_name": "Visual Design",
-      "question_type": "multiformat",
-      "instruction_text": "How skilled are you at the following types of ",
+      "question_type": "radio",
+      "instruction_text": "How much experience do you have with ",
       "instruction_text2": "?",
-      "answer_options": ["World-class UI mockup", "Solid, but not world-class mockup", "Middle-of-the-road mockup", "Very novice UI mockup", "Basically a pencil sketch", "I don't do mockups"],
-      "values": [5, 4, 3, 2, 1, 0],
-      "subskills": ["UI Design", "Illustration", "Typography", "Animation", "Photos"],
-      "subskill_levels": ["Never done it", "Beginner", "Proficient", "Expert", "World Class"],
+      "answer_options": ["None", "Beginner", "Junior level", "Mid-level", "Senior level", "World-class"],
+      "answer_description": ["", " - I've mostly done student or practice projects", " - I've contributed to the design of at least one actual product", " - I've created the visual design for multiple projects over a few years", " - I've produced a wide variety of designs in different industries over many years", " - I produce top-quality, industry-leading work"],
+      "values": 0,
+      "followup": "Share a few samples that represent your best Visual Design work (mockups, illustrations, animations, etc.)",
+      "subskills": ["UI Design, Typography, Illustration, Animation"],
+      "subskill_levels": [],
+      "skip_subskills": true,
       "cta_text": "Next"
     },
     {
@@ -21,6 +24,7 @@
       "answer_options": ["None", "Beginner", "Junior level", "Mid-level", "Senior level", "World-class"],
       "answer_description": ["", " - I've mostly done student or practice projects", " - I've contributed to the design of at least one actual product", " - I've contributed to multiple projects over a few years", " - I've solved a wide variety of problems in different industries over many years", " - I produce top-quality, industry-leading work"],
       "values": 0,
+      "followup": "Share a case study that represents your best UX Design work",
       "subskills": ["Information Architecture", "Interaction Design", "Prototyping"],
       "subskill_levels": ["Never done it", "Beginner", "Proficient", "Expert", "World Class"],
       "cta_text": "Next"

@@ -1,9 +1,18 @@
 import React, { Component } from 'react'
+import firebase from './Firebase.js'
 import Quiz from './Quiz.js'
 import Intro from './Intro.js'
 import Create from './Create.js'
 import Upload from './Upload.js'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import './App.css'
+
+var db = firebase.firestore();
 
 let introData = require('./intro_data.json')
 
@@ -14,10 +23,10 @@ class App extends Component {
     this.state = {
       current_screen: 1,
       skillValues: Array(6).fill(null),
-      skillNames: ['UI', 'UX', 'Research', 'Writing', 'Code', 'Ops'], 
+      skillNames: ['Visual', 'UX', 'Research', 'Writing', 'Code', 'Ops'], 
       skillFullNames: ['Visual Design', 'UX Design', 'UX Research', 'Writing', 'Code', 'DesignOps'],
-      selectedQuestions: [],
-      selectedNames: [],
+      selectedQuestions: [0, 1, 2, 3, 4, 5],
+      selectedNames: ['Visual', 'UX', 'Research', 'Writing', 'Code', 'Ops'],
       arrangedValues: [],
       arrangedNames: [],
       researchValues: [null, null, null, null, null],
@@ -30,7 +39,10 @@ class App extends Component {
       techValues: [null, null, null],
       opsValues: [null, null, null],
       subskills: [[null, null, null, null, null], [null, null, null], [null, null, null, null, null], [null, null, null], [null, null], [null, null, null]],
-      showPreview: false
+      showPreview: false,
+      image: null,
+      assessmentID: null,
+      assessmentQuestions: null
     }
   }
   
@@ -42,6 +54,11 @@ class App extends Component {
       selectedNames.push(this.state.skillNames[skills[i]])
     }
     this.setState({selectedQuestions: skills, selectedNames: selectedNames})
+  }
+  
+  // When after creating an assessment, store its DB reference in the App state
+  storeDBreference(id) {
+    this.setState({assessmentID: id})
   }
   
   // For questions that collect multiple data points, store those data in the App state
@@ -164,6 +181,9 @@ class App extends Component {
   showQuiz() {
     this.setState({showPreview: false})
   }
+  storeImage(image) {
+    this.setState({image: image})
+  }
   showNextScreen() {
     this.setState((state) => {
       return {current_screen: state.current_screen + 1}
@@ -173,10 +193,63 @@ class App extends Component {
   
   render() {
     const didQuizStart = ((this.state.current_screen) === 2)
-    
+    let AssessmentID = this.state.assessmentID
     return (
-      <div class="container" ref={this.ref}>
-        {didQuizStart ? <Quiz 
+      <Router>
+        <div class="container" ref={this.ref}>
+          <Switch>
+            <Route path="/Assessment">
+              <Route path={"/Assessment/" + AssessmentID}>
+                <Quiz 
+                  selectedQuestions={this.state.selectedQuestions}
+                  selectedNames={this.state.selectedNames}
+                  updateQuizSectionValue={this.updateSectionValue.bind(this)}
+                  updateQuizSliderValue={this.updateSliderValue.bind(this)}
+                  updateQuizValue={this.updateValue.bind(this)}
+                  updateSubskills={this.updateSubskills.bind(this)}
+                  skill_values={this.state.arrangedValues} 
+                  skill_names={this.state.arrangedNames}
+                  unsorted_values={this.state.skillValues}
+                  research_values={this.state.researchValues}
+                  motion_values={this.state.motionValues}
+                  leader_values={this.state.leaderValues}
+                  leader_values2={this.state.leaderValues2}
+                  illustration_values={this.state.illustrationValues}
+                  visual_values={this.state.visualValues}
+                  writing_values={this.state.writingValues}
+                  tech_values={this.state.techValues}
+                  ops_values={this.state.opsValues}
+                  shape={this.state.skillShape}
+                  resetQuiz={this.resetQuiz.bind(this)}
+                  deep_skills={this.state.deepSkills}
+                  level={this.state.level} 
+                  subskills={this.state.subskills}
+                  showPreview={this.state.showPreview}
+                  showQuiz={this.showQuiz.bind(this)}
+                  storeImage={this.storeImage.bind(this)}
+                  image={this.state.image}
+                  assessmentID={this.state.assessmentID}
+                />
+              </Route>
+            </Route>
+            <Route path="/">
+              <Create 
+                intro_content={introData.intro_pages[this.state.current_screen - 1]} 
+                showPreview={this.showPreview.bind(this)}
+                showNextScreenHandler={this.showNextScreen.bind(this)}
+                updateSelectedSkills={this.updateSelectedSkills.bind(this)}
+                selectedQuestions={this.state.selectedQuestions}
+                skills={this.state.arrangedValues}
+                names={this.state.arrangedNames}
+                subskills={this.state.subskills}
+                fullNames={this.state.skillFullNames}
+                storeDBreference={this.storeDBreference.bind(this)}
+                assessmentCreated={this.state.showPreview}
+                assessmentID={this.state.assessmentID}
+              />
+            </Route>
+          </Switch>
+          {/*didQuizStart ? <Quiz 
                          selectedQuestions={this.state.selectedQuestions}
                          selectedNames={this.state.selectedNames}
                          updateQuizSectionValue={this.updateSectionValue.bind(this)}
@@ -202,6 +275,9 @@ class App extends Component {
                          subskills={this.state.subskills}
                          showPreview={this.state.showPreview}
                          showQuiz={this.showQuiz.bind(this)}
+                         storeImage={this.storeImage.bind(this)}
+                         image={this.state.image}
+                         assessmentID={this.state.assessmentID}
                         /> 
                       : <Create 
                           intro_content={introData.intro_pages[this.state.current_screen - 1]} 
@@ -213,8 +289,24 @@ class App extends Component {
                           names={this.state.arrangedNames}
                           subskills={this.state.subskills}
                           fullNames={this.state.skillFullNames}
-                          />}
-      </div>
+                          storeDBreference={this.storeDBreference.bind(this)}
+                          />*/}
+        
+          {/*<div className="image-upload-container">
+            <div>
+              <p className="text-label">Title</p>
+              <input className="text-field" type="text"></input>
+              <p className="text-label">Description</p>
+              <textarea className="text-field"></textarea>
+            </div>
+            <div>
+              <div className="subskill-empty-image">
+                <div>Upload file</div>
+              </div>
+            </div>
+          </div>*/}
+        </div>
+      </Router>
     )
   }
 }

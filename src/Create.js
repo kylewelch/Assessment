@@ -1,18 +1,34 @@
 import React, { Component } from 'react'
 import Checkbox from './Checkbox.js'
 import Subskill from './Subskill.js'
+import Firebase from './Firebase.js'
+import AssessmentCreated from './AssessmentCreated.js'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 let introData = require('./intro_data.json')
+
+const firebase = require("firebase");
+// Required for side-effects
+require("firebase/firestore");
+
+var db = firebase.firestore();
+
 
 class Create extends Component {
   constructor(props) {
     super(props)
     this.state = {
       assessmentName: "",
-      selectedSkills: [false, false, false, false, false, false]
+      email: "",
+      selectedSkills: [true, true, true, true, true, true]
     }
   }
-  updateName(e) {
+  updateValue(e) {
     this.setState({
       [e.target.name]: e.target.value
     });
@@ -41,36 +57,75 @@ class Create extends Component {
     this.props.updateSelectedSkills(skillIndexes);
   }
   
-  createAssessment(e) {
+  /*createAssessment(e) {
     e.preventDefault();
-    /*const db = firebase.firestore();
+    const db = firebase.firestore();
     db.settings({
       timestampsInSnapshots: true
     });
     const userRef = db.collection(“Assessments”).add({
       Name: this.state.assessmentName,
       Questions: this.state.selectedSkills
-    });*/ 
-  };
+    }); 
+  };*/
   
-  showNextScreen() {
-    this.props.showPreview()
-    this.props.showNextScreenHandler()
+  createNewAssessment(e) {
+    
+    // Make sure they've selected at least 1 skill
+    if (this.props.selectedQuestions.length === 0) {
+        e.preventDefault();
+    } 
+    
+    // Create and store their assessment in the Firestore DB
+    else {
+      let name = this.state.assessmentName;
+      let email = this.state.email;
+      let questions = this.props.selectedQuestions;
+      let newAssessment = db.collection("assessments").doc();
+      newAssessment.set({
+        name: name,
+        email: email,
+        questions: questions,
+        time: Date.now()
+      })
+      
+      // Store the DB reference to this new assessment in the App state
+      this.props.storeDBreference(newAssessment.id);
+      
+      // Move to the confirmation screen
+      this.props.showPreview()
+      this.props.showNextScreenHandler()
+    }
   }
-
   render() { 
+    const assessmentCreated = this.props.assessmentCreated;
     return (
       <main>
-        <form onSubmit={this.createAssessment.bind(this)}>
-          <input 
-            className="assessment-name-input" 
-            type="text" 
-            name="assessmentName" 
-            placeholder="Name this assessment" 
-            onChange={this.updateName.bind(this)} 
-            value={this.state.assessmentName}
-            />
-          <h1 className="main-heading">Which skills would you like to assess?</h1>
+        {assessmentCreated ? 
+          <AssessmentCreated 
+            assessmentID={this.props.assessmentID} /> :
+        <form>
+          <h1 className="main-heading">Create an assessment</h1>
+          <div className="input-fields">
+            <input 
+              className="text-input" 
+              type="text" 
+              name="assessmentName" 
+              placeholder="Assessment name" 
+              onChange={this.updateValue.bind(this)} 
+              value={this.state.assessmentName}
+              />
+            <input 
+              className="text-input" 
+              type="email" 
+              name="email" 
+              placeholder="Your email"  
+              onChange={this.updateValue.bind(this)}
+              value={this.state.email}
+              />
+          </div>
+          <h2>Which skills would you like to assess?</h2>
+          <p>{this.props.selectedQuestions.length} of 6 skills selected</p>
           <div className="skill-list">
             {this.props.fullNames.map((skill, index) => {
             return <Checkbox
@@ -82,8 +137,10 @@ class Create extends Component {
                     />
             })}
           </div>
-          <button className="nav-btn" type="submit" onClick={this.showNextScreen.bind(this)}>Next</button>
-        </form>
+          <br />
+          {(this.props.selectedQuestions.length === 0) ? <p className="validation-msg">Please select at least 1 skill you want to assess.</p> : null}
+          <button className="nav-btn" type="submit" onClick={this.createNewAssessment.bind(this)}>Next</button>
+        </form>}
       </main>
     )
   }

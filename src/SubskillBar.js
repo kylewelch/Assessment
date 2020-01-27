@@ -6,7 +6,7 @@ class SubskillBar extends Component {
     const barLength = {
       width: (100 * this.props.subskill) / ((quizData.quiz_questions[this.props.selectedQuestion].question_type === "input-card") ? 2 : 4) + '%'
     };
-    const levels = ["No experience", "Beginner", "Proficient", "Expert", "World Class"];
+    const levels = ["No experience", "Some experience", "Proficient", "Expert", "World Class"];
     return(
       <div className="progress-bar-section">
         <p className="progress-bar-name">{this.props.subskillName}</p>
