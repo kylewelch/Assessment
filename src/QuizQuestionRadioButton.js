@@ -7,7 +7,7 @@ class QuizQuestionRadioButton extends Component {
   render() {
     return (
       <div className="radio-option" onClick={this.handleClick.bind(this)}>
-        <div className={this.props.isChecked ? "radio-circle checked" : "radio-circle unchecked"} data-value={this.props.answer_text}></div>
+        <div className={this.props.isChecked ? "radio-circle checked" : "radio-circle unchecked"} data-value={this.props.answer_text}>{this.props.isChecked ? <div className="radio-fill"></div> : null}</div>
         <label className="radio-label"><span className={this.props.question_data.question_type === "radio" ? "radio-main-answer" : "radio-multi-answer"}>{this.props.answer_text}</span>{this.props.question_data.answer_description ? this.props.question_data.answer_description[this.props.index] : null}</label>
       </div>
     )

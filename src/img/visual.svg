@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
+    <title>Group 3</title>
+    <desc>Created with Sketch.</desc>
+    <g id="UI-Exploration-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Create-Assessment-Copy-2" transform="translate(-255.000000, -453.000000)">
+            <g id="Group-3" transform="translate(255.000000, 453.000000)">
+                <rect id="Rectangle" fill="#BCD5EF" x="0" y="0" width="50" height="50" rx="25"></rect>
+                <g id="md-color-swatch" transform="translate(15.000000, 13.000000)" stroke="#4478B3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5">
+                    <path d="M4.88888889,22 C2.18882889,22 0,19.8111222 0,17.1111111 L0,2.44444444 C0,1.09441444 1.09441444,0 2.44444444,0 L7.33333333,0 C8.6834,0 9.77777778,1.09441444 9.77777778,2.44444444 L9.77777778,17.1111111 C9.77777778,19.8111222 7.58894889,22 4.88888889,22 Z M4.88888889,22 L19.5555556,22 C20.9056222,22 22,20.9056222 22,19.5555556 L22,14.6666667 C22,13.3166 20.9056222,12.2222222 19.5555556,12.2222222 L16.6917667,12.2222222 M9.77777778,5.30825778 L11.8028778,3.28324333 C12.7574333,2.32862667 14.3051333,2.32862667 15.2598111,3.28324333 L18.7167444,6.74021333 C19.6714222,7.69483 19.6714222,9.24256667 18.7167444,10.1971222 L8.34585889,20.5680444" id="Shape"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

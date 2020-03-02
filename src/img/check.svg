@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="15px" height="12px" viewBox="0 0 15 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 60.1 (88133) - https://sketch.com -->
-    <title>Path 2</title>
+<svg width="17px" height="14px" viewBox="0 0 17 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
+    <title>check</title>
     <desc>Created with Sketch.</desc>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="New-Assessment-Copy" transform="translate(-650.000000, -105.000000)" stroke="#FFFFFF" stroke-width="3">
-            <polyline id="Path-2" points="651.75544 110.62056 655.809059 114.490958 663.991455 106.689575"></polyline>
+    <g id="UI-Exploration-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Create-Assessment-Copy" transform="translate(-879.000000, -88.000000)" fill="#9B6B20">
+            <g id="check" transform="translate(879.000000, 88.000000)">
+                <path d="M3.17043211,5.30462827 C2.43850145,4.56431986 1.25944207,4.5721426 0.536929289,5.32210085 C-0.185583495,6.0720591 -0.177948798,7.28015892 0.553981862,8.02046734 L5.28576598,12.8064119 C6.0642153,13.5937714 7.33417869,13.5273579 8.0303473,12.6628823 L15.7132748,3.12251605 C16.3678417,2.30969984 16.2553944,1.10708126 15.4621168,0.436392252 C14.6688392,-0.234296754 13.4951293,-0.119079896 12.8405624,0.693736306 L6.45335452,8.62512733 L3.17043211,5.30462827 Z" id="Checklist"></path>
+            </g>
         </g>
     </g>
 </svg>

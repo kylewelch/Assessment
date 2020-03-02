@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import firebase from './Firebase.js'
 import Quiz from './Quiz.js'
-import Intro from './Intro.js'
 import Create from './Create.js'
-import Upload from './Upload.js'
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,7 +11,8 @@ import {
 } from "react-router-dom";
 import './App.css'
 
-var db = firebase.firestore();
+const AssessmentID = window.location.pathname.substr(12);
+const db = firebase.firestore();
 
 let introData = require('./intro_data.json')
 
@@ -29,7 +29,9 @@ class App extends Component {
       selectedNames: ['Visual', 'UX', 'Research', 'Writing', 'Code', 'Ops'],
       arrangedValues: [],
       arrangedNames: [],
-      researchValues: [null, null, null, null, null],
+      researchValues: [null, null, null, null, null, null, null, null, null, null, null, null],
+      researchTotal: 0,
+      researchScore: 0,
       motionValues: [null, null, null],
       leaderValues: [null, null, null, null, null],
       leaderValues2: [0, 0, 0, 0, 0],
@@ -40,7 +42,9 @@ class App extends Component {
       opsValues: [null, null, null],
       subskills: [[null, null, null, null, null], [null, null, null], [null, null, null, null, null], [null, null, null], [null, null], [null, null, null]],
       showPreview: false,
-      image: null,
+      image: [[null], [null], [null], [null]],
+      imageTitle: [[null], [null], [null], [null]],
+      imageDescription: [[null], [null], [null], [null]],
       assessmentID: null,
       assessmentQuestions: null
     }
@@ -56,15 +60,15 @@ class App extends Component {
     this.setState({selectedQuestions: skills, selectedNames: selectedNames})
   }
   
-  // When after creating an assessment, store its DB reference in the App state
+  // After creating an assessment, store its DB reference in the App state
   storeDBreference(id) {
     this.setState({assessmentID: id})
   }
   
   // For questions that collect multiple data points, store those data in the App state
   
-  updateSectionValue(updatedValue, section, position) {
-    switch (position) {
+  updateSectionValue(updatedValue, section, question) {
+    switch (question) {
       case 1:
         let visualValues = this.state.visualValues.slice()
         visualValues[section] = updatedValue
@@ -72,8 +76,13 @@ class App extends Component {
         break;  
       case 3:
         let researchValues = this.state.researchValues.slice()
-        researchValues[section] = updatedValue
-        this.setState({researchValues: researchValues})
+        let researchTotal = this.state.researchTotal;
+        let status = (this.state.researchValues[section] === null) ? 1 : (this.state.researchValues[section] === 1) ? 2 : null;
+        researchValues[section] = status;
+        researchTotal += (status === null) ? -3 : status;
+        let score = (researchTotal === null) ? 0 : (researchTotal < 6) ? 1 : (researchTotal < 12) ? 2 : (researchTotal < 18) ? 3 : (researchTotal < 24) ? 4 : 5;
+        this.setState({researchValues: researchValues, researchTotal: researchTotal, researchScore: score})
+        this.updateValue(score, 2)
         break;      
       case 4:
         let writingValues = this.state.writingValues.slice()
@@ -181,8 +190,37 @@ class App extends Component {
   showQuiz() {
     this.setState({showPreview: false})
   }
-  storeImage(image) {
-    this.setState({image: image})
+  storeImage(image, number, question) {
+    let uploads = this.state.image.slice();
+    uploads[question][number] = image
+    this.setState({image: uploads})
+    this.setState({test1: image, test2: number, test3: question})
+  }
+  removeImage(number, question) {
+    const uploads = this.state.image.slice();
+    const titles = this.state.imageTitle.slice();
+    const descriptions = this.state.imageDescription.slice();
+    uploads[question][number] = null;
+    titles[question][number] = null;
+    descriptions[question][number] = null;
+    this.setState({image: uploads, imageTitle: titles, imageDescription: descriptions})
+  }
+  deleteImage(number, question) {
+    const uploads = this.state.image.slice();
+    uploads[question].splice(number, 1)
+    this.setState({image: uploads})
+  }
+  deleteUploadText(number, question) {
+    const titles = this.state.imageTitle.slice();
+    const descriptions = this.state.imageDescription.slice();
+    titles[question].splice(number, 1)
+    descriptions[question].splice(number, 1)
+    this.setState({imageTitle: titles, imageDescription: descriptions})
+  }
+  updateTextInput(name, newValue, number, question) {
+    let values = (name === "imageTitle") ? this.state.imageTitle.slice() : this.state.imageDescription.slice()
+    values[question][number] = newValue
+    this.setState({[name]: values});
   }
   showNextScreen() {
     this.setState((state) => {
@@ -193,10 +231,9 @@ class App extends Component {
   
   render() {
     const didQuizStart = ((this.state.current_screen) === 2)
-    let AssessmentID = this.state.assessmentID
     return (
       <Router>
-        <div class="container" ref={this.ref}>
+        <div className="container" ref={this.ref}>
           <Switch>
             <Route path="/Assessment">
               <Route path={"/Assessment/" + AssessmentID}>
@@ -227,7 +264,13 @@ class App extends Component {
                   showPreview={this.state.showPreview}
                   showQuiz={this.showQuiz.bind(this)}
                   storeImage={this.storeImage.bind(this)}
+                  removeImage={this.removeImage.bind(this)}
+                  deleteImage={this.deleteImage.bind(this)}
+                  deleteUploadText={this.deleteUploadText.bind(this)}
                   image={this.state.image}
+                  imageTitle={this.state.imageTitle}
+                  imageDescription={this.state.imageDescription}
+                  updateTextInput={this.updateTextInput.bind(this)}
                   assessmentID={this.state.assessmentID}
                 />
               </Route>

@@ -32,9 +32,9 @@
     {
       "id": 3,
       "skill_name": "UX Research",
-      "question_type": "input-card",
-      "instruction_text": "How many times have you done the following types of ",
-      "instruction_text2": "?",
+      "question_type": "click-card",
+      "instruction_text": "Select the ",
+      "instruction_text2": " methods that you have experience with:",
       "answer_options": [0, 1, 2],
       "sections": [0, 1, 2, 3, 4],
       "section_text": ["Conducting user interviews", "Launching user surveys", "Rapid prototyping or concept testing", "Running A/B tests or analytics", "Any other types of user research (e.g. task analysis, card sorting, field studies, etc.)"],
@@ -67,6 +67,7 @@
       "answer_options": ["Nah, that ain't my thing", "I'm an informed non-engineer", "Junior level", "Mid-level", "Senior level", "World-class"],
       "answer_description": ["", " - I'm familiar with the basics of HTML, CSS, and/or JavaScript, but I don't write much code", " - I can build a basic front end, but it's not my area of expertise", " - I'm a UI engineer", " - I'm a senior-level UI engineer", " - I'm a world-class engineer"],
       "values": 0,
+      "followup": "Share a any samples of your code (optional)",
       "subskills": ["HTML & CSS", "JavaScript", "Other Languages"],
       "subskill_levels": ["Never done it", "Beginner", "Proficient", "Expert", "World Class"],
       "cta_text": "Next"
@@ -82,7 +83,7 @@
       "section_text": ["Workflow - maximizing your design team’s output and efficiency", "Tooling - Managing the software and tools that your design team uses", "Design Systems - Contributing to a design system", "Education - helping members of your design team sharpen their skills", "Advocacy - promoting and advocating for design within your company"],
       "answer_text": ["Never", "Done it a bit", "Done it a lot"], 
       "values": 0,
-      "subskills": ["Workflow", "Design Systems", "Tooling", "Mentoring", "Advocacy"],
+      "subskills": ["Workflow", "Tooling", "Design Systems", "Mentoring", "Advocacy", "Design Critiques"],
       "subskill_levels": ["Never done it", "Beginner", "Proficient", "Expert", "World Class"],
       "cta_text": "Next"
     } 

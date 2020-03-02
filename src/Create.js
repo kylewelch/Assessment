@@ -105,27 +105,9 @@ class Create extends Component {
           <AssessmentCreated 
             assessmentID={this.props.assessmentID} /> :
         <form>
-          <h1 className="main-heading">Create an assessment</h1>
-          <div className="input-fields">
-            <input 
-              className="text-input" 
-              type="text" 
-              name="assessmentName" 
-              placeholder="Assessment name" 
-              onChange={this.updateValue.bind(this)} 
-              value={this.state.assessmentName}
-              />
-            <input 
-              className="text-input" 
-              type="email" 
-              name="email" 
-              placeholder="Your email"  
-              onChange={this.updateValue.bind(this)}
-              value={this.state.email}
-              />
-          </div>
-          <h2>Which skills would you like to assess?</h2>
-          <p>{this.props.selectedQuestions.length} of 6 skills selected</p>
+          {/*<h1 className="main-heading">Create an assessment</h1>*/}
+          <h1 className="title">Which skills would you like to assess?</h1>
+          {/*<p>{this.props.selectedQuestions.length} of 6 skills selected</p>*/}
           <div className="skill-list">
             {this.props.fullNames.map((skill, index) => {
             return <Checkbox
@@ -137,9 +119,33 @@ class Create extends Component {
                     />
             })}
           </div>
-          <br />
+
+          <div className="input-fields">
+            <div className="input-area">
+              <p className="input-label">ASSESSMENT NAME</p>
+              <input 
+                className="text-input name-input" 
+                type="text" 
+                name="assessmentName" 
+                placeholder="Name your assessment" 
+                onChange={this.updateValue.bind(this)} 
+                value={this.state.assessmentName}
+                />
+            </div>
+            <div className="input-area right-area">
+              <p className="input-label">YOUR EMAIL</p>
+              <input 
+                className="text-input email-input" 
+                type="email" 
+                name="email" 
+                placeholder="Email address"  
+                onChange={this.updateValue.bind(this)}
+                value={this.state.email}
+                />
+            </div>
+          </div>
           {(this.props.selectedQuestions.length === 0) ? <p className="validation-msg">Please select at least 1 skill you want to assess.</p> : null}
-          <button className="nav-btn" type="submit" onClick={this.createNewAssessment.bind(this)}>Next</button>
+          <button className="nav-btn btn-center" type="submit" onClick={this.createNewAssessment.bind(this)}>Create Assessment</button>
         </form>}
       </main>
     )

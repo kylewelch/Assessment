@@ -61,8 +61,20 @@ class Quiz extends Component {
     this.props.showQuiz();
     this.ref.current.scrollIntoView(/*{behavior: 'smooth'}*/)
   }
-  storeImage(image) {
-    this.props.storeImage(image)
+  storeImage(image, number) {
+    this.props.storeImage(image, number, (this.state.quiz_position - 1))
+  }
+  removeImage(number, question) {
+    this.props.removeImage(number, question);
+  }
+  deleteImage(number, question) {
+    this.props.deleteImage(number, question);
+  }
+  deleteUploadText(number, question) {
+    this.props.deleteUploadText(number, question);
+  }
+  updateTextInput(name, value, number, question) {
+    this.props.updateTextInput(name, value, number, question)
   }
   render() {
     const showPreview = this.props.showPreview
@@ -116,7 +128,13 @@ class Quiz extends Component {
           leader_values2={this.props.leader_values2} 
           subskills={this.props.subskills[this.props.selectedQuestions[this.state.quiz_position - 1]]}
           storeImage={this.storeImage.bind(this)}
-          image={this.props.image}
+          removeImage={this.removeImage.bind(this)}
+          deleteImage={this.deleteImage.bind(this)}
+          deleteUploadText={this.deleteUploadText.bind(this)}
+          image={this.props.image[this.props.selectedQuestions[this.state.quiz_position - 1]]}
+          imageTitle={this.props.imageTitle[this.props.selectedQuestions[this.state.quiz_position - 1]]}
+          imageDescription={this.props.imageDescription[this.props.selectedQuestions[this.state.quiz_position - 1]]}
+          updateTextInput={this.updateTextInput.bind(this)}
         /> }
 
       </div>

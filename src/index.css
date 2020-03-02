@@ -1,13 +1,50 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,800,800i&display=swap');
+
+@font-face {
+  font-family: "Campton";
+  src: url('./fonts/campton-black.otf');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Campton";
+  src: url('./fonts/campton-bold.otf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Campton";
+  src: url('./fonts/campton-semibold.otf');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Campton";
+  src: url('./fonts/campton-medium.otf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Campton";
+  src: url('./fonts/campton-book.otf');
+  font-weight: 300;
+  font-style: normal;
+}
+
 
 body {
-  font: 14px "Poppins", Futura, sans-serif;
+  font: 14px "Campton", Futura, sans-serif;
   margin: 35px;
-  color: rgba(0, 0, 0, 0.8);
+  background-color: #faf9f6;
+  color: #484743;
+  -webkit-font-smoothing: antialiased
 }
 
 .container {
-  max-width: 800px;
+  max-width: 1170px;
   margin: auto;
 }
 
@@ -124,7 +161,8 @@ ol, ul {
 }
 
 .main-heading {
-  margin-top: 2em;
+  margin: 2em 0;
+  font-size: 36px;
 }
 
 .main-heading-skill {
@@ -132,23 +170,39 @@ ol, ul {
   color: #94999e;
 }
 
+.nav-section {
+  display: flex;
+  justify-content: flex-start;
+}
+
 .nav-btn {
-  background-color: #6a6e72;
-  width: 100%;
-  height: 2.8em;
+  background-color: #484743;
+  width: 300px;
+  height: 56px;
   border: none;
-  border-radius: 6px;
-  margin: 1.4em auto 0;
-  font-size: 1.4em;
-  font-weight: 500;
+  border-radius: 15px;
+  margin: 60px 0 0 0;
+  font-size: 18px;
+  font-family: "Campton", Futura, sans-serif;
+  font-weight: 400;
   color: #fff;
+  box-shadow: 0 10px 40px 0 rgba(182, 173, 156, .50)
 }
 
 .nav-btn-secondary {
-  margin: .6em auto 0;
-  border: 2px solid #6a6e72;
+  margin: 60px 24px 0 0;
+  border: 2px solid #F4F2EF;
   background-color: #fff;
-  color: #6a6e72;
+  color: #484743;
+  box-shadow: none;
+}
+
+.nav-btn:hover {
+  cursor: pointer;
+}
+
+.btn-center {
+  margin: 40px auto 100px;
 }
 
 .main-img {
@@ -229,16 +283,12 @@ ol, ul {
   width: 0;
 }
 
-.radio-input:checked ~ .radio-fill {
-  opacity: 1;
-}
-
 .radio-circle {
   float: left;
   height: 20px;
   width: 20px;
   margin-top: 1px;
-  border: 2px solid #a1a4a9;
+  border: 1px solid #9D9B97;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -246,16 +296,12 @@ ol, ul {
 }
 
 .radio-fill {
-  background-color: #a1a4a9;
-  height: 14px;
-  width: 14px;
+  background-color: #4478B3;
+  height: 12px;
+  width: 12px;
   border-radius: 50%;
-  opacity: 0;
 }
 
-.radio-fill:hover {
-  opacity: 1;
-}
 
 .radio-label {
   font-size: 1.3em;
@@ -299,9 +345,6 @@ ol, ul {
   margin-top: 4em;
 }
 
-.upload-section {
-  margin-top: 3em;
-}
 
 .uploads {
   max-width: 100%;
@@ -355,7 +398,9 @@ ol, ul {
 }
 
 .checked {
-  background-color: #a1a4a9;
+  border: 2px solid #4478B3;
+  width: 18px;
+  height: 18px;
 }
 
 .unchecked {
@@ -434,28 +479,65 @@ ol, ul {
 /* Assessment Creation Page */
 
 
+.title {
+  font-size: 36px;
+  font-weight: 500;
+  text-align: center;
+  margin: 80px 0 40px;
+}
+
+.input-area {
+  width: 50%;
+}
+
+.right-area {
+  padding-left: 20px;
+}
+
 .input-fields {
   display: flex;
   justify-content: space-between;
+  margin-top: 50px;
+}
+
+.input-label {
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: #9D9B97;
 }
 
 .text-input {
   margin: .5em 0 2em;
   font-size: 1.2em;
-  border: none;
-  border-bottom: 1px solid #bdbdbd;
+  border: 2px solid #F4F2EF;
+  border-radius: 9px;
   line-height: 2em;
-  width: 45%;
+  width: 86%;
+  padding: 12px 22px;
   font-family: "Poppins", Futura, sans-serif;
+  background-color: #fff;
+}
+
+.name-input {
+  background-image: url(img/name.svg);
+  background-repeat: no-repeat;
+  background-position: 18px 17px;
+  padding-left: 55px;
+}
+
+.email-input {
+  background-image: url(img/email.svg);
+  background-repeat: no-repeat;
+  background-position: 18px 20px;
+  padding-left: 55px;
 }
 
 .text-input::placeholder {
-  opacity: .5;
+  color: #9D9B97;
 }
 
 .text-input:focus {
   outline-width: 0;
-  border-bottom: 2px solid #009789;
 }
 
 .skill-list {
@@ -468,15 +550,18 @@ ol, ul {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid #bdbdbd;
-  width: 45%;
-  padding: 6px 16px;
-  border-radius: 4px;
-  margin: 7px 0;
+  width: 42%;
+  min-height: 140px;
+  padding: 6px 40px;
+  border-radius: 15px;
+  margin: 20px 0;
+  background-color: #fff;
+  box-shadow: 0 6px 10px 0 rgba(124, 124, 124, .2);
+  user-select: none;
 }
 
 .selected-item {
-  background-color: #eee;
+  background-color: #fff;
 }
 
 .skill-list-item:hover {
@@ -489,43 +574,54 @@ ol, ul {
   font-size: 1.2em;
 }
 
+.skill-list-item-unselected {
+  opacity: .5;
+}
+
 .circle-icon {
-  height: 40px;
-  width: 40px;
-  background-color: #bdbdbd;
+  height: 50px;
+  width: 50px;
+  background-color: #BCD5EF;
   border-radius: 50%;
-  margin-right: 12px;
+  margin-right: 33px;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .skill-list-core-skill {
-  margin-bottom: 0;
-  font-weight: 600;
+  margin: 0;
+  font-weight: 500;
+  font-size: 28px;
 }
 
 .skill-list-subskill {
-  font-size: 14px;
-  margin-top: 0;
-  opacity: .7;
+  font-size: 16px;
+  font-weight: 400;
+  margin: 12px 0 0;
+  color: #9D9B97;
+  max-width: 300px;
 
 }
 
 .skill-list-item-check {
-  border: 2px solid #ababab;
+  border: 2px solid #9D9B97;
   box-shadow: none;
-  height: 17px;
-  width: 17px;
-  border-radius: 2px;
+  height: 27px;
+  width: 27px;
+  border-radius: 10px;
   margin: 0 4px;
+  display: flex;
   flex-shrink: 0;
 }
 
 .checked-item {
-  background-color: #009789;
-  border: 2px solid #009789;
-  display: flex;
+  background-color: #F7C06D;
+  border: 2px solid #F7C06D;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 10px 40px 0 rgba(163, 105, 0, .40)
 }
 
 
@@ -660,6 +756,159 @@ ol, ul {
 }
 
 
+/* Click Cards */
+
+
+.click-card-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.click-card {
+  width: 200px;
+  height: 220px;
+  border: 1px solid #bdbdbd;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 6px;
+  margin: 20px;
+}
+
+.click-card-large {
+  width: 280px;
+}
+
+.click-card:hover {
+  cursor: pointer;
+}
+
+.click-card-image {
+  width: 150px;
+  height: 90px;
+  margin: 20px 20px 0;
+  background-color: lightgray;
+}
+
+.click-card-title {
+  margin: 20px;
+  text-align: center;
+  font-weight: 800;
+  font-size: 1.2em;
+  user-select: none;
+}
+
+.click-card-experience {
+  background-color: lightgray;
+  width: 100%;
+  text-align: center;
+  line-height: 2.5em;
+  font-size: 1.1em;
+}
+
+.click-card-experience-high {
+  background-color: gray;
+  color: #fff;
+}
+
+.click-card-popup {
+  position: absolute;
+  z-index: 2;
+}
+
+/* Uploads */
+
+
+.upload-grid {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.upload-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.close-button:hover {
+  cursor: pointer;
+}
+
+.upload-section {
+  display: flex;
+}
+
+.upload-box {
+  background-color: #F4F2EF;
+  border: 2px dashed #9D9B97;
+  width: 400px;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.upload-icon {
+  margin-bottom: 20px;
+}
+
+.upload-label {
+  background-color: gray;
+  color: #fff;
+  border-radius: 4px;
+  padding: 5px 15px;
+  max-width: 100%;
+  margin-top: 20px;
+}
+
+.upload-label:hover {
+  cursor: pointer;
+}
+
+.upload-button {
+  width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.image-box {
+  width: 400px;
+  position: relative;
+  margin: 0 20px 20px 0;
+}
+
+.delete-image {
+  position: absolute;
+  z-index: 2;
+  margin: 16px;
+  right: 0;
+  opacity: .7;
+}
+
+.delete-image:hover {
+  cursor: pointer;
+  opacity: 1;
+}
+
+.uploaded-image {
+  max-width: 100%;
+}
+
+.upload-fields {
+  margin-left: 20px;
+  width: 300px;
+}
+
+.upload-title-input {
+  width: 100%;
+}
+
+
 /* Forms */
 
 
@@ -674,6 +923,10 @@ ol, ul {
 .text-field {
   font-size: 1.2em;
   line-height: 2em;
+  width: 700px;
+  resize: none;
+  border: 1px solid #c7c7c7;
+  margin: 8px 0 20px;
 }
 
 
@@ -693,7 +946,7 @@ ol, ul {
     margin: 6px 0;
   }
   .text-input {
-    width: 90%;
+    width: 100%;
   }
   .subskill-container-section {
     width: 100%;
@@ -701,5 +954,11 @@ ol, ul {
   }
   .subskill-container {
     flex-wrap: wrap;
+  }
+  .input-fields {
+    flex-direction: column;
+  }
+  .input-area {
+    width: 70%;
   }
 }
