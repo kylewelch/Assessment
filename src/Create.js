@@ -119,7 +119,8 @@ class Create extends Component {
                     />
             })}
           </div>
-
+          {(this.props.selectedQuestions.length === 0) ? <p className="validation-msg">Please select at least 1 skill you want to assess.</p> : null}
+          
           <div className="input-fields">
             <div className="input-area">
               <p className="input-label">ASSESSMENT NAME</p>
@@ -144,7 +145,6 @@ class Create extends Component {
                 />
             </div>
           </div>
-          {(this.props.selectedQuestions.length === 0) ? <p className="validation-msg">Please select at least 1 skill you want to assess.</p> : null}
           <button className="nav-btn btn-center" type="submit" onClick={this.createNewAssessment.bind(this)}>Create Assessment</button>
         </form>}
       </main>

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import firebase from './Firebase.js'
 import Quiz from './Quiz.js'
 import Create from './Create.js'
+import CardsAndSliders from './CardsAndSliders.js'
 
 import {
   BrowserRouter as Router,
@@ -37,16 +38,22 @@ class App extends Component {
       leaderValues2: [0, 0, 0, 0, 0],
       illustrationValues: [null, null],
       visualValues: [null, null, null, null, null],
-      writingValues: [null, null],
+      writingValues: [null, 0, 0],
       techValues: [null, null, null],
-      opsValues: [null, null, null],
+      opsValues: [null, null, 0],
       subskills: [[null, null, null, null, null], [null, null, null], [null, null, null, null, null], [null, null, null], [null, null], [null, null, null]],
       showPreview: false,
       image: [[null], [null], [null], [null]],
       imageTitle: [[null], [null], [null], [null]],
       imageDescription: [[null], [null], [null], [null]],
       assessmentID: null,
-      assessmentQuestions: null
+      assessmentQuestions: null,
+      uxURL: null,
+      researchURL: null,
+      codingURL: null,
+      uxCaseStudy: ["", "", "", "", ""],
+      researchCaseStudy: ["", "", "", "", ""],
+      opsOpenQuestion: ""
     }
   }
   
@@ -67,7 +74,7 @@ class App extends Component {
   
   // For questions that collect multiple data points, store those data in the App state
   
-  updateSectionValue(updatedValue, section, question) {
+  updateSectionValue(updatedValue, section, question, position) {
     switch (question) {
       case 1:
         let visualValues = this.state.visualValues.slice()
@@ -81,18 +88,22 @@ class App extends Component {
         researchValues[section] = status;
         researchTotal += (status === null) ? -3 : status;
         let score = (researchTotal === null) ? 0 : (researchTotal < 6) ? 1 : (researchTotal < 12) ? 2 : (researchTotal < 18) ? 3 : (researchTotal < 24) ? 4 : 5;
-        this.setState({researchValues: researchValues, researchTotal: researchTotal, researchScore: score})
-        this.updateValue(score, 2)
+        this.setState({researchValues: researchValues, researchTotal: researchTotal, researchScore: score});
+        this.updateValue(score, position);
         break;      
       case 4:
-        let writingValues = this.state.writingValues.slice()
-        writingValues[section] = updatedValue
-        this.setState({writingValues: writingValues})
+        let writingValues = this.state.writingValues.slice();
+        writingValues[section] = updatedValue;
+        let writingTotal = Math.round(writingValues.reduce((a, b) => a + b, 0));
+        this.setState({writingValues: writingValues});
+        this.updateValue(writingTotal, position);
         break;
       default:
-        let opsValues = this.state.opsValues.slice()
-        opsValues[section] = updatedValue
-        this.setState({opsValues: opsValues})         
+        let opsValues = this.state.opsValues.slice();
+        opsValues[section] = updatedValue;
+        let opsTotal = Math.round((opsValues.reduce((a, b) => a + b, 0)) / 2);
+        this.setState({opsValues: opsValues});
+        this.updateValue(opsTotal, position);  
     }
   }
   updateSliderValue(updatedValue, section) {
@@ -194,7 +205,6 @@ class App extends Component {
     let uploads = this.state.image.slice();
     uploads[question][number] = image
     this.setState({image: uploads})
-    this.setState({test1: image, test2: number, test3: question})
   }
   removeImage(number, question) {
     const uploads = this.state.image.slice();
@@ -218,9 +228,34 @@ class App extends Component {
     this.setState({imageTitle: titles, imageDescription: descriptions})
   }
   updateTextInput(name, newValue, number, question) {
-    let values = (name === "imageTitle") ? this.state.imageTitle.slice() : this.state.imageDescription.slice()
-    values[question][number] = newValue
-    this.setState({[name]: values});
+    let values;
+
+    // if it's a UX case study
+    if (number === "ux") {
+      values = this.state.uxCaseStudy.slice();
+      values[name] = newValue
+      this.setState({uxCaseStudy: values})
+    }
+    // else if it's a research case study
+    else if (number === "research") {
+      values = this.state.researchCaseStudy.slice();
+      values[name] = newValue
+      this.setState({researchCaseStudy: values})
+    }
+    else if (number === "ops") {
+      this.setState({opsOpenQuestion: newValue})
+    }
+    // else it's an image title / description
+    else {
+      values = (name === "imageTitle") ? this.state.imageTitle.slice() : this.state.imageDescription.slice();
+      values[question][number] = newValue;
+      this.setState({[name]: values});
+    }
+  }
+  updateLinkValue(name, value) {
+    this.setState({
+      [name]: value
+    })
   }
   showNextScreen() {
     this.setState((state) => {
@@ -272,6 +307,11 @@ class App extends Component {
                   imageDescription={this.state.imageDescription}
                   updateTextInput={this.updateTextInput.bind(this)}
                   assessmentID={this.state.assessmentID}
+                  updateLinkValue={this.updateLinkValue.bind(this)}
+                  codingURL={this.state.codingURL}
+                  uxCaseStudy={this.state.uxCaseStudy}
+                  researchCaseStudy={this.state.researchCaseStudy}
+                  opsText={this.state.opsOpenQuestion}
                 />
               </Route>
             </Route>

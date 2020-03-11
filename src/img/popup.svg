@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="241px" height="127px" viewBox="0 0 241 127" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="195px" height="87px" viewBox="0 0 195 87" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
     <title>Group</title>
     <desc>Created with Sketch.</desc>
     <defs>
-        <path d="M6.6,13.2 L91.7915625,13.2 L91.7915625,13.2 L106.8375,0 L123.961406,13.2 L212.52,13.2 C216.165079,13.2 219.12,16.1549207 219.12,19.8 L219.12,99 C219.12,102.645079 216.165079,105.6 212.52,105.6 L6.6,105.6 C2.95492065,105.6 -5.77085546e-15,102.645079 0,99 L0,19.8 C-1.78239694e-13,16.1549207 2.95492065,13.2 6.6,13.2 Z" id="path-1"></path>
-        <filter x="-9.4%" y="-27.0%" width="118.7%" height="138.8%" filterUnits="objectBoundingBox" id="filter-2">
-            <feOffset dx="0" dy="-8" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
-            <feGaussianBlur stdDeviation="5.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
-            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.19263549 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        <path d="M157,-1.56319402e-13 C161.418278,-1.57131026e-13 165,3.581722 165,8 L165,42 C165,46.418278 161.418278,50 157,50 L87.333,50 L83.7647059,56.6911765 C83.2449085,57.6657966 82.0334437,58.0345033 81.0588235,57.5147059 C80.7086956,57.327971 80.422029,57.0413044 80.2352941,56.6911765 L76.667,50 L8,50 C3.581722,50 5.41083001e-16,46.418278 0,42 L0,8 C-5.41083001e-16,3.581722 3.581722,-1.55507777e-13 8,-1.56319402e-13 L157,-1.56319402e-13 Z" id="path-1"></path>
+        <filter x="-16.4%" y="-31.2%" width="132.7%" height="193.5%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="9" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="7.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.4862149   0 0 0 0 0.4862149   0 0 0 0 0.4862149  0 0 0 0.2 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
         </filter>
     </defs>
-    <g id="LoFi-MVP" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Research" transform="translate(-71.000000, -162.000000)">
-            <g id="Group" transform="translate(82.000000, 165.000000)">
-                <g id="Rectangle" transform="translate(109.560000, 52.800000) scale(1, -1) translate(-109.560000, -52.800000) ">
+    <g id="UI-Exploration-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard-Click-1-tooltip" transform="translate(-970.000000, -424.000000)">
+            <g id="Group" transform="translate(985.000000, 430.000000)">
+                <g id="Combined-Shape">
                     <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
-                    <use fill="#FFFDFD" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    <use fill="#484743" fill-rule="evenodd" xlink:href="#path-1"></use>
                 </g>
-                <text id="Click-again-if-you-h" font-family="Fieldwork-Geo-Regular, Fieldwork" font-size="18.48" font-weight="normal" fill="#0F151C">
-                    <tspan x="15.4468359" y="39.48">Click again if you have </tspan>
-                    <tspan x="36.0022266" y="65.48">lots of experience</tspan>
+                <text id="Click-again-if-you-h" font-family="Campton-Book, Campton" font-size="12" font-weight="300" letter-spacing="0.0750000011" fill="#FFFFFF">
+                    <tspan x="16.5815" y="20">Click again if you have </tspan>
+                    <tspan x="31.205" y="36">lots of experience</tspan>
                 </text>
             </g>
         </g>

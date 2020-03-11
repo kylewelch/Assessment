@@ -17,7 +17,7 @@ class UploadPage extends Component {
   }
   closeUploadPage() {
     this.props.closeUploadPage();
-    if (!this.props.submittedImage) {
+    if (!this.props.submittedImage && this.props.editUpload === null) {
       const uploadNumber = (this.props.image.length - 1)
       this.props.removeImage(uploadNumber, (this.props.quizPosition - 1));
       this.props.deleteUploadText(uploadNumber, (this.props.quizPosition - 1));
@@ -66,6 +66,7 @@ class UploadPage extends Component {
     this.setState({uploaded: false})
     const uploadNumber = (this.props.editUpload !== null) ? this.props.editUpload : (this.props.image.length - 1)
     this.props.deleteImage(uploadNumber, (this.props.quizPosition - 1))
+    this.props.deleteUploadText(uploadNumber, (this.props.quizPosition - 1));
   }
 
   render() {
@@ -73,7 +74,7 @@ class UploadPage extends Component {
     return (
     <div className="upload-container">
       <div className="upload-header">
-        <h2>Visual Design Sample</h2>
+        <h1>{this.props.quizQuestion.skill_name} Sample</h1>
         <img 
           className="close-button" 
           src={close} 
@@ -102,8 +103,9 @@ class UploadPage extends Component {
               className="upload-button"
               multiple={false}
               id="file"
+              value={this.props.codingURL}
               onChange={this.onChange.bind(this)}/>
-              <label className="upload-label" for="file">Choose a file</label>
+              <label className="upload-button-label" for="file">Choose a file</label>
             </form>
           </div>)
         }
@@ -118,12 +120,13 @@ class UploadPage extends Component {
           <p className="text-label">Description</p>
           <textarea
             name="imageDescription"
-            className="text-field"
+            className="text-field text-area"
+            rows="4"
             onChange={this.updateValue.bind(this)}
             value={(this.props.editUpload !== null) ? this.props.imageDescription[this.props.editUpload] : this.props.imageDescription[uploadNumber]} />
         </div>
       </section>
-      {/* Only show first image, for now. */}
+      <div className="nav-section-spread">
         <NavButton 
           button_text={{cta_text: "Cancel"}} 
           className=" nav-btn-secondary"
@@ -134,6 +137,7 @@ class UploadPage extends Component {
           className=" "
           clickHandler={this.submitSample.bind(this)}
         />
+      </div>
     </div>
    )
   }

@@ -11,11 +11,11 @@ class ClickCardGrid extends Component {
         click: 0
       }
   }
-  updateStatus(value, method, question) {
+  updateStatus(value, method, question, position) {
     let click = this.state.click
     click++
     this.setState({click: click})
-    this.props.updateSectionValue(value, method, question)
+    this.props.updateSectionValue(value, method, question, position)
   }
   storeImage(image) {
     this.props.storeImage(image);
@@ -26,6 +26,12 @@ class ClickCardGrid extends Component {
   editUpload(index) {
     this.props.editUpload(index)
   }
+  updateLinkValue(name, value) {
+    this.props.updateLinkValue(name, value)
+  }
+  updateTextInput(name, value, number, question) {
+    this.props.updateTextInput(name, value, number, question)
+  }
   showNextQuestion() {
     this.props.showNextQuestionHandler();
   }
@@ -33,18 +39,20 @@ class ClickCardGrid extends Component {
     this.props.showPreviousQuestionHandler();
   }
   render() {
-    const methods = ['User Interviews', 'Surveys', 'Prototyping / Concept Testing', 'Usability Studies', 'A/B Testing & Analytics', 'Card Sorting', 'Field Studies', 'Persona Building', 'Task Analysis', 'Journey Mapping', 'Accessibility Evaluation', 'Competitive Analysis']
+    const methods = ['User Interviews', 'Surveys', 'Prototype Testing', 'Usability Studies', 'A/B Testing & Analytics', 'Card Sorting', 'Field Studies', 'Persona Building', 'Task Analysis', 'Journey Mapping', 'Accessibility Evaluation', 'Competitive Analysis']
     return (
       <section>
         <div className="click-card-grid">
           {methods.map((method, index) => {
             return <ClickCard 
                       methods={method}
+                      key={method}
                       index={index}
                       updateStatus={this.updateStatus.bind(this)}
                       status={this.props.section_values[index]}
                       click={this.state.click} 
                       quiz_question={this.props.quiz_question}
+                      quiz_position={this.props.quiz_position}
                     />
           })}
         </div>
@@ -70,6 +78,10 @@ class ClickCardGrid extends Component {
             {(this.props.quiz_question.id === 3) ? 
             <CaseStudy 
               quiz_question={this.props.quiz_question}
+              updateTextInput={this.updateTextInput.bind(this)}
+              updateLinkValue={this.updateLinkValue.bind(this)}
+              caseStudy={this.props.caseStudy}
+              url={this.props.url}
             /> : null}
             
             <Upload 
@@ -84,14 +96,16 @@ class ClickCardGrid extends Component {
             />
           </div> : null
         }
-        <NavButton 
-          button_text={this.props.quiz_question} 
-          className=" "
-          clickHandler={this.showNextQuestion.bind(this)} />
-        <NavButton 
-          button_text={this.props.nav_text} 
-          className=" nav-btn-secondary"
-          clickHandler={this.showPreviousQuestion.bind(this)} />
+        <div className="nav-section">
+          <NavButton 
+            button_text={this.props.nav_text} 
+            className=" nav-btn-secondary"
+            clickHandler={this.showPreviousQuestion.bind(this)} />
+          <NavButton 
+            button_text={this.props.quiz_question} 
+            className=" "
+            clickHandler={this.showNextQuestion.bind(this)} />
+        </div>
       </section>
     )
   }

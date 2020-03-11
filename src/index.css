@@ -44,7 +44,7 @@ body {
 }
 
 .container {
-  max-width: 1170px;
+  max-width: 1000px;
   margin: auto;
 }
 
@@ -161,7 +161,7 @@ ol, ul {
 }
 
 .main-heading {
-  margin: 2em 0;
+  margin: 2em 0 1em;
   font-size: 36px;
 }
 
@@ -175,6 +175,10 @@ ol, ul {
   justify-content: flex-start;
 }
 
+.nav-section-spread {
+  display: flex;
+  justify-content: space-between;
+}
 .nav-btn {
   background-color: #484743;
   width: 300px;
@@ -214,7 +218,6 @@ ol, ul {
 .validation {
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
 .validation-msg {
@@ -374,8 +377,12 @@ ol, ul {
 
 .input-card-question {
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 500;
   margin: 0 0 16px;
+}
+
+.lighter-text {
+  font-weight: 300;
 }
 
 .input-card-button-container {
@@ -426,26 +433,24 @@ ol, ul {
 }
 
 .slidecontainer {
-  width: 100%;
-  background-color: #efefef;
+  max-width: 700px; 
   border-radius: 4px;
-  margin-bottom: 22px;
+  margin-bottom: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-/* The slider itself */
 .slider {
   -webkit-appearance: none;  
   appearance: none;
-  width: 90%; 
+  width: 100%; 
   height: 8px; 
   margin-bottom: 23px;
-  background: #d3d3d3; 
+  background: #E2E2EB; 
   outline: none; 
-  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  opacity: 0.9; /* Set transparency (for mouse-over effects on hover) */
   -webkit-transition: .2s; /* 0.2 seconds transition on hover */
   transition: opacity .2s;
   border-radius: 4px;
@@ -462,7 +467,7 @@ ol, ul {
   appearance: none;
   width: 25px; /* Set a specific slider handle width */
   height: 25px; /* Slider handle height */
-  background: #aaa; /* Green background */
+  background: #4478B3; /* Green background */
   cursor: pointer; /* Cursor on hover */
   border-radius: 50%;
 }
@@ -470,7 +475,7 @@ ol, ul {
 .slider::-moz-range-thumb {
   width: 25px; /* Set a specific slider handle width */
   height: 25px; /* Slider handle height */
-  background: #d4d4d4; /* Green background */
+  background: #4478B3; /* Green background */
   cursor: pointer; /* Cursor on hover */
   border-radius: 50%;
 }
@@ -514,7 +519,7 @@ ol, ul {
   line-height: 2em;
   width: 86%;
   padding: 12px 22px;
-  font-family: "Poppins", Futura, sans-serif;
+  font-family: "Campton", Futura, sans-serif;
   background-color: #fff;
 }
 
@@ -530,6 +535,18 @@ ol, ul {
   background-repeat: no-repeat;
   background-position: 18px 20px;
   padding-left: 55px;
+}
+
+.url-input {
+  background-image: url(img/link.svg);
+  background-repeat: no-repeat;
+  background-position: 19px 19px;
+  padding-left: 55px;
+}
+
+.link-container {
+  max-width: 500px;
+  margin-top: 20px;
 }
 
 .text-input::placeholder {
@@ -550,18 +567,18 @@ ol, ul {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 42%;
+  width: 41%;
   min-height: 140px;
   padding: 6px 40px;
   border-radius: 15px;
   margin: 20px 0;
   background-color: #fff;
-  box-shadow: 0 6px 10px 0 rgba(124, 124, 124, .2);
   user-select: none;
 }
 
 .selected-item {
   background-color: #fff;
+  box-shadow: 0 6px 10px 0 rgba(124, 124, 124, .2);
 }
 
 .skill-list-item:hover {
@@ -601,7 +618,7 @@ ol, ul {
   font-weight: 400;
   margin: 12px 0 0;
   color: #9D9B97;
-  max-width: 300px;
+  max-width: 280px;
 
 }
 
@@ -765,60 +782,153 @@ ol, ul {
 }
 
 .click-card {
-  width: 200px;
-  height: 220px;
-  border: 1px solid #bdbdbd;
+  width: 236px;
+  height: 85px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  border-radius: 6px;
-  margin: 20px;
+  border-radius: 8px;
+  margin: 15px;
+  background-color: #fff;
+  box-shadow: 0 6px 10px 0 rgba(124, 124, 124, .2);
+  position: relative;
 }
 
-.click-card-large {
-  width: 280px;
+.click-card:hover {
+  width: 236px;
+  margin: 14px 15px;
+  height: 87px;
+  box-shadow: 0 6px 16px 0 rgba(124, 124, 124, .3);
+}
+
+.click-card-experience-bar {
+  width: 0;
+  height: 5px;
+  background-color: #358D6E;
+  border-radius: 8px 0 0 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation-name: halfBar;
+  animation-duration: .2s;
+  animation-fill-mode: forwards;
+}
+
+
+.full-bar {
+  width: 100%;
+  background-color: #4478B3;
+  border-radius: 8px 8px 0 0;
+  animation-name: fullBar;
+  animation-duration: .2s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes halfBar {
+  from {width: 0;}
+  to {width: 50%;}
+}
+
+@keyframes fullBar {
+  from {width: 50%;}
+  to {width: 100%;}
 }
 
 .click-card:hover {
   cursor: pointer;
 }
 
-.click-card-image {
-  width: 150px;
-  height: 90px;
-  margin: 20px 20px 0;
-  background-color: lightgray;
-}
-
 .click-card-title {
-  margin: 20px;
+  margin: 12px;
   text-align: center;
-  font-weight: 800;
-  font-size: 1.2em;
+  color: #9D9B97;
+  font-weight: 500;
+  font-size: 16px;
   user-select: none;
 }
 
+.click-card-title-experienced {
+  color: #484743;
+}
+
 .click-card-experience {
-  background-color: lightgray;
+  color: #358D6E;
   width: 100%;
   text-align: center;
-  line-height: 2.5em;
-  font-size: 1.1em;
+  font-size: 12px;
+  font-weight: 600;
+  user-select: none;
 }
 
 .click-card-experience-high {
-  background-color: gray;
-  color: #fff;
+  color: #4478B3;
 }
 
 .click-card-popup {
   position: absolute;
+  top: -68px;
   z-index: 2;
+}
+
+.card-button-section {
+  margin: 80px 0;
+}
+
+.card-button {
+  width: 200px;
+  height: 162px;
+  border-radius: 8px;
+  border: 2px solid #E4E2E0;
+  background-color: #fff;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15px;
+  user-select: none; 
+}
+
+.card-button:hover {
+  cursor: pointer;
+}
+
+.card-button-selected {
+  color: #484743;
+  background-color: #FFBF5C;
+  box-shadow: 0 10px 40px 0 rgb(163, 105, 0, .2);
+  border: 2px solid #FFBF5C;
+}
+
+.card-button-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-button-title {
+  text-align: center;
+  max-width: 150px;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 10px 0 0;
+}
+
+.card-button-text {
+  max-width: 150px;
+  text-align: center;
+}
+
+.card-button-text-large {
+  height: 63px;
 }
 
 /* Uploads */
 
+
+.upload-description {
+  font-size: 16px;
+  margin-bottom: 36px;
+}
 
 .upload-grid {
   display: flex;
@@ -829,6 +939,7 @@ ol, ul {
 .upload-header {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 20px;
 }
 
 .close-button:hover {
@@ -842,25 +953,45 @@ ol, ul {
 .upload-box {
   background-color: #F4F2EF;
   border: 2px dashed #9D9B97;
+  border-radius: 15px;
   width: 400px;
   height: 250px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-}
-
-.upload-icon {
-  margin-bottom: 20px;
+  font-size: 16px;
+  color: #484743;
 }
 
 .upload-label {
-  background-color: gray;
-  color: #fff;
-  border-radius: 4px;
-  padding: 5px 15px;
+  color: #484743;
+  font-size: 16px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #484743;
+  border-radius: 15px;
   max-width: 100%;
   margin-top: 20px;
+}
+
+.upload-button-label {
+  color: #fff;
+  font-size: 16px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #9D9B97;
+  border-radius: 15px;
+  width: 200px;
+  margin-top: 20px;
+}
+
+.upload-button-label:hover {
+  cursor: pointer;
 }
 
 .upload-label:hover {
@@ -900,8 +1031,8 @@ ol, ul {
 }
 
 .upload-fields {
-  margin-left: 20px;
-  width: 300px;
+  margin-left: 40px;
+  width: 340px;
 }
 
 .upload-title-input {
@@ -911,24 +1042,50 @@ ol, ul {
 
 /* Forms */
 
+.case-study-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 6px 10px 0 rgba(124, 124, 124, .2);
+  padding: 10px 30px 5px;
+}
+
+.spaced-text {
+  margin: 30px;
+}
 
 .image-upload-container {
   display: flex;
 }
+
+.upload-container {
+  max-width: 800px;
+
+}
+
 .text-label {
   font-size: 1.2em;
-  margin-bottom: .3em;
+  margin: 8px 0 .3em;
+}
+
+.text-margin {
+  margin: 30px 0;
 }
 
 .text-field {
   font-size: 1.2em;
   line-height: 2em;
-  width: 700px;
+  width: 90%;
   resize: none;
-  border: 1px solid #c7c7c7;
+  border: 2px solid #F4F2EF;
+  border-radius: 10px;
   margin: 8px 0 20px;
+  padding: 12px 22px;
 }
 
+.dark-field {
+  background-color: #fafafb;
+  border: 2px solid #dadadf;
+}
 
 /* Media Queries */
 

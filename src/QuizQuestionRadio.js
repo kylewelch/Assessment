@@ -29,6 +29,12 @@ class QuizQuestionRadio extends Component {
   editUpload(index) {
     this.props.editUpload(index)
   }
+  updateLinkValue(name, value) {
+    this.props.updateLinkValue(name, value)
+  }
+  updateTextInput(name, value, number, question) {
+    this.props.updateTextInput(name, value, number, question)
+  }
   showNextQuestion() {
     if (this.props.currentSkillValue === null) {
       this.setState({isIncomplete: true})
@@ -79,6 +85,10 @@ class QuizQuestionRadio extends Component {
             (this.props.quiz_question.id === 2) ? 
             <CaseStudy 
               quiz_question={this.props.quiz_question}
+              updateTextInput={this.updateTextInput.bind(this)}
+              updateLinkValue={this.updateLinkValue.bind(this)}
+              caseStudy={this.props.caseStudy}
+              url={this.props.url}
             /> : null}
 
             <Upload 
@@ -89,7 +99,10 @@ class QuizQuestionRadio extends Component {
               imageTitle={this.props.imageTitle}
               imageDescription={this.props.imageDescription}
               showUploadPage={this.showUploadPage.bind(this)} 
-              editUpload={this.editUpload.bind(this)}           
+              editUpload={this.editUpload.bind(this)} 
+              updateLinkValue={this.updateLinkValue.bind(this)}  
+              url={this.props.url}
+              currentSkillValue={this.props.currentSkillValue}        
             />
           </div> : null
         }

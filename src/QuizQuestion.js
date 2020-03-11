@@ -7,6 +7,7 @@ import QuizQuestionSliderCards from './QuizQuestionSliderCards.js'
 import QuizQuestionRadioCards from './QuizQuestionRadioCards.js'
 import QuizQuestionMultiFormat from './QuizQuestionMultiFormat.js'
 import ClickCardGrid from './ClickCardGrid.js'
+import CardsAndSliders from './CardsAndSliders.js'
 import UploadPage from './UploadPage.js'
 
 let quizData = require('./quiz_data.json')
@@ -24,8 +25,8 @@ class QuizQuestion extends Component {
   updateAnswerValue(newValue) {
     this.props.updateValue(newValue)
   }
-  updateAnswerSectionValue(newValue, section, position) {
-    this.props.updateSectionValue(newValue, section, position)
+  updateAnswerSectionValue(newValue, section, question, position) {
+    this.props.updateSectionValue(newValue, section, question, position)
   }
   updateAnswerSliderValue(newValue, section) {
     this.props.updateSliderValue(newValue, section)
@@ -68,6 +69,9 @@ class QuizQuestion extends Component {
   closeUploadPage() {
     this.setState({showUploadPage: false, editUpload: null})
   }
+  updateLinkValue(name, value) {
+    this.props.updateLinkValue(name, value);
+  }
   render() {
     const showUploadPage = this.state.showUploadPage
     return (
@@ -86,7 +90,8 @@ class QuizQuestion extends Component {
             submitImage={this.submitImage.bind(this)}
             updateTextInput={this.updateTextInput.bind(this)}  
             quizPosition={this.props.quiz_position} 
-            editUpload={this.state.editUpload}     
+            editUpload={this.state.editUpload}    
+            quizQuestion={this.props.quiz_question} 
           /> : 
       <main>
         <p className="sub-heading">{'Question ' + this.props.quiz_position + ' of ' + this.props.selectedQuestions.length}</p>
@@ -111,6 +116,10 @@ class QuizQuestion extends Component {
             storeImage={this.storeImage.bind(this)} 
             showUploadPage={this.showUploadPage.bind(this)}
             editUpload={this.editUpload.bind(this)}
+            updateLinkValue={this.updateLinkValue.bind(this)}
+            url={(this.props.quiz_question.id === 2) ? this.props.uxURL : this.props.codingURL}
+            updateTextInput={this.updateTextInput.bind(this)}
+            caseStudy={this.props.uxCaseStudy}
           />
           : (this.props.quiz_question.question_type === "multiformat") ? 
           <QuizQuestionMultiFormat 
@@ -161,7 +170,33 @@ class QuizQuestion extends Component {
               storeImage={this.storeImage.bind(this)} 
               showUploadPage={this.showUploadPage.bind(this)}
               editUpload={this.editUpload.bind(this)}
+              updateLinkValue={this.updateLinkValue.bind(this)}
+              url={this.props.researchURL}
+              updateTextInput={this.updateTextInput.bind(this)}
+              caseStudy={this.props.researchCaseStudy}
             /> 
+          : (this.props.quiz_question.question_type === "cards-sliders") ? 
+          <CardsAndSliders 
+            slider_values={0}
+            section={0} 
+            updateSectionValue={this.updateAnswerSectionValue.bind(this)}
+            sectionValues={this.props.section_values}
+            quiz_position={this.props.quiz_position} 
+            quiz_question={this.props.quiz_question}
+            currentSkillValue={this.props.currentSkillValue}
+            image={this.props.image} 
+            imageTitle={this.props.imageTitle}
+            imageDescription={this.props.imageDescription}
+            storeImage={this.storeImage.bind(this)} 
+            showUploadPage={this.showUploadPage.bind(this)}
+            editUpload={this.editUpload.bind(this)}
+            updateLinkValue={this.updateLinkValue.bind(this)}
+            updateTextInput={this.updateTextInput.bind(this)}
+            nav_text={quizData.nav_text[0]}
+            showNextQuestionHandler={this.showNextQuestion.bind(this)}
+            showPreviousQuestionHandler={this.showPreviousQuestion.bind(this)}
+            opsText={this.props.opsText}
+          />
           : (this.props.quiz_question.question_type === "slider-radio-card") ? 
           <QuizQuestionSliderCards 
             quiz_position={this.props.quiz_position}

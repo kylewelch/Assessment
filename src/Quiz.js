@@ -28,8 +28,8 @@ class Quiz extends Component {
       test: window.location.pathname.substr(12),
       name: ''}
   }
-  updateAnswerSectionValue(newValue, section, position) {
-    this.props.updateQuizSectionValue(newValue, section, position)
+  updateAnswerSectionValue(newValue, section, question, position) {
+    this.props.updateQuizSectionValue(newValue, section, question, position)
   }
   updateAnswerSliderValue(newValue, section) {
     this.props.updateQuizSliderValue(newValue, section)
@@ -75,6 +75,9 @@ class Quiz extends Component {
   }
   updateTextInput(name, value, number, question) {
     this.props.updateTextInput(name, value, number, question)
+  }
+  updateLinkValue(name, value) {
+    this.props.updateLinkValue(name, value)
   }
   render() {
     const showPreview = this.props.showPreview
@@ -135,6 +138,13 @@ class Quiz extends Component {
           imageTitle={this.props.imageTitle[this.props.selectedQuestions[this.state.quiz_position - 1]]}
           imageDescription={this.props.imageDescription[this.props.selectedQuestions[this.state.quiz_position - 1]]}
           updateTextInput={this.updateTextInput.bind(this)}
+          updateLinkValue={this.updateLinkValue.bind(this)}
+          uxURL={this.props.uxURL}
+          researchURL={this.props.researchURL}
+          codingURL={this.props.codingURL}
+          uxCaseStudy={this.props.uxCaseStudy}
+          researchCaseStudy={this.props.researchCaseStudy}
+          opsText={this.props.opsText}
         /> }
 
       </div>
