@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="36px" height="36px" viewBox="0 0 36 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
+    <title>Group 13</title>
+    <desc>Created with Sketch.</desc>
+    <g id="UI-Exploration-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-13">
+            <circle id="Oval" fill="#000000" cx="18" cy="18" r="18"></circle>
+            <g id="sm-eye" transform="translate(8.000000, 11.000000)" fill="#FFFFFF">
+                <path d="M10.0000075,8 C10.5523025,8 11.0000075,7.5523 11.0000075,7 C11.0000075,6.447715 10.5523025,6 10.0000075,6 C9.4477225,6 9.0000075,6.447715 9.0000075,7 C9.0000075,7.5523 9.4477225,8 10.0000075,8 Z" id="Path" fill-rule="nonzero"></path>
+                <path d="M0.457764,7 C1.73202,2.94291 5.52232,0 9.99997,0 C14.4776,0 18.2679,2.94288 19.5422,6.99996 C18.2679,11.0571 14.4776,14 9.99995,14 C5.52232,14 1.73204,11.0571 0.457764,7 Z M14.00001,7 C14.00001,9.2091 12.2091,11 10.00001,11 C7.79087,11 6.00001,9.2091 6.00001,7 C6.00001,4.79086 7.79087,3 10.00001,3 C12.2091,3 14.00001,4.79086 14.00001,7 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

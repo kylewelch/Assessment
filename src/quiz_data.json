@@ -42,7 +42,7 @@
       "answer_text": ["Never", "A few times", "Lots of times"],      
       "values": 0,
       "followup": "Share a case study that represents your best UX Research (Optional)",
-      "subskills": ["Interviews", "Surveys", "Concept Testing", "Analytics", "Other Methods"],
+      "subskills": ["Qualitative & Quantitative Methods"],
       "subskill_levels": ["Never done it", "Beginner", "Proficient", "Expert", "World Class"],
       "cta_text": "Next"
     },
@@ -90,7 +90,7 @@
       "answer_text": ["Never", "Done it a bit", "Done it a lot"], 
       "values": 0,
       "slider_question": "Working on an Agile team (e.g., scrum, kanban, etc.)", 
-      "subskills": ["Workflow", "Tooling", "Design Systems", "Mentoring", "Design Critiques"],
+      "subskills": ["Design Systems", "Workflow", "Mentoring"],
       "subskill_levels": ["Never done it", "Beginner", "Proficient", "Expert", "World Class"],
       "cta_text": "Next"
     } 

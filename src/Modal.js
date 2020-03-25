@@ -3,18 +3,13 @@ import NavButton from './NavButton.js'
 import upload from './img/upload.svg'
 import close from './img/close.svg'
 import remove from './img/delete.svg'
+import test from './img/testImage.jpg'
 
-class UploadPage extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      imgSrc: null,
-      uploaded: false
-    }
+class Modal extends Component {
+  closeModal() {
+    this.props.closeModal();
   }
-  getInitialState() {
-    return{file: []}
-  }
+  /*
   closeUploadPage() {
     this.props.closeUploadPage();
     if (!this.props.submittedImage && this.props.editUpload === null) {
@@ -29,11 +24,11 @@ class UploadPage extends Component {
   }
   updateValue(e) {
     const uploadNumber = (this.props.image.length - 1)
-    this.props.updateTextInput(e.target.name, e.target.value, uploadNumber, (this.props.quizQuestion.id - 1))
+    this.props.updateTextInput(e.target.name, e.target.value, uploadNumber, this.props.quizPosition - 1)
   }
   onChange() {  
     // Assuming only image
-    var file = this.refs.file.files[0]; 
+    var file = this.refs.file.files[0];
     var reader = new FileReader();
     var url = reader.readAsDataURL(file);
 
@@ -57,7 +52,7 @@ class UploadPage extends Component {
     if (this.state.uploaded) {
       this.setState({uploaded: false})
       const uploadNumber = (this.props.editUpload !== null) ? this.props.editUpload : (this.props.image.length - 1)
-      this.props.removeImage(uploadNumber, (this.props.quizQuestion.id - 1))
+      this.props.removeImage(uploadNumber, (this.props.quizPosition - 1))
     }
   }
 
@@ -65,13 +60,15 @@ class UploadPage extends Component {
   deleteImage() {
     this.setState({uploaded: false})
     const uploadNumber = (this.props.editUpload !== null) ? this.props.editUpload : (this.props.image.length - 1)
-    this.props.deleteImage(uploadNumber, (this.props.quizQuestion.id - 1))
-    this.props.deleteUploadText(uploadNumber, (this.props.quizQuestion.id - 1));
-  }
+    this.props.deleteImage(uploadNumber, (this.props.quizPosition - 1))
+    this.props.deleteUploadText(uploadNumber, (this.props.quizPosition - 1));
+  }*/
 
   render() {
-    const uploadNumber = (this.props.image[0] === null) ? 0 : (this.props.image.length)
+    /*const uploadNumber = (this.props.image[0] === null) ? 0 : (this.props.image.length)*/
+    let testImages = [test, test, test]
     return (
+      /*
     <div className="upload-container">
       <div className="upload-header">
         <h1>{this.props.quizQuestion.skill_name} Sample</h1>
@@ -138,9 +135,49 @@ class UploadPage extends Component {
           clickHandler={this.submitSample.bind(this)}
         />
       </div>
+    </div>*/
+
+    <div className="modal-bg">
+      <div className="modal-card">
+        <div className="upload-header">
+          <h2 className="modal-title">{(this.props.skill === 1 || this.props.skill === 2) ? this.props.caseStudy[0] : this.props.imageTitle}</h2>
+          <img 
+            className="close-button" 
+            src={close}
+            onClick={this.closeModal.bind(this)}  />
+        </div>
+        {(this.props.skill === 1 || this.props.skill === 2) ? 
+        <div>
+          <h3>Goal / Problem</h3>
+          <p>{this.props.caseStudy[1]}</p>
+          <h3>My Role</h3>
+          <p>{this.props.caseStudy[2]}</p>
+          <h3>Process</h3>
+          <p>{this.props.caseStudy[3]}</p>
+          <h3>Outcome and Results</h3>
+          <p>{this.props.caseStudy[4]}</p>
+
+          {this.props.caseStudyImage.map((image, index) => {
+          return (
+            <div className="case-study-modal-sample">
+              <h3>{this.props.caseStudyImageTitle[index]}</h3>
+              <p className="modal-description">{this.props.caseStudyImageDescription[index]}</p>
+              <img className="modal-img" src={image} />
+            </div>
+          )
+        })}
+        <div className="nav-btn nav-btn-secondary centered" onClick={this.closeModal.bind(this)}>Close</div>
+        </div>
+        :
+        <div>
+          <p className="modal-description">{this.props.imageDescription}</p>
+          <img className="modal-img" src={this.props.image} />
+        </div>
+      }
+      </div>
     </div>
    )
   }
 }
 
-export default UploadPage
+export default Modal

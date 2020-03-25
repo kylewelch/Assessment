@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import Subskill from './Subskill.js'
+import close from './img/close.svg'
+
 let resultsData = require('./results_data.json')
+let blankBlocks = ["visual-block", "ux-block", "research-block", "writing-block", "code-block", "ops-block"];
+let filledBlocks = ["visual-block-filled", "ux-block-filled", "research-block-filled", "writing-block-filled", "code-block-filled", "ops-block-filled"];
 
 
 // Single block component
@@ -15,10 +19,20 @@ function Block(props) {
 
 
 class Column extends React.Component {
+  currentSkill() {
+    switch(this.props.skillType) {
+      case 'Visual': return 0;
+      case 'UX': return 1;
+      case 'Research': return 2;
+      case 'Writing': return 3;
+      case 'Code': return 4;
+      case 'Ops': return 5;
+    }
+  }
   renderBlock(i) {
     return (
       <Block 
-        value={(i < this.props.skillLevel) ? 'skill-added' : 'skill-blank'}
+        value={(i < this.props.skillLevel) ? filledBlocks[this.currentSkill()] : ('skill-blank ' + blankBlocks[this.currentSkill()])}
         index={i}
       />
     );
@@ -32,8 +46,8 @@ class Column extends React.Component {
 
     return (
       <div className="skill-grid-col">
-        <div class="skill-grid-col-label">
-          <p class="skill-grid-col-label-text">{this.props.skillType}</p>
+        <div className="skill-grid-col-label">
+          <p className="skill-grid-col-label-text">{this.props.skillType}</p>
         </div>
         {col}
       </div>
@@ -158,9 +172,16 @@ class Treeshape extends Component {
 
 
 class QuizEnd extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      modal: null,
+      modalImage: null
+    }
+  }
   
-  handleResetClick() {
-    this.props.resetClickHandler()
+  showSpecificQuestion(question) {
+    this.props.showSpecificQuestion(question);
   }
   getSkillLevel() {
     this.props.PassSkillLevel()
@@ -189,29 +210,78 @@ class QuizEnd extends Component {
               return <Treeshape deep_skills={this.props.deep_skills} />
     }
   }
+  openModal(skill, image) {
+    this.setState({
+      modal: skill,
+      modalImage: image})
+  }
+  closeModal() {
+    this.setState({modal: null});
+  }
   render() {
     return(
-      <div>
-        <h1 className="main-heading">Design Skills{/*(this.props.shape === "T-shaped designer" || this.props.shape === "specialist") ? ((this.props.deep_skills.length === 2) ? (this.props.deep_skills[0] + '/' + this.props.deep_skills[1] + ' ' + this.props.level) : (this.props.deep_skills[0] + ' ' + this.props.level)) : this.props.shape*/}</h1>
-        
-        <Grid 
-          skill_level={this.props.skills} 
-          skill_name={this.props.names}
-          selectedQuestions={this.props.selectedQuestions}
-          />
-        
+      <div className="results-container">
+        <div className="header-container">
+          <div>
+            <h1 className="main-heading no-margin">Almost Done...{/*(this.props.shape === "T-shaped designer" || this.props.shape === "specialist") ? ((this.props.deep_skills.length === 2) ? (this.props.deep_skills[0] + '/' + this.props.deep_skills[1] + ' ' + this.props.level) : (this.props.deep_skills[0] + ' ' + this.props.level)) : this.props.shape*/}</h1>
+            <p className="results-subheading">Here are your results. Review and submit to show off your sweet sweet skills.</p>
+          </div>
+          <div className="nav-btn flex no-margin">Submit</div>
+        </div>
+        <div className="summary-container">
+          <div className="subskill-container-section">
+            <div className="subskill-title-container">
+              <p className="subskill-title">Summary</p>
+            </div>
+            <div className="results-info-section">
+                <div>
+                  <p className="progress-bar-name">Name</p>
+                  <p className="progress-bar-name">Portfolio</p>
+                  <p className="progress-bar-name">Email</p>
+                </div>
+                <div className="results-info-area">
+                  <p className="results-info">Denise Hansen</p>
+                  <p className="results-info">DeniseHansen.com</p>
+                  <p className="results-info">denisehansen@gmail.com</p>
+                </div>
+              </div>
+          </div>
+          <div>
+            <Grid 
+              skill_level={this.props.skills} 
+              skill_name={this.props.names}
+              selectedQuestions={this.props.selectedQuestions}
+              />
+          </div>
+        </div>
+
         {this.props.selectedQuestions.map((skill, index) => {
           return <Subskill 
                    skill={skill}
                    index={index}
                    skills={this.props.skills}
+                   unsortedSkills={this.props.unsorted_values}
                    names={[this.props.selectedNames]}
                    subskills={this.props.subskills[this.props.selectedQuestions[index]]}
                    selectedQuestion={this.props.selectedQuestions[index]}
-                   image={this.props.image}
+                   image={this.props.image[skill]}
+                   imageTitle={this.props.imageTitle[skill]}
+                   imageDescription={this.props.imageDescription[skill]}
+                   uxURL={this.props.uxURL}
+                   researchURL={this.props.researchURL}
+                   codingURL={this.props.codingURL}
+                   uxCaseStudy={this.props.uxCaseStudy}
+                   researchCaseStudy={this.props.researchCaseStudy}
+                   opsText={this.props.opsText}
+                   modal={this.state.modal}
+                   modalImage={this.state.modalImage}
+                   openModal={this.openModal.bind(this)}
+                   closeModal={this.closeModal.bind(this)}
+                   showSpecificQuestion={this.showSpecificQuestion.bind(this)}
                    />
         })}
         {/*<a href='#' onClick={this.handleResetClick.bind(this)}>Retake the Assessment</a>*/}
+        <div className="nav-btn flex no-margin">Submit</div>
       </div>
     )
   }

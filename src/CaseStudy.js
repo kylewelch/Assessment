@@ -9,7 +9,9 @@ class CaseStudy extends Component {
   }
 
   updateLinkValue(e) {
-    this.props.updateLinkValue(e.target.name, e.target.value)
+    let hasHttp = e.target.value.match(/^https?:/);
+    let url = hasHttp ? e.target.value : ("https://" + e.target.value);
+    this.props.updateLinkValue(e.target.name, url);
   }
   updateCaseStudyValue(e) {
     const number = (this.props.quiz_question.id === 2) ? "ux" : "research";

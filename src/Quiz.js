@@ -28,6 +28,9 @@ class Quiz extends Component {
       test: window.location.pathname.substr(12),
       name: ''}
   }
+  componentDidMount() {
+    this.props.testingState();
+  }
   updateAnswerSectionValue(newValue, section, question, position) {
     this.props.updateQuizSectionValue(newValue, section, question, position)
   }
@@ -53,6 +56,11 @@ class Quiz extends Component {
     })
     this.ref.current.scrollIntoView(/*{behavior: 'smooth'}*/)
   }
+  showSpecificQuestion(question) {
+    this.setState({quiz_position: question})
+    this.ref.current.scrollIntoView(/*{behavior: 'smooth'}*/)
+  }
+
   handleResetClick() {
     this.setState({quiz_position: 1, quiz_finished: false})
     this.props.resetQuiz()
@@ -62,7 +70,7 @@ class Quiz extends Component {
     this.ref.current.scrollIntoView(/*{behavior: 'smooth'}*/)
   }
   storeImage(image, number) {
-    this.props.storeImage(image, number, (this.state.quiz_position - 1))
+    this.props.storeImage(image, number, this.props.selectedQuestions[this.state.quiz_position - 1])
   }
   removeImage(number, question) {
     this.props.removeImage(number, question);
@@ -111,9 +119,18 @@ class Quiz extends Component {
           skills={this.props.skill_values} 
           names={this.props.skill_names}
           full_names={this.props.full_names}
-          subskillNames={this.props.subskillNames}
+          subskillNames={this.props.subskillNames} 
           subskills={this.props.subskills}
           image={this.props.image}
+          imageTitle={this.props.imageTitle}
+          imageDescription={this.props.imageDescription}
+          uxURL={this.props.uxURL}
+          researchURL={this.props.researchURL}
+          codingURL={this.props.codingURL}
+          uxCaseStudy={this.props.uxCaseStudy}
+          researchCaseStudy={this.props.researchCaseStudy}
+          opsText={this.props.opsText}
+          showSpecificQuestion={this.showSpecificQuestion.bind(this)}
         /> : 
         <QuizQuestion
           quiz_position={this.state.quiz_position}

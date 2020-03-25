@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import firebase from './Firebase.js'
 import Quiz from './Quiz.js'
 import Create from './Create.js'
-import CardsAndSliders from './CardsAndSliders.js'
+import QuizEnd from './QuizEnd.js'
 
 import {
   BrowserRouter as Router,
@@ -57,6 +57,10 @@ class App extends Component {
     }
   }
   
+  testingState() {
+    this.setState({testing: "bird"});
+  }
+
   // Store the skills selected during the creation of this assessment
   
   updateSelectedSkills(skills) {
@@ -268,126 +272,131 @@ class App extends Component {
     const didQuizStart = ((this.state.current_screen) === 2)
     return (
       <Router>
-        <div className="container" ref={this.ref}>
-          <Switch>
-            <Route path="/Assessment">
-              <Route path={"/Assessment/" + AssessmentID}>
-                <Quiz 
-                  selectedQuestions={this.state.selectedQuestions}
-                  selectedNames={this.state.selectedNames}
-                  updateQuizSectionValue={this.updateSectionValue.bind(this)}
-                  updateQuizSliderValue={this.updateSliderValue.bind(this)}
-                  updateQuizValue={this.updateValue.bind(this)}
-                  updateSubskills={this.updateSubskills.bind(this)}
-                  skill_values={this.state.arrangedValues} 
-                  skill_names={this.state.arrangedNames}
-                  unsorted_values={this.state.skillValues}
-                  research_values={this.state.researchValues}
-                  motion_values={this.state.motionValues}
-                  leader_values={this.state.leaderValues}
-                  leader_values2={this.state.leaderValues2}
-                  illustration_values={this.state.illustrationValues}
-                  visual_values={this.state.visualValues}
-                  writing_values={this.state.writingValues}
-                  tech_values={this.state.techValues}
-                  ops_values={this.state.opsValues}
-                  shape={this.state.skillShape}
-                  resetQuiz={this.resetQuiz.bind(this)}
-                  deep_skills={this.state.deepSkills}
-                  level={this.state.level} 
-                  subskills={this.state.subskills}
-                  showPreview={this.state.showPreview}
-                  showQuiz={this.showQuiz.bind(this)}
-                  storeImage={this.storeImage.bind(this)}
-                  removeImage={this.removeImage.bind(this)}
-                  deleteImage={this.deleteImage.bind(this)}
-                  deleteUploadText={this.deleteUploadText.bind(this)}
-                  image={this.state.image}
-                  imageTitle={this.state.imageTitle}
-                  imageDescription={this.state.imageDescription}
-                  updateTextInput={this.updateTextInput.bind(this)}
-                  assessmentID={this.state.assessmentID}
-                  updateLinkValue={this.updateLinkValue.bind(this)}
-                  codingURL={this.state.codingURL}
-                  uxCaseStudy={this.state.uxCaseStudy}
-                  researchCaseStudy={this.state.researchCaseStudy}
-                  opsText={this.state.opsOpenQuestion}
-                />
+        <div>
+          <div className="container" ref={this.ref}>
+            <Switch>
+              <Route path="/Assessment">
+                <Route path={"/Assessment/" + AssessmentID}>
+                  <Quiz 
+                    selectedQuestions={this.state.selectedQuestions}
+                    selectedNames={this.state.selectedNames}
+                    updateQuizSectionValue={this.updateSectionValue.bind(this)}
+                    updateQuizSliderValue={this.updateSliderValue.bind(this)}
+                    updateQuizValue={this.updateValue.bind(this)}
+                    updateSubskills={this.updateSubskills.bind(this)}
+                    skill_values={this.state.arrangedValues} 
+                    skill_names={this.state.arrangedNames}
+                    unsorted_values={this.state.skillValues}
+                    research_values={this.state.researchValues}
+                    motion_values={this.state.motionValues}
+                    leader_values={this.state.leaderValues}
+                    leader_values2={this.state.leaderValues2}
+                    illustration_values={this.state.illustrationValues}
+                    visual_values={this.state.visualValues}
+                    writing_values={this.state.writingValues}
+                    tech_values={this.state.techValues}
+                    ops_values={this.state.opsValues}
+                    shape={this.state.skillShape}
+                    resetQuiz={this.resetQuiz.bind(this)}
+                    deep_skills={this.state.deepSkills}
+                    level={this.state.level} 
+                    subskills={this.state.subskills}
+                    showPreview={this.state.showPreview}
+                    showQuiz={this.showQuiz.bind(this)}
+                    storeImage={this.storeImage.bind(this)}
+                    removeImage={this.removeImage.bind(this)}
+                    deleteImage={this.deleteImage.bind(this)}
+                    deleteUploadText={this.deleteUploadText.bind(this)}
+                    image={this.state.image}
+                    imageTitle={this.state.imageTitle}
+                    imageDescription={this.state.imageDescription}
+                    updateTextInput={this.updateTextInput.bind(this)}
+                    assessmentID={this.state.assessmentID}
+                    updateLinkValue={this.updateLinkValue.bind(this)}
+                    uxURL={this.state.uxURL}
+                    researchURL={this.state.researchURL}
+                    codingURL={this.state.codingURL}
+                    uxCaseStudy={this.state.uxCaseStudy}
+                    researchCaseStudy={this.state.researchCaseStudy}
+                    opsText={this.state.opsOpenQuestion}
+                    testingState={this.testingState.bind(this)}
+                  />
+                </Route>
               </Route>
-            </Route>
-            <Route path="/">
-              <Create 
-                intro_content={introData.intro_pages[this.state.current_screen - 1]} 
-                showPreview={this.showPreview.bind(this)}
-                showNextScreenHandler={this.showNextScreen.bind(this)}
-                updateSelectedSkills={this.updateSelectedSkills.bind(this)}
-                selectedQuestions={this.state.selectedQuestions}
-                skills={this.state.arrangedValues}
-                names={this.state.arrangedNames}
-                subskills={this.state.subskills}
-                fullNames={this.state.skillFullNames}
-                storeDBreference={this.storeDBreference.bind(this)}
-                assessmentCreated={this.state.showPreview}
-                assessmentID={this.state.assessmentID}
-              />
-            </Route>
-          </Switch>
-          {/*didQuizStart ? <Quiz 
-                         selectedQuestions={this.state.selectedQuestions}
-                         selectedNames={this.state.selectedNames}
-                         updateQuizSectionValue={this.updateSectionValue.bind(this)}
-                         updateQuizSliderValue={this.updateSliderValue.bind(this)}
-                         updateQuizValue={this.updateValue.bind(this)}
-                         updateSubskills={this.updateSubskills.bind(this)}
-                         skill_values={this.state.arrangedValues} 
-                         skill_names={this.state.arrangedNames}
-                         unsorted_values={this.state.skillValues}
-                         research_values={this.state.researchValues}
-                         motion_values={this.state.motionValues}
-                         leader_values={this.state.leaderValues}
-                         leader_values2={this.state.leaderValues2}
-                         illustration_values={this.state.illustrationValues}
-                          visual_values={this.state.visualValues}
-                         writing_values={this.state.writingValues}
-                         tech_values={this.state.techValues}
-                         ops_values={this.state.opsValues}
-                         shape={this.state.skillShape}
-                         resetQuiz={this.resetQuiz.bind(this)}
-                         deep_skills={this.state.deepSkills}
-                         level={this.state.level} 
-                         subskills={this.state.subskills}
-                         showPreview={this.state.showPreview}
-                         showQuiz={this.showQuiz.bind(this)}
-                         storeImage={this.storeImage.bind(this)}
-                         image={this.state.image}
-                         assessmentID={this.state.assessmentID}
-                        /> 
-                      : <Create 
-                          intro_content={introData.intro_pages[this.state.current_screen - 1]} 
-                          showPreview={this.showPreview.bind(this)}
-                          showNextScreenHandler={this.showNextScreen.bind(this)}
-                          updateSelectedSkills={this.updateSelectedSkills.bind(this)}
+              <Route path="/">
+                <Create 
+                  intro_content={introData.intro_pages[this.state.current_screen - 1]} 
+                  showPreview={this.showPreview.bind(this)}
+                  showNextScreenHandler={this.showNextScreen.bind(this)}
+                  updateSelectedSkills={this.updateSelectedSkills.bind(this)}
+                  selectedQuestions={this.state.selectedQuestions}
+                  skills={this.state.arrangedValues}
+                  names={this.state.arrangedNames}
+                  subskills={this.state.subskills}
+                  fullNames={this.state.skillFullNames}
+                  storeDBreference={this.storeDBreference.bind(this)}
+                  assessmentCreated={this.state.showPreview}
+                  assessmentID={this.state.assessmentID}
+                />            
+              </Route>
+            </Switch>
+            {/*didQuizStart ? <Quiz 
                           selectedQuestions={this.state.selectedQuestions}
-                          skills={this.state.arrangedValues}
-                          names={this.state.arrangedNames}
+                          selectedNames={this.state.selectedNames}
+                          updateQuizSectionValue={this.updateSectionValue.bind(this)}
+                          updateQuizSliderValue={this.updateSliderValue.bind(this)}
+                          updateQuizValue={this.updateValue.bind(this)}
+                          updateSubskills={this.updateSubskills.bind(this)}
+                          skill_values={this.state.arrangedValues} 
+                          skill_names={this.state.arrangedNames}
+                          unsorted_values={this.state.skillValues}
+                          research_values={this.state.researchValues}
+                          motion_values={this.state.motionValues}
+                          leader_values={this.state.leaderValues}
+                          leader_values2={this.state.leaderValues2}
+                          illustration_values={this.state.illustrationValues}
+                            visual_values={this.state.visualValues}
+                          writing_values={this.state.writingValues}
+                          tech_values={this.state.techValues}
+                          ops_values={this.state.opsValues}
+                          shape={this.state.skillShape}
+                          resetQuiz={this.resetQuiz.bind(this)}
+                          deep_skills={this.state.deepSkills}
+                          level={this.state.level} 
                           subskills={this.state.subskills}
-                          fullNames={this.state.skillFullNames}
-                          storeDBreference={this.storeDBreference.bind(this)}
-                          />*/}
-        
-          {/*<div className="image-upload-container">
-            <div>
-              <p className="text-label">Title</p>
-              <input className="text-field" type="text"></input>
-              <p className="text-label">Description</p>
-              <textarea className="text-field"></textarea>
-            </div>
-            <div>
-              <div className="subskill-empty-image">
-                <div>Upload file</div>
+                          showPreview={this.state.showPreview}
+                          showQuiz={this.showQuiz.bind(this)}
+                          storeImage={this.storeImage.bind(this)}
+                          image={this.state.image}
+                          assessmentID={this.state.assessmentID}
+                          /> 
+                        : <Create 
+                            intro_content={introData.intro_pages[this.state.current_screen - 1]} 
+                            showPreview={this.showPreview.bind(this)}
+                            showNextScreenHandler={this.showNextScreen.bind(this)}
+                            updateSelectedSkills={this.updateSelectedSkills.bind(this)}
+                            selectedQuestions={this.state.selectedQuestions}
+                            skills={this.state.arrangedValues}
+                            names={this.state.arrangedNames}
+                            subskills={this.state.subskills}
+                            fullNames={this.state.skillFullNames}
+                            storeDBreference={this.storeDBreference.bind(this)}
+                            />*/}
+          
+            {/*<div className="image-upload-container">
+              <div>
+                <p className="text-label">Title</p>
+                <input className="text-field" type="text"></input>
+                <p className="text-label">Description</p>
+                <textarea className="text-field"></textarea>
               </div>
-            </div>
-          </div>*/}
+              <div>
+                <div className="subskill-empty-image">
+                  <div>Upload file</div>
+                </div>
+              </div>
+            </div>*/}
+          </div>
         </div>
       </Router>
     )
