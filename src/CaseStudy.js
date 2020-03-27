@@ -37,9 +37,9 @@ class CaseStudy extends Component {
 
       <div className="case-study-card">
         <h3>Option 2</h3>
-        <p>Create a quick and easy case study below</p>
+        <p>Quickly create a case study below</p>
 
-        <p className="text-label">Project Name</p>
+        <p className="text-label">Case Study Name</p>
         <input
           type="text"
           name={0}
@@ -47,7 +47,7 @@ class CaseStudy extends Component {
           onChange={this.updateCaseStudyValue.bind(this)}
           value={this.props.caseStudy[0]} />
 
-        <p className="text-label">Project Goal (the problem you were trying to solve)</p>
+        <p className="text-label">What was the goal or problem you were trying to solve?</p>
         <textarea
           name={1}
           className="text-field dark-field"
@@ -61,7 +61,7 @@ class CaseStudy extends Component {
           onChange={this.updateCaseStudyValue.bind(this)}
           value={this.props.caseStudy[2]} />
           
-        <p className="text-label">My process for studying the problem and designing a solution</p>
+        <p className="text-label">{(this.props.quiz_question.id === 2) ? "My process for studying the problem and designing a solution" : "Describe your process, methodologies, and tools you used to complete your research"}</p>
         <textarea
           name={3}
           className="text-field dark-field"
@@ -75,7 +75,7 @@ class CaseStudy extends Component {
           onChange={this.updateCaseStudyValue.bind(this)}
           value={this.props.caseStudy[4]} />
       </div>
-      <p className="text-label text-margin">Upload any diagrams, wireframes, or other deliverables from the project that you would like to add</p>
+      <p className="text-label text-margin">Upload any diagrams, wireframes, or other deliverables from the project that you would like to add.</p>
     </div>
     )
   }

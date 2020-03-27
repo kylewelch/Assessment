@@ -5,6 +5,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import checkmark from './img/checkmark.svg'
 let resultsData = require('./results_data.json')
 
 
@@ -79,7 +80,12 @@ class Grid extends Component {
 
 
 class QuizPreview extends Component {
-  
+  constructor(props) {
+    super(props)
+    this.state = {
+      copiedLink: false
+    }
+  }
   handleResetClick() {
     this.props.resetClickHandler()
   }
@@ -92,22 +98,41 @@ class QuizPreview extends Component {
   showQuiz() {
     this.props.showQuiz();
   }
+
+  copyLink = (e) => {
+    this.textArea.select();
+    document.execCommand('copy');
+    e.target.focus();
+    this.setState({ copiedLink: true });
+  };
   render() {
     let AssessmentID = this.props.assessmentID
     return(
       <div className="quiz-preview">
-        <h1 className="main-heading">Your assessment is ready!{/*(this.props.shape === "T-shaped designer" || this.props.shape === "specialist") ? ((this.props.deep_skills.length === 2) ? (this.props.deep_skills[0] + '/' + this.props.deep_skills[1] + ' ' + this.props.level) : (this.props.deep_skills[0] + ' ' + this.props.level)) : this.props.shape*/}</h1>
-        <p>Assessment link:</p>
-        <div class="grid-preview">
+        <h1 className="main-heading-two">Your assessment is ready!{/*(this.props.shape === "T-shaped designer" || this.props.shape === "specialist") ? ((this.props.deep_skills.length === 2) ? (this.props.deep_skills[0] + '/' + this.props.deep_skills[1] + ' ' + this.props.level) : (this.props.deep_skills[0] + ' ' + this.props.level)) : this.props.shape*/}</h1>
+        <p>All results will be sent to your email.</p>
+        <div className="grid-preview">
          {/*} <Grid 
             skill_level={this.props.skills} 
             skill_name={this.props.selectedNames}
             selectedQuestions={this.props.selectedQuestions}
             />*/}
-          <Link to={"/Assessment/" + AssessmentID}>{"sweetpotato.com/Assessment/" + this.props.assessmentID}</Link>
+          <p className="no-top-margin">{this.props.assessmentName ? (this.props.assessmentName + " link:") : "Assessment link:"}</p>
+          <Link to={"/Assessment/" + AssessmentID}>{"designertypes.com/Assessment/" + this.props.assessmentID}</Link>
         </div>
         {/*<div class="preview-btn">Copy link</div>*/}
-        <div class="preview-btn preview-secondary">Copy link</div>
+        <div className="preview-btn preview-secondary" onClick={this.copyLink.bind(this)}>
+          <img className={this.state.copiedLink ? "button-icon" : "hide"} src={checkmark} />
+          {this.state.copiedLink ? "Link copied to clipboard" : "Copy link"}
+        </div>
+        <form>
+          <textarea 
+            className="hide"
+            value={"designertypes.com/Assessment/" + this.props.assessmentID}
+            ref={(textarea) => this.textArea = textarea}
+          >
+          </textarea>
+        </form>
       </div>
     )
   }

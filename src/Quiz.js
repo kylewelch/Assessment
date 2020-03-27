@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import QuizQuestion from './QuizQuestion.js'
 import QuizEnd from './QuizEnd.js'
-import Firebase from './Firebase.js'
+import firebase from './Firebase.js'
 import QuizPreview from './QuizPreview.js'
 import {
   BrowserRouter as Router,
@@ -10,12 +10,10 @@ import {
   Link
 } from "react-router-dom";
 const quizData = require('./quiz_data.json')
-const firebase = require("firebase");
+
 // Required for side-effects
 require("firebase/firestore");
 
-
-const assessmentID = window.location.pathname.substr(12);
 const db = firebase.firestore();
 
 class Quiz extends Component {
@@ -26,10 +24,22 @@ class Quiz extends Component {
       quiz_position: 1,
       quiz_finished: false,
       test: window.location.pathname.substr(12),
+      questions: null,
       name: ''}
   }
   componentDidMount() {
-    this.props.testingState();
+    let thisAssessment = db.collection("assessments").doc(window.location.pathname.substr(12));
+    thisAssessment.get().then((doc) => {
+        let questions = doc.data().questions;
+        this.setState({questions: questions});
+        this.props.setSelectedQuestions(questions);
+    });
+    {/*let questionsOne = thisAssessment.get().then(function(doc) {
+      return doc.data().questions;
+    })
+    let questionsTwo = thisAssessment
+    console.log(questionsOne);
+  this.setState({test2: questionsOne})*/}
   }
   updateAnswerSectionValue(newValue, section, question, position) {
     this.props.updateQuizSectionValue(newValue, section, question, position)
@@ -112,15 +122,11 @@ class Quiz extends Component {
           
       isQuizEnd ? 
         <QuizEnd 
+          assessmentID={this.props.assessmentID}
           selectedQuestions={this.props.selectedQuestions} 
-          selectedNames={this.props.selectedNames}
-          resetClickHandler={this.handleResetClick.bind(this)} 
           unsorted_values={this.props.unsorted_values}
           skills={this.props.skill_values} 
           names={this.props.skill_names}
-          full_names={this.props.full_names}
-          subskillNames={this.props.subskillNames} 
-          subskills={this.props.subskills}
           image={this.props.image}
           imageTitle={this.props.imageTitle}
           imageDescription={this.props.imageDescription}

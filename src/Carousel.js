@@ -1,11 +1,7 @@
 import React, { Component } from 'react'
 import EmptyState from './EmptyState.js'
+import EmptyStateManagerView from './EmptyStateManagerView.js'
 import CarouselImage from './CarouselImage.js'
-import UploadPreview from './UploadPreview.js'
-import upload from './img/upload.svg'
-import add from './img/add.svg'
-import view from './img/view.svg'
-import testImg from './img/testImage.jpg'
 
 class Carousel extends Component {
   openModal(skill, image) {
@@ -32,6 +28,14 @@ class Carousel extends Component {
             )})}
           </div> 
           : 
+          this.props.managerView ?
+
+          <EmptyStateManagerView
+            skill={this.props.skill} 
+            index={this.props.index}
+            showSpecificQuestion={this.showSpecificQuestion.bind(this)}
+          />
+          :
           <EmptyState 
             skill={this.props.skill} 
             index={this.props.index}

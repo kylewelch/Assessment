@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import firebase from './Firebase.js'
 import Quiz from './Quiz.js'
 import Create from './Create.js'
-import QuizEnd from './QuizEnd.js'
+import Results from './Results.js'
 
 import {
   BrowserRouter as Router,
@@ -53,12 +53,8 @@ class App extends Component {
       codingURL: null,
       uxCaseStudy: ["", "", "", "", ""],
       researchCaseStudy: ["", "", "", "", ""],
-      opsOpenQuestion: ""
+      opsOpenQuestion: "",
     }
-  }
-  
-  testingState() {
-    this.setState({testing: "bird"});
   }
 
   // Store the skills selected during the creation of this assessment
@@ -311,7 +307,7 @@ class App extends Component {
                     imageTitle={this.state.imageTitle}
                     imageDescription={this.state.imageDescription}
                     updateTextInput={this.updateTextInput.bind(this)}
-                    assessmentID={this.state.assessmentID}
+                    assessmentID={window.location.pathname.substr(12)}
                     updateLinkValue={this.updateLinkValue.bind(this)}
                     uxURL={this.state.uxURL}
                     researchURL={this.state.researchURL}
@@ -319,9 +315,12 @@ class App extends Component {
                     uxCaseStudy={this.state.uxCaseStudy}
                     researchCaseStudy={this.state.researchCaseStudy}
                     opsText={this.state.opsOpenQuestion}
-                    testingState={this.testingState.bind(this)}
+                    setSelectedQuestions={this.updateSelectedSkills.bind(this)}
                   />
                 </Route>
+              </Route>
+              <Route path="/Results">
+                <Results />
               </Route>
               <Route path="/">
                 <Create 

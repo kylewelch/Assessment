@@ -172,14 +172,13 @@ class Treeshape extends Component {
 // Results Page
 
 
-class QuizEnd extends Component {
+class ResultsDashboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
       submitted: false,
       modal: null,
-      modalImage: null,
-      submissionID: null
+      modalImage: null
     }
   }
   
@@ -223,7 +222,8 @@ class QuizEnd extends Component {
   }
   submitResults() {
     this.setState({submitted: true})
-    db.collection("submissions").add({
+    let newSubmission = db.collection("submissions").doc();
+    newSubmission.set({
       assessmentID: this.props.assessmentID,
       selectedQuestions: this.props.selectedQuestions,
       unsortedValues: this.props.unsorted_values,
@@ -235,7 +235,7 @@ class QuizEnd extends Component {
       writingImageTitles: this.props.imageTitle[3],
       visualImageDescriptions: this.props.imageDescription[0],
       uxImageDescriptions: this.props.imageDescription[1],
-      researchImageDescriptions: this.props.imageDescription[2],
+      resaerchImageDescriptions: this.props.imageDescription[2],
       writingImageDescriptions: this.props.imageDescription[3],
       uxURL: this.props.uxURL,
       researchURL: this.props.researchURL,
@@ -243,27 +243,17 @@ class QuizEnd extends Component {
       uxCaseStudy: this.props.uxCaseStudy,
       researchCaseStudy: this.props.researchCaseStudy,
       opsText: this.props.opsText
-    }).then((docRef) => {
-      this.setState({submissionID: docRef.id});
-  })
+    });
   }
   render() {
     return(
       <div>
-        {this.state.submitted ? 
-        <div>
-          <h1 className="main-heading">Nice Work!</h1>
-          <p className="progress-bar-name">Your results have been sent. You can view them here: <a href={"https://designertypes.com/Results/" + this.state.submissionID}>{"designertypes.com/Results/" + this.state.submissionID}</a></p>
-        </div> : 
+        {this.props.assessmentID ? 
         <div className="results-container">
           <div className="header-container">
-            <div>
-              <h1 className="main-heading no-margin">Almost Done...{/*(this.props.shape === "T-shaped designer" || this.props.shape === "specialist") ? ((this.props.deep_skills.length === 2) ? (this.props.deep_skills[0] + '/' + this.props.deep_skills[1] + ' ' + this.props.level) : (this.props.deep_skills[0] + ' ' + this.props.level)) : this.props.shape*/}</h1>
-              <p className="results-subheading">Here are your results. Review and submit to show off your sweet sweet skills.</p>
-            </div>
-            <div className="nav-btn flex no-margin" onClick={this.submitResults.bind(this)}>Submit</div>
+            <h1 className="main-heading no-margin">Denise Hansen</h1>
           </div>
-          <div className="summary-container">
+          <div className="summary-container summary-container-results">
             <div className="subskill-container-section">
               <div className="subskill-title-container">
                 <p className="subskill-title">Summary</p>
@@ -311,14 +301,16 @@ class QuizEnd extends Component {
                     openModal={this.openModal.bind(this)}
                     closeModal={this.closeModal.bind(this)}
                     showSpecificQuestion={this.showSpecificQuestion.bind(this)}
-                    managerView={false}
+                    managerView={true}
                     />
           })}
-          <div className="nav-btn flex no-margin" onClick={this.submitResults.bind(this)}>Submit</div>
-        </div>}
+        </div>
+        : 
+        <div></div>
+        }
       </div>
     )
   }
 }
 
-export default QuizEnd
+export default ResultsDashboard

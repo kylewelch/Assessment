@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
 import EmptyState from './EmptyState.js'
+import EmptyStateManagerView from './EmptyStateManagerView.js'
 import arrow from './img/arrow.svg'
-import UploadPreview from './UploadPreview.js'
-import upload from './img/upload.svg'
-import add from './img/add.svg'
-import view from './img/view.svg'
-import testImg from './img/testImage.jpg'
+
 
 class CaseStudyPreview extends Component {
   openModal() {
@@ -36,6 +33,14 @@ class CaseStudyPreview extends Component {
           <p className="empty-sample-text">{this.props.skill === 1 ? "UX Case Study" : "Research Case Study"}</p>
           <a href={this.props.link} target="_blank" rel="noopener noreferrer">{this.props.link}</a>
         </div>
+        :
+        this.props.managerView ?
+
+        <EmptyStateManagerView 
+          skill={this.props.skill}
+          index={this.props.index}
+          showSpecificQuestion={this.showSpecificQuestion.bind(this)} 
+        />
         :
         <EmptyState 
           skill={this.props.skill}

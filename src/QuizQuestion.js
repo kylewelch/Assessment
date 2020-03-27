@@ -72,6 +72,16 @@ class QuizQuestion extends Component {
   updateLinkValue(name, value) {
     this.props.updateLinkValue(name, value);
   }
+  skillColor() {
+    switch(this.props.quiz_question.id) {
+      case 1: return "visual-text";
+      case 2: return "ux-text";
+      case 3: return "research-text";
+      case 4: return "writing-text";
+      case 5: return "code-text";
+      case 6: return "ops-text";
+    }
+  }
   render() {
     const showUploadPage = this.state.showUploadPage
     return (
@@ -94,10 +104,10 @@ class QuizQuestion extends Component {
             quizQuestion={this.props.quiz_question} 
           /> : 
       <main>
-        <p className="sub-heading">{'Question ' + this.props.quiz_position + ' of ' + this.props.selectedQuestions.length}</p>
+        <p className="sub-heading">{'Section ' + this.props.quiz_position + ' of ' + this.props.selectedQuestions.length}</p>
         <h1 className="main-heading">
           {this.props.quiz_question.instruction_text}
-          <span className="main-heading-skill">{this.props.quiz_question.skill_name}</span>{this.props.quiz_question.instruction_text2}
+          <span className={"main-heading-skill " + this.skillColor()}>{this.props.quiz_question.skill_name}</span>{this.props.quiz_question.instruction_text2}
         </h1>
         {(this.props.quiz_question.question_type === "radio") ? 
           <QuizQuestionRadio 

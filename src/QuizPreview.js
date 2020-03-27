@@ -96,7 +96,7 @@ class QuizPreview extends Component {
             skill_name={this.props.selectedNames}
             selectedQuestions={this.props.selectedQuestions}
             />*/}
-          <p>{"sweetpotato.com/Assessment/" + this.props.assessmentID}</p>
+          <p>{"designertypes.com/Assessment/" + this.props.assessmentID}</p>
         </div>
         <div class="preview-btn" onClick={this.showQuiz.bind(this)}>Preview</div>
         <div class="preview-btn preview-secondary">Send</div>

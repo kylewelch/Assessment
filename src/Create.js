@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Checkbox from './Checkbox.js'
 import Subskill from './Subskill.js'
-import Firebase from './Firebase.js'
+import firebase from './Firebase.js'
 import AssessmentCreated from './AssessmentCreated.js'
 import {
   BrowserRouter as Router,
@@ -12,7 +12,7 @@ import {
 
 let introData = require('./intro_data.json')
 
-const firebase = require("firebase");
+
 // Required for side-effects
 require("firebase/firestore");
 
@@ -103,10 +103,12 @@ class Create extends Component {
       <main>
         {assessmentCreated ? 
           <AssessmentCreated 
-            assessmentID={this.props.assessmentID} /> :
+            assessmentID={this.props.assessmentID}
+            assessmentName={this.state.assessmentName} /> :
         <form>
           {/*<h1 className="main-heading">Create an assessment</h1>*/}
-          <h1 className="title">Which skills would you like to assess?</h1>
+          <h1 className="title title-low-space">Create your custom skill assessment</h1>
+          <p className="input-label center-label">SKILLS TO ASSESS</p>
           {/*<p>{this.props.selectedQuestions.length} of 6 skills selected</p>*/}
           <div className="skill-list">
             {this.props.fullNames.map((skill, index) => {
