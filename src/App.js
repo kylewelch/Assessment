@@ -269,6 +269,10 @@ class App extends Component {
     return (
       <Router>
         <div>
+          <div className="mobile-message">
+            <h1>Hey there, friend!</h1>
+            <h2 className="mobile-message-subhead">Grab a computer and try this on a bigger screen</h2>
+          </div>
           <div className="container" ref={this.ref}>
             <Switch>
               <Route path="/Assessment">

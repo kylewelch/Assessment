@@ -1435,6 +1435,14 @@ ol, ul {
   margin-left: 10px;
 }
 
+.mobile-message {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.mobile-message-subhead {
+  font-weight: 300;
+}
 
 /* Forms */
 
@@ -1496,6 +1504,17 @@ ol, ul {
 
 /* Media Queries */
 
+@media only screen and (max-width: 1060px) {
+  .container {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 1060px) {
+  .mobile-message {
+    display: none;
+  }
+}
 
 @media only screen and (max-width: 800px) {
   .skill-list-item {
