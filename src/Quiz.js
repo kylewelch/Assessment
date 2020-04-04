@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import QuizQuestion from './QuizQuestion.js'
 import QuizEnd from './QuizEnd.js'
 import firebase from './Firebase.js'
-import QuizPreview from './QuizPreview.js'
+import Intro from './Intro.js'
 import {
   BrowserRouter as Router,
   Switch,
@@ -21,6 +21,7 @@ class Quiz extends Component {
     super(props)
     this.ref = React.createRef()
     this.state = {
+      showIntro: 1,
       quiz_position: 1,
       quiz_finished: false,
       test: window.location.pathname.substr(12),
@@ -40,6 +41,15 @@ class Quiz extends Component {
     let questionsTwo = thisAssessment
     console.log(questionsOne);
   this.setState({test2: questionsOne})*/}
+  }
+  showPreviousIntroPage() {
+    this.setState({showIntro: 1})
+  }
+  showNextIntroPage() {
+    this.setState({showIntro: 2})
+  }
+  startQuiz() {
+    this.setState({showIntro: false})
   }
   updateAnswerSectionValue(newValue, section, question, position) {
     this.props.updateQuizSectionValue(newValue, section, question, position)
@@ -61,9 +71,12 @@ class Quiz extends Component {
     this.ref.current.scrollIntoView(/*{behavior: 'smooth'}*/)
   }
   showPreviousQuestion() {
+    if (this.state.quiz_position === 1) {
+      this.setState({showIntro: 2})
+    } else {
     this.setState((state) => {
       return {quiz_position: state.quiz_position - 1}
-    })
+    })}
     this.ref.current.scrollIntoView(/*{behavior: 'smooth'}*/)
   }
   showSpecificQuestion(question) {
@@ -79,8 +92,8 @@ class Quiz extends Component {
     this.props.showQuiz();
     this.ref.current.scrollIntoView(/*{behavior: 'smooth'}*/)
   }
-  storeImage(image, number) {
-    this.props.storeImage(image, number, this.props.selectedQuestions[this.state.quiz_position - 1])
+  storeImage(image, number, name, file) {
+    this.props.storeImage(image, number, this.props.selectedQuestions[this.state.quiz_position - 1], name, file);
   }
   removeImage(number, question) {
     this.props.removeImage(number, question);
@@ -98,36 +111,35 @@ class Quiz extends Component {
     this.props.updateLinkValue(name, value)
   }
   render() {
-    const showPreview = this.props.showPreview
+    const showIntro = this.state.showIntro;
     const isQuizEnd = ((this.state.quiz_position -1) === this.props.selectedQuestions.length)
     let currentQuestionID = this.props.selectedQuestions[this.state.quiz_position - 1] + 1
     return (
       <div ref={this.ref}>
-      {/*showPreview ? 
-          <QuizPreview 
-            selectedQuestions={this.props.selectedQuestions}         
-            resetClickHandler={this.handleResetClick.bind(this)} 
-            unsorted_values={this.props.unsorted_values}
-            skills={this.props.skill_values} 
-            names={this.props.skill_names}
-            selectedNames={this.props.selectedNames}
-            full_names={this.props.full_names}
-            shape={this.props.shape}
-            deep_skills={this.props.deep_skills}
-            level={this.props.level}
-            showQuiz={this.showQuiz.bind(this)}
-            assessmentID={this.props.assessmentID}
-          />
-          :*/ 
+      {showIntro ? 
+        <Intro 
+          selectedQuestions={this.props.selectedQuestions}
+          skillFullNames={this.props.skillFullNames} 
+          updateTextInput={this.updateTextInput.bind(this)}
+          contactInfo={this.props.contactInfo}
+          startQuiz={this.startQuiz.bind(this)}
+          introPage={this.state.showIntro}
+          showPreviousIntroPage={this.showPreviousIntroPage.bind(this)}
+          showNextIntroPage={this.showNextIntroPage.bind(this)}
+        />
+          :
           
       isQuizEnd ? 
         <QuizEnd 
+          quiz_position={this.state.quiz_position}
           assessmentID={this.props.assessmentID}
           selectedQuestions={this.props.selectedQuestions} 
           unsorted_values={this.props.unsorted_values}
           skills={this.props.skill_values} 
           names={this.props.skill_names}
           image={this.props.image}
+          imageFile={this.props.imageFile}
+          imageName={this.props.imageName}
           imageTitle={this.props.imageTitle}
           imageDescription={this.props.imageDescription}
           uxURL={this.props.uxURL}
@@ -137,6 +149,7 @@ class Quiz extends Component {
           researchCaseStudy={this.props.researchCaseStudy}
           opsText={this.props.opsText}
           showSpecificQuestion={this.showSpecificQuestion.bind(this)}
+          contactInfo={this.props.contactInfo}
         /> : 
         <QuizQuestion
           quiz_position={this.state.quiz_position}

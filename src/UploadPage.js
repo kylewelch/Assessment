@@ -3,6 +3,7 @@ import NavButton from './NavButton.js'
 import upload from './img/upload.svg'
 import close from './img/close.svg'
 import remove from './img/delete.svg'
+import firebase from './Firebase.js'
 
 class UploadPage extends Component {
   constructor(props) {
@@ -33,7 +34,9 @@ class UploadPage extends Component {
   }
   onChange() {  
     // Assuming only image
-    var file = this.refs.file.files[0]; 
+    var file = this.refs.file.files[0];
+    var name = file.name; 
+    // var storageRef = firebase.storage().ref('testFolder/' + file.name);
     var reader = new FileReader();
     var url = reader.readAsDataURL(file);
 
@@ -43,9 +46,18 @@ class UploadPage extends Component {
           imgSrc: [reader.result]
         })
         if (this.state.imgSrc) {
-          this.props.storeImage(reader.result, uploadNumber);
+          this.props.storeImage(reader.result, uploadNumber, name, file);
         }
       }.bind(this);
+
+      /*upload file to storage
+      var task = storageRef.put(file);
+      task.on('state_changed', 
+        function check() {
+          console.log('success')
+        }
+
+      )*/
     this.setState({uploaded: true})
 
 

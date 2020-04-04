@@ -3,6 +3,9 @@ import firebase from './Firebase.js'
 import Quiz from './Quiz.js'
 import Create from './Create.js'
 import Results from './Results.js'
+import LandingPage from './LandingPage.js'
+import metaImage from './img/metaSkills.svg'
+
 
 import {
   BrowserRouter as Router,
@@ -30,6 +33,7 @@ class App extends Component {
       selectedNames: ['Visual', 'UX', 'Research', 'Writing', 'Code', 'Ops'],
       arrangedValues: [],
       arrangedNames: [],
+      contactInfo: [null, null, null],
       researchValues: [null, null, null, null, null, null, null, null, null, null, null, null],
       researchTotal: 0,
       researchScore: 0,
@@ -44,6 +48,9 @@ class App extends Component {
       subskills: [[null, null, null, null, null], [null, null, null], [null, null, null, null, null], [null, null, null], [null, null], [null, null, null]],
       showPreview: false,
       image: [[null], [null], [null], [null]],
+      imageCount: [0, 0, 0, 0],
+      imageFile: [[null], [null], [null], [null]],
+      imageName: [[null], [null], [null], [null]],      
       imageTitle: [[null], [null], [null], [null]],
       imageDescription: [[null], [null], [null], [null]],
       assessmentID: null,
@@ -201,24 +208,36 @@ class App extends Component {
   showQuiz() {
     this.setState({showPreview: false})
   }
-  storeImage(image, number, question) {
+  storeImage(image, number, question, name, file) {
     let uploads = this.state.image.slice();
-    uploads[question][number] = image
-    this.setState({image: uploads})
+    let imageNames = this.state.imageName.slice();
+    let files = this.state.imageFile.slice();
+    uploads[question][number] = image;
+    imageNames[question][number] = name;
+    files[question][number] = file;
+    this.setState({image: uploads, imageName: imageNames, imageFile: files})
   }
   removeImage(number, question) {
     const uploads = this.state.image.slice();
     const titles = this.state.imageTitle.slice();
     const descriptions = this.state.imageDescription.slice();
+    const files = this.state.imageFile.slice();
+    let names = this.state.imageName.slice();
+    files[question][number] = null;
     uploads[question][number] = null;
     titles[question][number] = null;
     descriptions[question][number] = null;
-    this.setState({image: uploads, imageTitle: titles, imageDescription: descriptions})
+    names[question][number] = null;
+    this.setState({image: uploads, imageTitle: titles, imageDescription: descriptions, imageFile: files, imageName: names})
   }
   deleteImage(number, question) {
     const uploads = this.state.image.slice();
-    uploads[question].splice(number, 1)
-    this.setState({image: uploads})
+    const files = this.state.imageFile.slice();
+    let names = this.state.imageName.slice();
+    files[question].splice(number, 1);
+    uploads[question].splice(number, 1);
+    names[question].splice(number, 1);
+    this.setState({image: uploads, imageFile: files, imageName: names})
   }
   deleteUploadText(number, question) {
     const titles = this.state.imageTitle.slice();
@@ -230,16 +249,22 @@ class App extends Component {
   updateTextInput(name, newValue, number, question) {
     let values;
 
+    // if it's contact info
+    if (number === "intro") {
+      values = this.state.contactInfo.slice();
+      values[name] = newValue;
+      this.setState({contactInfo: values});
+    }
     // if it's a UX case study
-    if (number === "ux") {
+    else if (number === "ux") {
       values = this.state.uxCaseStudy.slice();
-      values[name] = newValue
+      values[name] = newValue;
       this.setState({uxCaseStudy: values})
     }
     // else if it's a research case study
     else if (number === "research") {
       values = this.state.researchCaseStudy.slice();
-      values[name] = newValue
+      values[name] = newValue;
       this.setState({researchCaseStudy: values})
     }
     else if (number === "ops") {
@@ -286,6 +311,7 @@ class App extends Component {
                     updateSubskills={this.updateSubskills.bind(this)}
                     skill_values={this.state.arrangedValues} 
                     skill_names={this.state.arrangedNames}
+                    skillFullNames={this.state.skillFullNames}
                     unsorted_values={this.state.skillValues}
                     research_values={this.state.researchValues}
                     motion_values={this.state.motionValues}
@@ -308,6 +334,8 @@ class App extends Component {
                     deleteImage={this.deleteImage.bind(this)}
                     deleteUploadText={this.deleteUploadText.bind(this)}
                     image={this.state.image}
+                    imageFile={this.state.imageFile}                    
+                    imageName={this.state.imageName}
                     imageTitle={this.state.imageTitle}
                     imageDescription={this.state.imageDescription}
                     updateTextInput={this.updateTextInput.bind(this)}
@@ -320,13 +348,14 @@ class App extends Component {
                     researchCaseStudy={this.state.researchCaseStudy}
                     opsText={this.state.opsOpenQuestion}
                     setSelectedQuestions={this.updateSelectedSkills.bind(this)}
+                    contactInfo={this.state.contactInfo}
                   />
                 </Route>
               </Route>
               <Route path="/Results">
                 <Results />
               </Route>
-              <Route path="/">
+              <Route path="/Create">
                 <Create 
                   intro_content={introData.intro_pages[this.state.current_screen - 1]} 
                   showPreview={this.showPreview.bind(this)}
@@ -340,7 +369,10 @@ class App extends Component {
                   storeDBreference={this.storeDBreference.bind(this)}
                   assessmentCreated={this.state.showPreview}
                   assessmentID={this.state.assessmentID}
-                />            
+                />        
+              </Route>
+              <Route path="/">
+                  <LandingPage />        
               </Route>
             </Switch>
             {/*didQuizStart ? <Quiz 

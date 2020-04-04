@@ -6,7 +6,9 @@ import {
   Link
 } from "react-router-dom";
 import checkmark from './img/checkmark.svg'
+import computerDude from './img/computerDude.svg'
 let resultsData = require('./results_data.json')
+
 
 
 {/*
@@ -108,20 +110,14 @@ class QuizPreview extends Component {
   render() {
     let AssessmentID = this.props.assessmentID
     return(
-      <div className="quiz-preview">
+      <div className="quiz-preview"> 
         <h1 className="main-heading-two">Your assessment is ready!{/*(this.props.shape === "T-shaped designer" || this.props.shape === "specialist") ? ((this.props.deep_skills.length === 2) ? (this.props.deep_skills[0] + '/' + this.props.deep_skills[1] + ' ' + this.props.level) : (this.props.deep_skills[0] + ' ' + this.props.level)) : this.props.shape*/}</h1>
-        <p>All results will be sent to your email.</p>
+        <img className="created-image" src={computerDude} />
         <div className="grid-preview">
-         {/*} <Grid 
-            skill_level={this.props.skills} 
-            skill_name={this.props.selectedNames}
-            selectedQuestions={this.props.selectedQuestions}
-            />*/}
-          <p className="no-top-margin">{this.props.assessmentName ? (this.props.assessmentName + " link:") : "Assessment link:"}</p>
+          <p className="no-top-margin"><b>{this.props.assessmentName ? (this.props.assessmentName + " link:") : "Assessment link:"}</b></p>
           <Link to={"/Assessment/" + AssessmentID}>{"designertypes.com/Assessment/" + this.props.assessmentID}</Link>
         </div>
-        {/*<div class="preview-btn">Copy link</div>*/}
-        <div className="preview-btn preview-secondary" onClick={this.copyLink.bind(this)}>
+        <div className="nav-btn nav-btn-preview" onClick={this.copyLink.bind(this)}>
           <img className={this.state.copiedLink ? "button-icon" : "hide"} src={checkmark} />
           {this.state.copiedLink ? "Link copied to clipboard" : "Copy link"}
         </div>

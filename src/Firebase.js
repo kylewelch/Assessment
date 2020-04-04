@@ -6,6 +6,8 @@ const config = {
   apiKey: "AIzaSyBwtJfjoGZad-cT7LuWHbApUMhruusqDkk",
   authDomain: "sweetpotato-9e0ef.firebaseapp.com",
   projectId: "sweetpotato-9e0ef",
+  storageBucket: "gs://sweetpotato-9e0ef.appspot.com"
+
 };
 
 

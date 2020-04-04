@@ -29,13 +29,17 @@ class Results extends Component {
       researchCaseStudy: [],
       opsText: "",
       image: [[null], [null], [null], [null]],
-      imageTitle: [[null], [null], [null], [null]],
-      imageDescription: [[null], [null], [null], [null]]
+      imageTitles: [[null], [null], [null], [null]],
+      imageDescriptions: [[null], [null], [null], [null]],
+      imageURLs: [],
+      contactInfo: [[null], [null], [null]],
+      loaded: false
 
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
+    // Load data from Firebase
     let thisSubmission = db.collection("submissions").doc(window.location.pathname.substr(9));
     thisSubmission.get().then((doc) => {
       this.setState({
@@ -45,50 +49,78 @@ class Results extends Component {
         unsortedValues: doc.data().unsortedValues,
         skills: doc.data().skills,
         names: doc.data().names,
-        visualImageTitles: doc.data().visualImageTitles,
-        uxImageTitles: doc.data().uxImageTitles,
-        researchImageTitles: doc.data().researchImageTitles,
-        writingImageTitles: doc.data().writingImageTitles,
-        visualImageDescriptions: doc.data().visualImageDescriptions,
-        uxImageDescriptions: doc.data().uxImageDescriptions,
-        researchImageDescriptions: doc.data().researchImageDescriptions,
-        writingImageDescriptions: doc.data().writingImageDescriptions,
+        imageNames: [doc.data().visualImageNames, doc.data().uxImageNames, doc.data().researchImageNames, doc.data().writingImageNames],
+        imageTitles: [doc.data().visualImageTitles, doc.data().uxImageTitles, doc.data().researchImageTitles, doc.data().writingImageTitles],
+        imageDescriptions: [doc.data().visualImageDescriptions, doc.data().uxImageDescriptions, doc.data().researchImageDescriptions, doc.data().writingImageDescriptions],
         uxURL: doc.data().uxURL,
         researchURL: doc.data().researchURL,
         codingURL: doc.data().codingURL,
         uxCaseStudy: doc.data().uxCaseStudy,
         researchCaseStudy: doc.data().researchCaseStudy,
         opsText: doc.data().opsText,
+        contactInfo: doc.data().contactInfo, 
       });
-    });
-  }
+    }).then(() => {
 
+      // load images from Storage
+      let storagePath = window.location.pathname.substr(9);
+      let storageRef = firebase.storage().ref();
+      var listRef = storageRef.child(storagePath);
+
+      // Get all of the images from storage
+      listRef.listAll().then((result) => {
+        result.items.forEach((imageRef) => {
+          let name = imageRef.name;
+          imageRef.getDownloadURL().then((url) => {
+            let i, j;
+            let names = this.state.imageNames;
+            for (i = 0; i < names.length; i++){
+              for (j = 0; j < names[i].length; j++) {
+                if (name === names[i][j]) {
+                  let images = this.state.image.slice();
+                  images[i][j] = url;
+                  this.setState({image: images})
+                }
+              }
+            }
+            let URLs = this.state.imageURLs.slice();
+            URLs.push({"url": url, "name": name});
+            this.setState({imageURLs: URLs, testing: imageRef})
+          })   
+        })
+      })
+      setTimeout(() => { 
+
+        this.setState({loaded: true});
+      }, 2000);
+    })
+  }
   render() {
     return(
-      <ResultsDashboard 
-        assessmentID={this.state.assessmentID}
-        selectedQuestions={this.state.selectedQuestions} 
-        unsorted_values={this.state.unsortedValues}
-        skills={this.state.skills} 
-        names={this.state.names}
-        visualImageTitles={this.state.visualImageTitles}
-        uxImageTitles={this.state.uxImageTitles}
-        researchImageTitles={this.state.researchImageTitles}
-        writingImageTitles={this.state.writingImageTitles}
-        visualImageDescriptions={this.state.visualImageDescriptions}
-        uxImageDescriptions={this.state.uxImageDescriptions}
-        researchImageDescriptions={this.state.researchImageDescriptions}
-        writingImageDescriptions={this.state.writingImageDescriptions}
-        uxURL={this.state.uxURL}
-        researchURL={this.state.researchURL}
-        codingURL={this.state.codingURL}
-        uxCaseStudy={this.state.uxCaseStudy}
-        researchCaseStudy={this.state.researchCaseStudy}
-        opsText={this.state.opsText}
-        image={this.state.image}
-        imageTitle={this.state.image}
-        imageDescription={this.state.image}
-      />
+      <div>
+        {this.state.loaded &&
+        <ResultsDashboard 
+          assessmentID={this.state.assessmentID}
+          selectedQuestions={this.state.selectedQuestions} 
+          unsorted_values={this.state.unsortedValues}
+          skills={this.state.skills} 
+          names={this.state.names}
+          image={this.state.image}
+          imageURLs={this.state.imageURLs}
+          imageNames={this.state.imageNames}
+          imageTitles={this.state.imageTitles}
+          imageDescriptions={this.state.imageDescriptions}
+          uxURL={this.state.uxURL}
+          researchURL={this.state.researchURL}
+          codingURL={this.state.codingURL}
+          uxCaseStudy={this.state.uxCaseStudy}
+          researchCaseStudy={this.state.researchCaseStudy}
+          opsText={this.state.opsText}
+          contactInfo={this.state.contactInfo}
+
+        />
+       }
+      </div>
     )
   }
 }

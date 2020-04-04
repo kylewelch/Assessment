@@ -40,8 +40,8 @@ class QuizQuestion extends Component {
   showPreviousQuestion(newValue) {
     this.props.showPreviousQuestionHandler()
   }
-  storeImage(image, number) {
-    this.props.storeImage(image, number);
+  storeImage(image, number, name, file) {
+    this.props.storeImage(image, number, name, file);
   }
   submitImage() {
     this.setState({submittedImage: true})
@@ -90,7 +90,8 @@ class QuizQuestion extends Component {
           <UploadPage
             closeUploadPage={this.closeUploadPage.bind(this)} 
             storeImage={this.storeImage.bind(this)}
-            image={this.props.image}  
+            image={this.props.image} 
+            imageFile={this.props.imageFile} 
             imageTitle={this.props.imageTitle}
             imageDescription={this.props.imageDescription}
             removeImage={this.removeImage.bind(this)} 

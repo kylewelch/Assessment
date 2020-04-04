@@ -81,14 +81,15 @@ class Upload extends Component {
                           index={index} 
                           image={image}
                           imageTitle={this.props.imageTitle[index]}
-                          imageDescription={this.props.imageDescription[index]}
+                          imageescription={this.props.imageDescription[index]}
                           editUpload={this.editUpload.bind(this)}
                             />
                 })}
+                {this.props.image.length > 2 ? null :
                 <div className="upload-box" onClick={this.showUploadPage.bind(this)}>
                   <img src={add} className="upload-icon" />
                   <div className="upload-button-label">Add Sample</div>
-                </div>
+                </div>}
               </div>
               // Show this if nothing has been uploaded yet
                 : 

@@ -48,7 +48,9 @@ body {
   margin: auto;
 }
 
-
+a {
+  color: #4478B3;
+}
 
 ol, ul {
   padding-left: 30px;
@@ -103,7 +105,8 @@ ol, ul {
   display: flex;
   justify-content: center;
   width: 320px;
-  margin: 42px 0 12px 100px;
+  margin: -20px auto 12px;
+  transform: scale(.7);
 }
 
 .skill-row {
@@ -303,7 +306,12 @@ ol, ul {
   font-family: "Campton", Futura, sans-serif;
   font-weight: 400;
   color: #fff;
-  box-shadow: 0 10px 40px 0 rgba(182, 173, 156, .50)
+  box-shadow: 0 10px 40px 0 rgba(182, 173, 156, .50);
+}
+
+.nav-btn-preview {
+  margin: 1.2em 0 1.6em;
+  line-height: 56px;
 }
 
 .nav-btn-secondary {
@@ -431,12 +439,17 @@ ol, ul {
   font-size: 1.3em;
   display: block;
   margin-left: 34px;
-  color: #a1a4a9;
+  color: #81858B;
+  user-select: none;
+}
+
+.radio-label:hover {
+  cursor: pointer;
 }
 
 .radio-label-horiz {
   font-size: .8em;
-  color: #a1a4a9;
+  color: #81858B;
   width: 52px;
   margin-top: 8px;
   text-align: center;
@@ -444,11 +457,11 @@ ol, ul {
 
 .radio-main-answer {
   font-weight: 600;
-  color: #2a3036;
+  color: #484743;
 }
 
 .radio-multi-answer {
-  color: #2a3036;
+  color: #484743;
 }
 
 .horizontal-radio {
@@ -674,6 +687,13 @@ ol, ul {
   padding-left: 55px;
 }
 
+.user-input {
+  background-image: url(img/user.svg);
+  background-repeat: no-repeat;
+  background-position: 21px 18px;
+  padding-left: 55px;
+}
+
 .link-container {
   max-width: 500px;
   margin-top: 20px;
@@ -791,21 +811,26 @@ ol, ul {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #f2f2f2;
-  padding: 2em 2em 5em;
-  border-radius: 6px;
+  background-color: #fff;
+  border-radius: 15px;
   text-align: center;
+  box-shadow: 0 6px 10px 0 rgba(124, 124, 124, .2);
+}
+
+.created-image {
+  margin: 40px auto;
 }
 
 .grid-preview {
-  background-color: #fff;
-  width: 70%;
+  background-color: #F0F6FD;
+  width: 60%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-radius: 6px;
+  border-radius: 10px;
   padding: 2em;
   margin: 1.5em 0 2em;
+  font-size: 16px;
 }
 
 .skill-grid-preview {
@@ -855,6 +880,38 @@ ol, ul {
   margin-right: 8px;
 }
 
+.intro-container {
+  width: 670px;
+  margin: 120px auto;
+}
+
+.intro-subheading {
+  font-size: 21px;
+  font-weight: 400;
+  color: #9E9B96;
+  width: 630px;
+  line-height: 32px;
+  margin-bottom: 30px;
+}
+
+.skill-preview-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 500px;
+}
+
+.skill-preview {
+  display: flex;
+  width: 200px;
+  margin: 10px 50px 10px 0;
+}
+
+.skill-preview-text {
+  color: #484743;
+  font-weight: 500;
+  font-size: 18px;
+  margin-left: 10px;
+}
 
 /* Subskill section */
 
@@ -864,14 +921,27 @@ ol, ul {
   margin: 80px auto 0;
 }
 
+.submit-section {
+  display: flex;
+  width: 370px;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .summary-container {
   width: 100%;
+  height: 210px;
   background-color: #fff;
   border-radius: 15px;
   box-shadow: 0 6px 10px 0 rgba(124, 124, 124, .2);
   padding: 35px 0;
   margin-top: 70px;
   display: flex;
+}
+
+.summary-container-section {
+  width: 50%;
+  margin: 15px 70px 15px 45px;
 }
 
 .summary-container-results {
@@ -918,6 +988,13 @@ ol, ul {
 .divider {
   width: 0px;
   height: 150px;
+  border: 1px solid #F4F2EF;
+  margin-top: 15px;
+}
+
+.summary-divider {
+  width: 0px;
+  height: 190px;
   border: 1px solid #F4F2EF;
   margin-top: 15px;
 }
@@ -1006,6 +1083,7 @@ ol, ul {
 .no-margin {
   margin: 0;
 }
+
 
 /* Click Cards */
 
@@ -1322,9 +1400,9 @@ ol, ul {
 }
 
 .modal-card {
-  position: relative;
+  position: absolute;
   z-index: 5;
-  max-width: 960px;
+  width: 700px;
   background-color: #fff;
   border-radius: 15px;
   box-shadow: 0 6px 10px 0 rgba(124, 124, 124, .2);
@@ -1492,6 +1570,13 @@ ol, ul {
   border: 2px solid #dadadf;
 }
 
+.submit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  width: 170px;
+}
 
 .flex {
   display: flex;
@@ -1500,7 +1585,42 @@ ol, ul {
   width: 240px;
 }
 
+/* Landing Page */
 
+
+.landing-page {
+  width: 1000px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin: 80px auto 0;
+  text-align: center;
+}
+
+.landing-page-header {
+  font-size: 45px;
+  color: #484743;
+  margin-bottom: 20px;
+}
+
+.landing-page-description {
+  font-size: 18px;
+  max-width: 450px;
+  line-height: 27px;
+}
+
+.start-btn {
+  margin: 30px 0 20px;
+}
+
+.landing-page-illustration {
+  margin-bottom: -35px;
+}
+
+.link {
+  text-decoration: none;
+}
 
 /* Media Queries */
 
